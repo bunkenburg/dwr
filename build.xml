@@ -141,7 +141,7 @@
 			</action>
 		</if-not-uptodate>
 		<copy file="${basedir}/${target.root}/dwr-jdk14.jar" tofile="${dwr-maven-jdk14-jar}" />
-		<!-- Rezip the demo war file if it's contents have changed -->
+		<!-- Rezip the demo war file if its contents have changed -->
 		<if-not-uptodate destfile="${target.root}/dwrdemo.war" sourcedir="${target.root}/web/demo">
 			<action>
 				<zip destfile="${target.root}/dwrdemo.war" basedir="${target.root}/web/demo" />
