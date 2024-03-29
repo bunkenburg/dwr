@@ -16,26 +16,17 @@ import org.directwebremoting.util.CopyUtils;
  */
 public final class InputStreamFactoryOutputStreamLoader implements OutputStreamLoader
 {
-    /**
-     * We need an InputStreamFactory
-     */
     public InputStreamFactoryOutputStreamLoader(InputStreamFactory inputStreamFactory)
     {
         this.inputStreamFactory = inputStreamFactory;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.io.OutputStreamLoader#load(java.io.OutputStream)
-     */
     public void load(OutputStream out) throws IOException
     {
         InputStream in = inputStreamFactory.getInputStream();
         CopyUtils.copy(in, out);
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.io.OutputStreamLoader#close()
-     */
     public void close() throws IOException
     {
         inputStreamFactory.close();

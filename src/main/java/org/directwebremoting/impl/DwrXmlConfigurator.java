@@ -45,6 +45,7 @@ public class DwrXmlConfigurator implements Configurator
     /**
      * Setter for the resource name that we can use to read a file from the
      * servlet context
+     * @param servletContext ...
      * @param servletResourceName The name to lookup
      * @throws IOException On file read failure
      * @throws ParserConfigurationException On XML setup failure
@@ -279,7 +280,7 @@ public class DwrXmlConfigurator implements Configurator
         try
         {
             Class<?> impl = LocalUtil.classForName(type);
-            AjaxFilter object = (AjaxFilter) impl.newInstance();
+            AjaxFilter object = (AjaxFilter) impl.getDeclaredConstructor().newInstance();
 
             LocalUtil.setParams(object, createSettingMap(allower), ignore);
 

@@ -22,7 +22,6 @@ import org.directwebremoting.extend.ProtocolConstants;
 /**
  * An implementation of Converter for Arrays.
  * @author Joe Walker [joe at getahead dot ltd dot uk]
- * @noinspection RefusedBequest
  */
 public class ArrayConverter implements Converter
 {

@@ -38,6 +38,8 @@ public class CallbackHelperFactory
      * Internal method to allow us to get the Builder from which we
      * will get CallbackHelper objects.
      * Do NOT call this method from outside of DWR.
+     * @param container ...
+     * @return ...
      */
     public static CallbackHelper attach(Container container)
     {

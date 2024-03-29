@@ -75,8 +75,8 @@ public class MapConverter implements Converter
                 // If there is a problem creating the type then we have no way
                 // of completing this - they asked for a specific type and we
                 // can't create that type. I don't know of a way of finding
-                // subclasses that might be instaniable so we accept failure.
-                map = (Map<Object, Object>) paramType.newInstance();
+                // subclasses that might be instantiable so we accept failure.
+                map = (Map<Object, Object>) paramType.getDeclaredConstructor().newInstance();
             }
             else
             {

@@ -37,6 +37,8 @@ public interface Builder<T>
      * except that it is called by {@link Factory#attach} which is
      * called after the container has finished setting itself up so we can
      * rely on {@link ServerContextFactory#get()} working.
+     * @param container ...
+     * @return ...
      */
     T attach(Container container);
 }

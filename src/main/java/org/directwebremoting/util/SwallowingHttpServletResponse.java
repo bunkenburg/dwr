@@ -329,18 +329,9 @@ public final class SwallowingHttpServletResponse implements HttpServletResponse
         return null;
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.http.HttpServletResponse#encodeUrl(java.lang.String)
-     */
-    public String encodeUrl(String paramString)
-    {
-        return null;
-    }
+    @Deprecated public String encodeUrl(String paramString) {return null;}
 
-    /* (non-Javadoc)
-     * @see javax.servlet.http.HttpServletResponse#encodeRedirectUrl(java.lang.String)
-     */
-    public String encodeRedirectUrl(String paramString)
+    @Deprecated public String encodeRedirectUrl(String paramString)
     {
         return null;
     }

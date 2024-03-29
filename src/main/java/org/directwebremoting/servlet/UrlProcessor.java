@@ -38,9 +38,6 @@ import org.directwebremoting.util.Loggers;
  */
 public class UrlProcessor implements Handler, InitializingBean
 {
-    /* (non-Javadoc)
-     * @see org.directwebremoting.InitializingBean#afterPropertiesSet(Container)
-     */
     public void afterContainerSetup(Container container)
     {
         // Set up urlMapping
@@ -221,6 +218,7 @@ public class UrlProcessor implements Handler, InitializingBean
      * 3) runtimeexception (unchecked).
      * 4) error - default for production.
      * 5) off.
+     * @param accessLogLevel ...
      */
     public void setAccessLogLevel(String accessLogLevel)
     {

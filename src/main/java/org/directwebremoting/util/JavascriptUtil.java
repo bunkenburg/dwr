@@ -44,9 +44,9 @@ public class JavascriptUtil
      * input string: He didn't say, "Stop!"
      * output string: He didn\'t say, \"Stop!\"
      * </pre>
-     * </p>
      *
      * @param str  String to escape values in, may be null
+     * @param escapeSingleQuote ...
      * @return String with escaped values, <code>null</code> if null string input
      */
     public static String escapeJavaScript(String str, boolean escapeSingleQuote)

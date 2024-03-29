@@ -21,12 +21,15 @@ public interface InputStreamFactory
 {
     /**
      * Gets an input stream. This function should be called only once.
+     * @return ...
+     * @throws IOException ...
      */
-    public InputStream getInputStream() throws IOException;
+    InputStream getInputStream() throws IOException;
 
     /**
      * Whether or not this resource has been read from, this should be called
      * to indicate that the resources are no longer required.
+     * @throws IOException ...
      */
-    public void close() throws IOException;
+    void close() throws IOException;
 }

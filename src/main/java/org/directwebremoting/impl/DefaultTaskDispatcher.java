@@ -17,9 +17,7 @@ import org.directwebremoting.extend.TaskDispatcher;
  */
 public class DefaultTaskDispatcher implements TaskDispatcher
 {
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.TaskDispatcher#dispatchTask(org.directwebremoting.ScriptSessionFilter, java.lang.Runnable)
-     */
+
     public void dispatchTask(ScriptSessionFilter filter, Runnable task)
     {
         Collection<ScriptSession> all = scriptSessionManager.getAllScriptSessions();
@@ -44,9 +42,6 @@ public class DefaultTaskDispatcher implements TaskDispatcher
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.TaskDispatcher#getTargetSessions()
-     */
     public Collection<ScriptSession> getTargetSessions()
     {
         return target.get();
@@ -54,6 +49,7 @@ public class DefaultTaskDispatcher implements TaskDispatcher
 
     /**
      * Connection to the DwrServlet that we are attached to
+     * @param scriptSessionManager ...
      */
     public void setScriptSessionManager(ScriptSessionManager scriptSessionManager)
     {

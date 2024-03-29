@@ -15,7 +15,7 @@ public class Security
      * <li>&amp; to &amp;amp;</li>
      * <li>&lt; to &amp;lt;</li>
      * <li>&gt; to &amp;gt;</li>
-     * <li>&apos; to &amp;apos;</li>
+     * <li>' to &amp;apos;</li>
      * <li>&quot; to &amp;quot;</li>
      * </ul>
      * These replacements are useful when the original sense is important, but
@@ -40,7 +40,7 @@ public class Security
      * <li>&amp;amp; to &amp;</li>
      * <li>&amp;lt; to &lt;</li>
      * <li>&amp;gt; to &gt;</li>
-     * <li>&amp;apos; to &apos;</li>
+     * <li>&amp;apos; to '</li>
      * <li>&amp;quot; to &quot;</li>
      * </ul>
      * These replacements are useful to reverse the effects of
@@ -63,10 +63,10 @@ public class Security
     /**
      * Perform the following replacements:<ul>
      * <li>&amp; to +</li>
-     * <li>&lt; to \\u2039 (\u2039)</li>
-     * <li>&gt; to \\u203A (\u203A)</li>
-     * <li>&apos; to \\u2018 (\u2018)</li>
-     * <li>&quot; to \\u201C (\u201C)</li>
+     * <li>&lt; to \\u2039 (‹)</li>
+     * <li>&gt; to \\u203A (›)</li>
+     * <li>' to \\u2018 (‘)</li>
+     * <li>&quot; to \\u201C (“)</li>
      * </ul>
      * These replacements are useful when readability is more important than
      * retaining the exact character string of the original.
@@ -77,16 +77,16 @@ public class Security
     {
         String reply = original;
         reply = reply.replace("&", "+");
-        reply = reply.replace("<", "\u2039");
-        reply = reply.replace(">", "\u203A");
-        reply = reply.replace("\'", "\u2018");
-        reply = reply.replace("\"", "\u201C");
+        reply = reply.replace("<", "‹");
+        reply = reply.replace(">", "›");
+        reply = reply.replace("'", "‘");
+        reply = reply.replace("\"", "“");
         return reply;
     }
 
     /**
      * Return true iff the input string contains any of the characters that
-     * are special to XML: &amp;, &lt;, &gt;, &apos; or &quot;
+     * are special to XML: &amp;, &lt;, &gt;, ' or &quot;
      * @param original The string to test for XML special characters
      * @return True if the characters are found, false otherwise
      */

@@ -14,7 +14,7 @@ public interface Remoter
      * @param assignVariable JavaScript identifier to generate an assignment of the interface to
      * @param contextServletPath request.contextPath + request.servletPath.
      * @return An interface javascript
-     * @throws SecurityException
+     * @throws SecurityException ...
      */
     String generateInterfaceJavaScript(String scriptName, String indent, String assignVariable, String contextServletPath) throws SecurityException;
 
@@ -24,7 +24,7 @@ public interface Remoter
      * @param indent Indent string prepended to all generated text lines
      * @param assignVariable JavaScript identifier to generate an assignment of the class to
      * @return JavaScript class definition
-     * @throws SecurityException
+     * @throws SecurityException ...
      */
     String generateDtoJavaScript(String jsClassName, String indent, String assignVariable) throws SecurityException;
 
@@ -36,7 +36,7 @@ public interface Remoter
      * @param delegateFunction Name of a callable JavaScript function that will create a prototype delegate
      * (f ex dojo.delegate, in other frameworks sometimes called clone, beget, etc)
      * @return JavaScript inheritance statement
-     * @throws SecurityException
+     * @throws SecurityException ...
      */
     String generateDtoInheritanceJavaScript(String indent, String classExpression, String superClassExpression, String delegateFunction);
 

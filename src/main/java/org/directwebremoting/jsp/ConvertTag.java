@@ -20,7 +20,7 @@ import org.directwebremoting.extend.ScriptBufferUtil;
  *    var clientsideObject = &lt;dwr:convert value="${myServersideObject}" /%&gt;;
  * &lt;/script%&gt;
  *
- * @author Lance Semmens <uklance at gmail dot com>
+ * @author Lance Semmens [uklance at gmail dot com]
  */
 public class ConvertTag extends TagSupport
 {

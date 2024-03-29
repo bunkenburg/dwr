@@ -11,15 +11,13 @@ public class NonNestedOutboundVariable implements OutboundVariable
 {
     /**
      * Create a new NonNestedOutboundVariable
+     * @param assignCode ...
      */
     public NonNestedOutboundVariable(String assignCode)
     {
         this.assignCode = assignCode;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.OutboundVariable#incrementReferenceCount()
-     */
     public void incrementReferenceCount()
     {
         referenceCount++;
@@ -30,41 +28,26 @@ public class NonNestedOutboundVariable implements OutboundVariable
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.OutboundVariable#getDeclareCode()
-     */
     public String getDeclareCode()
     {
         return "";
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.OutboundVariable#getBuildCode()
-     */
     public String getBuildCode()
     {
         return "";
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.OutboundVariable#getAssignCode()
-     */
     public String getAssignCode()
     {
         return assignCode;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.OutboundVariable#getReference()
-     */
     public OutboundVariable getReferenceVariable()
     {
         return this;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString()
     {

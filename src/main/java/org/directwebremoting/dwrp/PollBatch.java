@@ -13,7 +13,7 @@ public class PollBatch extends Batch
 {
     /**
      * @param request The request to parse to fill out this batch
-     * @throws ServerException
+     * @throws ServerException ...
      */
     public PollBatch(HttpServletRequest request) throws ServerException
     {
@@ -41,9 +41,6 @@ public class PollBatch extends Batch
      */
     private final PartialResponse partialResponse;
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString()
     {

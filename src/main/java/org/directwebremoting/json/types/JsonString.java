@@ -12,33 +12,25 @@ public class JsonString extends JsonValue
 {
     /**
      * All JsonStrings wrap a Java string
+     * @param value ...
      */
     public JsonString(String value)
     {
         this.value = value;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.json.JsonValue#getString()
-     */
     @Override
     public String getString()
     {
         return value;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.json.JsonValue#toExternalRepresentation()
-     */
     @Override
     public String toExternalRepresentation()
     {
         return "'" + JavascriptUtil.escapeJavaScript(value, false) + "'";
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString()
     {

@@ -72,6 +72,7 @@ public class ClasspathScanner
 
     /**
      * Get the list of classes available to the classloader
+     * @return ...
      */
     public Set<String> getClasses()
     {
@@ -117,6 +118,8 @@ public class ClasspathScanner
 
     /**
      * Is this path pointing at a JAR file?
+     * @param path ...
+     * @return ...
      */
     protected boolean isJARPath(String path)
     {
@@ -125,6 +128,9 @@ public class ClasspathScanner
 
     /**
      * Extract the classes from a JAR file
+     * @param path ...
+     * @return ...
+     * @throws IOException ...
      */
     protected Set<String> getClassesFromJAR(String path) throws IOException
     {
@@ -155,6 +161,8 @@ public class ClasspathScanner
 
     /**
      * Extract the classes from a set of classes in the file system
+     * @param path ...
+     * @return ...
      */
     protected Set<String> getClassesFromDirectory(String path)
     {
@@ -180,6 +188,9 @@ public class ClasspathScanner
 
     /**
      * Extract the classes from a set of classes within a JBoss 5 vfszip protocol URL
+     * @param path ...
+     * @return ...
+     * @throws IOException ...
      */
     protected Set<String> getClassesFromVFS(String path) throws IOException
     {
@@ -223,6 +234,8 @@ public class ClasspathScanner
     /**
      * Check to see that the given file is a class in the right package and add
      * it to the given collection
+     * @param classes ...
+     * @param className ...
      */
     protected void addIfMatches(Set<String> classes, String className)
     {
@@ -238,6 +251,8 @@ public class ClasspathScanner
 
     /**
      * Paths need cleaning up, especially in windows
+     * @param path ...
+     * @return ...
      */
     protected String sanitizePath(String path)
     {
@@ -248,7 +263,7 @@ public class ClasspathScanner
             tmp = tmp.replaceAll("%20", " ");
         }
 
-        if ((tmp.indexOf(":") >= 0) && (tmp.startsWith("/")))
+        if ((tmp.contains(":")) && (tmp.startsWith("/")))
         {
             // Remove leading / in URLs like /c:/...
             tmp = tmp.substring(1);

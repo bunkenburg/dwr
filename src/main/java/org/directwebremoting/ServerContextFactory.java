@@ -40,6 +40,8 @@ public class ServerContextFactory
      * Internal method to allow us to get the Builder from which we
      * will get ServerContext objects.
      * Do NOT call this method from outside of DWR.
+     * @param container ...
+     * @return ...
      */
     public static ServerContext attach(Container container)
     {

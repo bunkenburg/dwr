@@ -14,9 +14,9 @@ public interface ResponseHandler
 {
     /**
      * Decorate a response by setting headers and other meta-data.
-     * @param handler
-     * @param request
-     * @param response
+     * @param handler ...
+     * @param request ...
+     * @param response ...
      */
     void handle(Handler handler, HttpServletRequest request, HttpServletResponse response);
 }

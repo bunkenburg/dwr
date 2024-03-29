@@ -50,6 +50,10 @@ public class DefaultCallbackHelper implements CallbackHelper
     /**
      * The reverse of {@link CallbackHelper#saveCallback(Callback, Class)}
      * which executes a {@link Callback} which has been called by the browser
+     * @param <T> ...
+     * @param key ...
+     * @param data ...
+     * @throws ConversionException ...
      */
     @SuppressWarnings("unchecked")
     public static <T> void executeCallback(String key, RealRawData data) throws ConversionException
@@ -86,6 +90,7 @@ public class DefaultCallbackHelper implements CallbackHelper
 
     /**
      * Callbacks need a unique ID
+     * @return ...
      */
     public String createUniqueId()
     {
@@ -94,6 +99,7 @@ public class DefaultCallbackHelper implements CallbackHelper
 
     /**
      * The id generator
+     * @param idGenerator ...
      */
     public void setIdGenerator(IdGenerator idGenerator)
     {

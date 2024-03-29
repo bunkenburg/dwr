@@ -15,8 +15,10 @@ public interface TaskDispatcher
     /**
      * Take a runnable action and run it against every {@link ScriptSession}
      * that matches a specified filter.
+     * @param filter ...
+     * @param task ...
      */
-    public void dispatchTask(ScriptSessionFilter filter, Runnable task);
+    void dispatchTask(ScriptSessionFilter filter, Runnable task);
 
     /**
      * This method discovers the sessions that are currently being targeted
@@ -26,5 +28,5 @@ public interface TaskDispatcher
      * APIs. Using it directly may cause scaling problems
      * @return The list of current browser windows.
      */
-    public Collection<ScriptSession> getTargetSessions();
+    Collection<ScriptSession> getTargetSessions();
 }

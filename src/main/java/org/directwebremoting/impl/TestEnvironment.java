@@ -22,6 +22,10 @@ public class TestEnvironment
 {
     /**
      * Configure from a dwr.xml file given as a class resource name
+     * @param classResourceName ...
+     * @throws IOException ...
+     * @throws ParserConfigurationException ...
+     * @throws SAXException ...
      */
     public static void configureFromClassResource(String classResourceName) throws IOException, ParserConfigurationException, SAXException
     {
@@ -46,9 +50,6 @@ public class TestEnvironment
         webContextBuilder.disengageThread();
     }
 
-    /**
-     *
-     */
     public static ConverterManager getConverterManager()
     {
         return container.getBean(ConverterManager.class);
@@ -86,7 +87,7 @@ public class TestEnvironment
         return webContextBuilder;
     }
 
-    private static Container container;
+    private static final Container container;
 
     private static WebContextBuilder webContextBuilder;
 
@@ -94,9 +95,6 @@ public class TestEnvironment
 
     private final static ServletConfig servletConfig = new FakeServletConfig("dwr-test", servletContext);
 
-    /**
-    *
-    */
    static
    {
        try

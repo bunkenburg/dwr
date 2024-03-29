@@ -10,7 +10,7 @@ import org.directwebremoting.extend.Converter;
 
 /**
  * Convert a class to JavaScript and back.
- * @author Maik Schreiber <blizzy AT blizzy DOT de>
+ * @author Maik Schreiber [blizzy AT blizzy DOT de]
  * @author Joe Walker [joe at getahead dot ltd dot uk]
  */
 @Target(ElementType.TYPE)
@@ -19,23 +19,27 @@ public @interface DataTransferObject
 {
     /**
      * Converter that converts instance of the class (default: bean converter).
+     * @return ...
      */
     Class<? extends Converter> converter() default BeanConverter.class;
 
     /**
      * Parameters for the converter.
+     * @return ...
      */
     Param[] params() default {};
 
     /**
      * Converter type
      * TODO: Just used by Spring configurator
+     * @return ...
      */
     String type() default "bean";
 
     /**
      * Javascript class mapping.
      * TODO: Just used by Spring configurator
+     * @return ...
      */
     String javascript() default "";
 

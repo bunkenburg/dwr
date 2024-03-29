@@ -13,15 +13,18 @@ public interface JavascriptObject
      * Execute the function.
      * TODO: At some stage it would be good to allow the final parameter to be
      * a Callback....
+     * @param methodName ...
      * @param params The data to pass to the server
      */
-    public void execute(String methodName, Object... params);
+    void execute(String methodName, Object... params);
 
     /**
      * Add a property to a JavaScript object. The type of the data must be
      * convertible by DWR.
+     * @param propertyName ...
+     * @param data ...
      */
-    public void set(String propertyName, Object data);
+    void set(String propertyName, Object data);
 
     /*
      * TODO: Add this in
@@ -35,5 +38,5 @@ public interface JavascriptObject
      * accessible objects. To clear this data, the function needs to be cleared
      * on the server.
      */
-    public void close();
+    void close();
 }

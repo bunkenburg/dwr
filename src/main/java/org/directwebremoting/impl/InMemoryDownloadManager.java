@@ -100,6 +100,7 @@ public class InMemoryDownloadManager extends PurgingDownloadManager implements D
     /**
      * Some download managers cause multiple downloads, so we count the number
      * of downloads before the delete is done.
+     * @param downloadRequestsBeforeRemove ...
      */
     public void setDownloadRequestsBeforeRemove(int downloadRequestsBeforeRemove)
     {

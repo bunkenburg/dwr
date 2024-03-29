@@ -10,6 +10,7 @@ public abstract class NestedOutboundVariable implements OutboundVariable
 {
     /**
      * OutboundVariable may need to create variables or deny outlining
+     * @param context ...
      */
     protected NestedOutboundVariable(OutboundContext context)
     {
@@ -19,6 +20,7 @@ public abstract class NestedOutboundVariable implements OutboundVariable
     /**
      * We setup the children later than construction time so we can check for
      * recursive references.
+     * @param children ...
      */
     public void setChildren(Collection<OutboundVariable> children)
     {
@@ -27,6 +29,7 @@ public abstract class NestedOutboundVariable implements OutboundVariable
 
     /**
      * The objects that we contain
+     * @return ...
      */
     public Collection<OutboundVariable> getChildren()
     {
@@ -63,9 +66,6 @@ public abstract class NestedOutboundVariable implements OutboundVariable
         return builder.toString();
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.OutboundVariable#getReference()
-     */
     public OutboundVariable getReferenceVariable()
     {
         if (reference == null)
@@ -79,6 +79,7 @@ public abstract class NestedOutboundVariable implements OutboundVariable
 
     /**
      * If outline then we need a variable so we can be referred to
+     * @return ...
      */
     protected String getVariableName()
     {
@@ -93,6 +94,7 @@ public abstract class NestedOutboundVariable implements OutboundVariable
     /**
      * Is there something (like JSON mode) that forces us to inline or maybe we
      * are referred to by multiple other things
+     * @return ...
      */
     protected boolean isInline()
     {
@@ -101,6 +103,7 @@ public abstract class NestedOutboundVariable implements OutboundVariable
 
     /**
      * Are we in JSON mode, and therefore must quote property names?
+     * @return ...
      */
     public boolean isJsonMode()
     {

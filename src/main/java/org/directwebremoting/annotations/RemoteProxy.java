@@ -10,7 +10,7 @@ import org.directwebremoting.extend.Creator;
 
 /**
  * Make a class available for remote access.
- * @author Maik Schreiber <blizzy AT blizzy DOT de>
+ * @author Maik Schreiber [blizzy AT blizzy DOT de]
  * @author Joe Walker [joe at getahead dot ltd dot uk]
  */
 @Target(ElementType.TYPE)
@@ -19,21 +19,25 @@ public @interface RemoteProxy
 {
     /**
      * Name of the JavaScript variable (default: the simple class name without package).
+     * @return ...
      */
     String name() default "";
 
     /**
      * Creator that creates instances of the class (default: &quot;{@code new}&quot; creator).
+     * @return ...
      */
     Class<? extends Creator> creator() default NewCreator.class;
 
     /**
      * Parameters for the creator.
+     * @return ...
      */
     Param[] creatorParams() default {};
 
     /**
      * Scope of the JavaScript variable (default: PAGE).
+     * @return ...
      */
     ScriptScope scope() default ScriptScope.PAGE;
 }

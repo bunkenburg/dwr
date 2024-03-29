@@ -17,6 +17,7 @@ public class JsonRpcCalls extends Calls
      * return a verbatim string because id is really a variant type in
      * Javascript.
      * @see #getBatchId()
+     * @return ...
      */
     public StringWrapper getId()
     {
@@ -31,7 +32,7 @@ public class JsonRpcCalls extends Calls
         return version;
     }
 
-    /**
+    /** @param version ...
      * @see #getVersion()
      */
     public void setVersion(String version)
@@ -43,6 +44,7 @@ public class JsonRpcCalls extends Calls
      * If parsing has failed and we should not continue, then we might want to
      * carry on with the parse to get information like the id that is needed
      * for the response, but remembering the error messages
+     * @param message ...
      */
     public void addParseError(String message)
     {
@@ -51,6 +53,7 @@ public class JsonRpcCalls extends Calls
 
     /**
      * Did parsing complete without errors?
+     * @return ...
      * @see #addParseError(String)
      */
     public boolean isParseErrorClean()
@@ -62,6 +65,7 @@ public class JsonRpcCalls extends Calls
      * Get a summary of the parse errors.
      * If there is more than one parse error, then return them all concatenated
      * by a ', '
+     * @return ...
      */
     public String getParseErrors()
     {

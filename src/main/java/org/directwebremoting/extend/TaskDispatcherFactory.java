@@ -38,13 +38,15 @@ public class TaskDispatcherFactory
      * Internal method to allow us to get the Builder from which we
      * will get TaskDispatcher objects.
      * Do NOT call this method from outside of DWR.
+     * @param container ...
+     * @return ...
      */
     public static TaskDispatcher attach(Container container)
     {
         return factory.attach(container);
     }
 
-    private static Factory<TaskDispatcher> factory = Factory.create(TaskDispatcherBuilder.class);
+    private static final Factory<TaskDispatcher> factory = Factory.create(TaskDispatcherBuilder.class);
 
     /**
      * Hack to get around Generics not being implemented by erasure

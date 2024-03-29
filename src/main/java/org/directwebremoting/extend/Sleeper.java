@@ -21,6 +21,7 @@ public interface Sleeper extends Serializable
      * @param batchId The batchId for the poll
      * @param onClose The action to take when {@link #wakeUpToClose()} is called
      * @param disconnectedTime The waiting time to instruct the browser before the next poll
+     * @throws IOException ...
      */
     void enterSleep(String batchId, Runnable onClose, int disconnectedTime) throws IOException;
 

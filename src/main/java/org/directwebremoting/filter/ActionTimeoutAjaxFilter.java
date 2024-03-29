@@ -18,9 +18,7 @@ import org.directwebremoting.io.DwrConvertedException;
  */
 public class ActionTimeoutAjaxFilter implements AjaxFilter
 {
-    /* (non-Javadoc)
-     * @see org.directwebremoting.AjaxFilter#doFilter(java.lang.Object, java.lang.reflect.Method, java.lang.Object[], org.directwebremoting.AjaxFilterChain)
-     */
+
     public Object doFilter(Object obj, Method method, Object[] params, AjaxFilterChain chain) throws Exception
     {
         ScriptSession session = WebContextFactory.get().getScriptSession();
@@ -48,6 +46,7 @@ public class ActionTimeoutAjaxFilter implements AjaxFilter
     /**
      * The time after which we detect out of date ScriptSessions, and time
      * them out.
+     * @param actionTimeoutMillis ...
      */
     public void setActionTimeoutMillis(long actionTimeoutMillis)
     {
@@ -61,6 +60,7 @@ public class ActionTimeoutAjaxFilter implements AjaxFilter
 
     /**
      * What do we ask the browser to do when the timeout happens?
+     * @param onTimeout ...
      */
     public void setOnTimeout(String onTimeout)
     {

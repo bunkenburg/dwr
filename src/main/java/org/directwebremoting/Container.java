@@ -1,5 +1,6 @@
 package org.directwebremoting;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
 /**
@@ -18,6 +19,7 @@ public interface Container
 
     /**
      * Get the contained instance of a bean of a given type
+     * @param <T> ...
      * @param type The type to get an instance of
      * @return The object of the given type, or null if the object does not exist
      */
@@ -43,9 +45,15 @@ public interface Container
      * Sometimes we need to create a bean as a one-off object and have it
      * injected with settings by the container.
      * This does not make the object part of the container.
+     * @param <T> ...
      * @param type The type to get an instance of
+     * @return ...
+     * @throws InstantiationException ...
+     * @throws IllegalAccessException ...
+     * @throws NoSuchMethodException ...
+     * @throws InvocationTargetException ...
      */
-    <T> T newInstance(Class<T> type) throws InstantiationException, IllegalAccessException;
+    <T> T newInstance(Class<T> type) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException;
 
     /**
      * Sometimes we need to take a bean not created by the container, and inject

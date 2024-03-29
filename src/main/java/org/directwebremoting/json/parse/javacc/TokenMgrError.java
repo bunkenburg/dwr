@@ -36,8 +36,10 @@ public class TokenMgrError extends Error
     /**
      * Replaces unprintable characters by their escaped (or unicode escaped)
      * equivalents in the given string
+     * @param str ...
+     * @return ...
      */
-    protected static final String addEscapes(String str)
+    protected static String addEscapes(String str)
     {
         StringBuffer retval = new StringBuffer();
         char ch;
@@ -98,7 +100,13 @@ public class TokenMgrError extends Error
      *    errorAfter  : prefix that was seen before this error occurred
      *    curchar     : the offending character
      * Note: You can customize the lexical error message by modifying this method.
+     * @param EOFSeen ...
      * @param lexState Not used
+     * @param errorLine ...
+     * @param errorColumn ...
+     * @param errorAfter ...
+     * @param curChar ...
+     * @return ...     * @param page The URL of the page on which we sit
      */
     protected static String LexicalError(boolean EOFSeen, int lexState, int errorLine, int errorColumn, String errorAfter, char curChar)
     {

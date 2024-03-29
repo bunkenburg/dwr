@@ -7,7 +7,7 @@ import org.directwebremoting.Container;
  * properties have been set by a {@link Container}: for example, to perform
  * custom initialization.
  * <p>This is similar in concept to the Spring
- * {@link org.springframework.beans.factory.InitializingBean}.
+ * org.springframework.beans.factory.InitializingBean.
  * @author Joe Walker [joe at getahead dot ltd dot uk]
  */
 public interface InitializingBean

@@ -10,6 +10,9 @@ public class JsonRpcResponse
 {
     /**
      * Create an Error from a request and the data to fulfill the request
+     * @param version ...
+     * @param id ...
+     * @param result ...
      */
     public JsonRpcResponse(String version, StringWrapper id, Object result)
     {
@@ -48,6 +51,7 @@ public class JsonRpcResponse
      * A Request identifier that SHOULD be a JSON scalar (String, Number, True,
      * False), but SHOULD normally not be Null [1].
      * If omitted, the Request is a Notification.
+     * @return ...
      */
     public StringWrapper getId()
     {

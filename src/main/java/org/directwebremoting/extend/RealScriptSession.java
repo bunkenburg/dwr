@@ -14,11 +14,13 @@ public interface RealScriptSession extends ScriptSession
     /**
      * While a Marshaller is processing a request it can register a
      * Sleeper with the ScriptSession to say - "tell me when there is new data"
+     * @param sleeper ...
      */
     void setSleeper(Sleeper sleeper);
 
     /**
      * Remove Sleeper.
+     * @param sleeper ...
      */
     void clearSleeper(Sleeper sleeper);
 
@@ -44,11 +46,13 @@ public interface RealScriptSession extends ScriptSession
 
     /**
      * Set a new page for the ScriptSession (in case of HTML pushState)
+     * @param page ...
      */
     void setPage(String page);
 
     /**
      * Set a new HttpSession id for the ScriptSession
+     * @param httpSessionId ...
      */
     void setHttpSessionId(String httpSessionId);
 
@@ -56,7 +60,7 @@ public interface RealScriptSession extends ScriptSession
      * Interface for queued script info class.
      * @author Mike Wilson
      */
-    public static interface Script
+    interface Script
     {
         long getIndex();
         Object getScript();

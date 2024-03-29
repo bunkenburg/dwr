@@ -230,6 +230,7 @@ public class BasePollHandler extends BaseDwrpHandler
     /**
      * Send a script to the browser and wrap it in the required prefixes etc.
      * @param response The http response to write to
+     * @param batch ...
      * @param script The script to write
      * @throws IOException if writing fails.
      */
@@ -334,7 +335,7 @@ public class BasePollHandler extends BaseDwrpHandler
     /**
      * Do we support streaming for clients that allow it?
      *
-     * @param streamingEnabled
+     * @param streamingEnabled ...
      */
     public void setStreamingEnabled(boolean streamingEnabled)
     {
@@ -416,6 +417,7 @@ public class BasePollHandler extends BaseDwrpHandler
 
     /**
      * How often do we check for script sessions that need timing out
+     * @param executor ...
      */
     public void setScheduledThreadPoolExecutor(ScheduledThreadPoolExecutor executor)
     {

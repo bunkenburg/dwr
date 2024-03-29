@@ -397,7 +397,6 @@ public class LegacyCompressor implements Compressor
     /**
      * Flag for use in javascript compression: Remove single line comments.
      * For ease of use you may wish to use one of the LEVEL_* compression levels.
-     * @noinspection PointlessBitwiseExpression
      */
     public static final int COMPRESS_STRIP_SL_COMMENTS = 1 << 0;
 

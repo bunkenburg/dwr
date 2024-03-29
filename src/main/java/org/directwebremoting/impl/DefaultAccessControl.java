@@ -23,26 +23,17 @@ import org.directwebremoting.extend.MethodDeclaration;
  */
 public class DefaultAccessControl implements AccessControl
 {
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.AccessControl#assertGeneralExecutionIsPossible(java.lang.String, org.directwebremoting.extend.MethodDeclaration)
-     */
     public void assertGeneralExecutionIsPossible(String scriptName, MethodDeclaration method) throws SecurityException
     {
         assertRoleRestriction(scriptName, method.getName());
         assertGeneralDisplayable(scriptName, method);
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.AccessControl#assertMethodExecutionIsPossible(java.lang.Class, java.lang.reflect.Method)
-     */
     public void assertMethodExecutionIsPossible(Class<?> clazz, Method method) throws SecurityException
     {
         assertMethodDisplayable(clazz, method);
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.AccessControl#assertGeneralDisplayable(java.lang.String, org.directwebremoting.extend.MethodDeclaration)
-     */
     public void assertGeneralDisplayable(String scriptName, MethodDeclaration method) throws SecurityException
     {
         assertIsExecutable(scriptName, method.getName());
@@ -53,9 +44,6 @@ public class DefaultAccessControl implements AccessControl
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.AccessControl#assertMethodDisplayable(java.lang.Class, java.lang.reflect.Method)
-     */
     public void assertMethodDisplayable(Class<?> clazz, Method method) throws SecurityException
     {
         assertIsMethodPublic(method);
@@ -67,9 +55,6 @@ public class DefaultAccessControl implements AccessControl
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.AccessControl#addRoleRestriction(java.lang.String, java.lang.String, java.lang.String)
-     */
     public void addRoleRestriction(String scriptName, String methodName, String role)
     {
         String key = scriptName + '.' + methodName;
@@ -83,9 +68,6 @@ public class DefaultAccessControl implements AccessControl
         roles.add(role);
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.AccessControl#addIncludeRule(java.lang.String, java.lang.String)
-     */
     public void addIncludeRule(String scriptName, String methodName)
     {
         Policy policy = getPolicy(scriptName);
@@ -106,9 +88,6 @@ public class DefaultAccessControl implements AccessControl
         policy.rules.add(methodName);
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.AccessControl#addExcludeRule(java.lang.String, java.lang.String)
-     */
     public void addExcludeRule(String scriptName, String methodName)
     {
         Policy policy = getPolicy(scriptName);
@@ -294,7 +273,7 @@ public class DefaultAccessControl implements AccessControl
 
     /**
      * Is the class that we are executing a method on part of DWR?
-     * @param clazz
+     * @param clazz ...
      */
     protected static void assertClassNotDwrInternal(Class<?> clazz)
     {

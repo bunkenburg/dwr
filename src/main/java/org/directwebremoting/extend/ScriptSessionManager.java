@@ -69,6 +69,7 @@ public interface ScriptSessionManager
     /**
      * Some implementations of ScriptSessionManager need to add custom code into
      * engine.js to register ScriptSessions with the server.
+     * @return ...
      */
     String getInitCode();
 

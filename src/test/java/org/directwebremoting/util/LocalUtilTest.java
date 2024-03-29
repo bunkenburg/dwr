@@ -53,7 +53,7 @@ public class LocalUtilTest
         assertFalse(LocalUtil.hasText(""));
         assertFalse(LocalUtil.hasText(null));
         assertFalse(LocalUtil.hasText("   "));
-        assertFalse(LocalUtil.hasText(new String()));
+        assertFalse(LocalUtil.hasText(""));
         assertTrue(LocalUtil.hasText("hello"));
     }
 
@@ -62,7 +62,7 @@ public class LocalUtilTest
     {
         assertFalse(LocalUtil.isWrapper(null));
         assertFalse(LocalUtil.isWrapper("me"));
-        assertTrue(LocalUtil.isWrapper(new Float(2.0)));
+        assertTrue(LocalUtil.isWrapper(2.0f));
     }
 
     @Test
@@ -79,10 +79,10 @@ public class LocalUtilTest
         LocalUtil.setProperty(bean, "aux", "new");
         assertEquals("new", bean.getAux());
         LocalUtil.setProperty(bean, "prim", 2);
-        assertTrue(bean.getPrim() == 2);
+        assertEquals(2, bean.getPrim());
     }
 
-    class Bean
+    static class Bean
     {
         private String aux;
         private int prim;

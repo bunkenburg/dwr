@@ -8,6 +8,10 @@ public class JsonRpcError
 {
     /**
      * Create an Error from a request and an exception/error code
+     * @param calls ...
+     * @param message ...
+     * @param code ...
+     * @param data ...
      */
     public JsonRpcError(JsonRpcCalls calls, String message, int code, Object data)
     {
@@ -28,11 +32,11 @@ public class JsonRpcError
     }
 
     /**
-     * @param version
-     * @param id
-     * @param message
-     * @param code
-     * @param data
+     * @param version ...
+     * @param id ...
+     * @param message ...
+     * @param code ...
+     * @param data ...
      */
     public JsonRpcError(String version, String id, String message, int code, Object data)
     {
@@ -44,7 +48,7 @@ public class JsonRpcError
     }
 
     /**
-     * @param ex
+     * @param ex ...
      */
     public JsonRpcError(JsonRpcCallException ex)
     {
@@ -72,6 +76,7 @@ public class JsonRpcError
      * A Request identifier that SHOULD be a JSON scalar (String, Number, True,
      * False), but SHOULD normally not be Null [1].
      * If omitted, the Request is a Notification.
+     * @return ...
      */
     public String getId()
     {
@@ -86,6 +91,7 @@ public class JsonRpcError
     /**
      * Additional information, may be omitted. Its contents is entirely defined
      * by the application (e.g. detailed error information, nested errors etc.).
+     * @return ...
      */
     public Object getData()
     {
@@ -100,6 +106,7 @@ public class JsonRpcError
     /**
      * A Number that indicates the actual error that occurred.
      * This MUST be an integer.
+     * @return ...
      */
     public int getCode()
     {
@@ -114,6 +121,7 @@ public class JsonRpcError
     /**
      * A String providing a short description of the error.
      * The message SHOULD be limited to a concise single sentence.
+     * @return ...
      */
     public String getMessage()
     {

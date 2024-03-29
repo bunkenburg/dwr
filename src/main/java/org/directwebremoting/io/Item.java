@@ -16,6 +16,8 @@ public class Item
 {
     /**
      * Create an Item with its ID and data.
+     * @param itemId ...
+     * @param data ...
      */
     public Item(String itemId, Object data)
     {
@@ -25,6 +27,7 @@ public class Item
 
     /**
      * Create an Item with its ID and data from a {@link java.util.Map.Entry}
+     * @param entry ...
      */
     public Item(Map.Entry<String, Object> entry)
     {

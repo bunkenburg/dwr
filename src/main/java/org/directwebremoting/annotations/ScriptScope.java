@@ -5,7 +5,7 @@ import org.directwebremoting.extend.Creator;
 /**
  * A scripting scope.
  * See {@link org.directwebremoting.extend.Creator} for details.
- * @author Maik Schreiber <blizzy AT blizzy DOT de>
+ * @author Maik Schreiber [blizzy AT blizzy DOT de]
  * @author Joe Walker [joe at getahead dot ltd dot uk]
  */
 public enum ScriptScope

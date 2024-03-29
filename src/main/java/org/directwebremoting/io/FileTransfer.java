@@ -38,7 +38,9 @@ public class FileTransfer
     }
 
     /**
-     * A ctor for the 3 things browsers tell us about the uploaded file
+     * A constructor for the 3 things browsers tell us about the uploaded file
+     * @param image ...
+     * @param type ...
      */
     public FileTransfer(BufferedImage image, String type)
     {
@@ -46,7 +48,10 @@ public class FileTransfer
     }
 
     /**
-     * A ctor for the 3 things browsers tell us about the uploaded file
+     * A constructor for the 3 things browsers tell us about the uploaded file
+     * @param image ...
+     * @param filename ...
+     * @param type ...
      */
     public FileTransfer(final BufferedImage image, String filename, final String type)
     {
@@ -169,6 +174,7 @@ public class FileTransfer
 
     /**
      * Returns the content type passed by the browser or null if not defined.
+     * @return ...
      */
     public String getMimeType()
     {
@@ -178,6 +184,7 @@ public class FileTransfer
     /**
      * Returns the size of the file passed by the browser or -1 if this is not
      * known.
+     * @return ...
      */
     public long getSize()
     {
@@ -187,6 +194,7 @@ public class FileTransfer
     /**
      * Returns an OutputStreamLoader that can be used to retrieve the contents
      * of the file.
+     * @return ...
      */
     public OutputStreamLoader getOutputStreamLoader()
     {
@@ -205,6 +213,8 @@ public class FileTransfer
      * of the file.
      * {@link InputStreamFactory} is used place of direct access to an
      * {@link InputStream} to ensure that resources are properly closed.
+     * @return ...
+     * @throws IOException ...
      */
     public InputStream getInputStream() throws IOException
     {

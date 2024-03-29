@@ -38,6 +38,8 @@ public class HubFactory
      * Internal method to allow us to get the Builder from which we
      * will get Hub objects.
      * Do NOT call this method from outside of DWR.
+     * @param container ...
+     * @return ...
      */
     public static Hub attach(Container container)
     {

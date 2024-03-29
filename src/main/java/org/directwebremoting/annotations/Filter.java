@@ -10,7 +10,7 @@ import org.directwebremoting.AjaxFilter;
 /**
  * Filter remote accesses to a class.
  * <p>To apply multiple filters, use the {@link Filters} annotation.</p>
- * @author Maik Schreiber <blizzy AT blizzy DOT de>
+ * @author Maik Schreiber [blizzy AT blizzy DOT de]
  * @author Joe Walker [joe at getahead dot ltd dot uk]
  */
 @Target(ElementType.TYPE)
@@ -19,11 +19,13 @@ public @interface Filter
 {
     /**
      * The filter implementation to use.
+     * @return ...
      */
     Class<? extends AjaxFilter> type();
 
     /**
      * Parameters for the filter.
+     * @return ...
      */
     Param[] params() default {};
 }

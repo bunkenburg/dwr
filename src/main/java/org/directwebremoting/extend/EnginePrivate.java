@@ -13,12 +13,13 @@ public class EnginePrivate
      * Begin wrapper with variable alias to do remote calls on the correct DWR instance.
      * @param instanceId DWR instance id from browser
      * @param useWindowParent should this alias target the same window or the parent window?
+     * @param documentDomain ...
      * @return JavaScript snippet to be used by other remote calls
      */
     public static String remoteBeginWrapper(String instanceId, boolean useWindowParent, String documentDomain)
     {
         StringBuilder buf = new StringBuilder();
-        if (documentDomain != null && !documentDomain.equals("")) {
+        if (documentDomain != null && !documentDomain.isEmpty()) {
             buf.append("document.domain='").append(documentDomain).append("';\r\n");
         }
         if (useWindowParent)
@@ -27,7 +28,7 @@ public class EnginePrivate
         	// iframe receives data and IE6/7 complains about "freed script"
             buf.append("try{\r\n");
             buf.append("if(window.parent.dwr){\r\n");
-            buf.append("var dwr=window.parent.dwr._[" + instanceId + "];");
+            buf.append("var dwr=window.parent.dwr._[").append(instanceId).append("];");
         }
         else
         {
@@ -88,16 +89,15 @@ public class EnginePrivate
 
     /**
      * Call dwr.engine.remote.handleReverseAjax() in the browser
-     * @param scriptIndex
-     * @param script
+     * @param scriptIndex ...
+     * @param script ...
+     * @return ...
      */
     public static String getRemoteHandleReverseAjaxScript(long scriptIndex, String script)
     {
-        StringBuffer strbuf = new StringBuffer();
-        strbuf.append("dwr.engine.remote.handleReverseAjax(").append(scriptIndex).append(",function(){\r\n");
-        strbuf.append(script).append("\r\n");
-        strbuf.append("});");
-        return strbuf.toString();
+        return "dwr.engine.remote.handleReverseAjax(" + scriptIndex + ",function(){\r\n" +
+                script + "\r\n" +
+                "});";
     }
 
     /**
@@ -108,7 +108,7 @@ public class EnginePrivate
      */
     public static String getRemoteHandleBatchExceptionScript(String batchId, Exception ex)
     {
-        StringBuffer reply = new StringBuffer();
+        StringBuilder reply = new StringBuilder();
 
         String output = JavascriptUtil.escapeJavaScript(ex.getMessage());
         String params = "{ name:'" + ex.getClass().getName() + "', message:'" + output + "' }";
@@ -136,6 +136,7 @@ public class EnginePrivate
     /**
      * Call dwr.engine.remote.executeFunction() in the browser
      * @param id The registered function name
+     * @param methodName ...
      * @param params The data to pass to the function
      * @return The script to send to the browser
      */
@@ -195,6 +196,7 @@ public class EnginePrivate
 
     /**
      * Returns the name of the newObject function.
+     * @return ...
      */
     public static String remoteNewObjectFunction()
     {

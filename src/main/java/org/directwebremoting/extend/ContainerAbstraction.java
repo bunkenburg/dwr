@@ -46,6 +46,7 @@ public interface ContainerAbstraction
      * @param scriptSession The Sleeper will probably need to know about the scriptSession
      * @param conduit The Sleeper will probably need to know about the conduit
      * @return A method of sending threads to sleep.
+     * @throws IOException ...
      */
     Sleeper createSleeper(HttpServletRequest request, HttpServletResponse response, RealScriptSession scriptSession, ScriptConduit conduit) throws IOException;
 }

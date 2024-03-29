@@ -27,18 +27,21 @@ public interface Module
 
     /**
      * Returns a particular method as matched by the name and parameter types.
-     * @param methodName
-     * @param parameterTypes
+     * @param methodName ...
+     * @param parameterTypes ...
      * @return method declaration
+     * @throws NoSuchMethodException ...
+     * @throws SecurityException ...
      */
     MethodDeclaration getMethod(String methodName, Class<?>... parameterTypes) throws NoSuchMethodException, SecurityException;
 
     /**
      * Invokes the code behind a logical method declaration, using the supplied
      * parameters.
-     * @param method
-     * @param parameters
+     * @param method ...
+     * @param parameters ...
      * @return the return value of the method
+     * @throws Exception ...
      */
     Object executeMethod(MethodDeclaration method, Object[] parameters) throws Exception;
 

@@ -7,7 +7,7 @@
  * <p>To use DWR with annotations you need to specify a different DWR controller
  * servlet in your {@code web.xml}:</p>
  *
- * <p><pre>
+ * <pre>
  * {@literal <servlet>}
  *    {@literal <description>}DWR controller servlet{@literal </description>}
  *    {@literal <servlet-name>}DWR controller servlet{@literal </servlet-name>}
@@ -20,7 +20,7 @@
  *       {@literal </param-value>}
  *    {@literal </init-param>}
  * {@literal </servlet>}
- * </pre></p>
+ * </pre>
  *
  * <p>The {@code classes} servlet parameter must provide a comma-separated list of the
  * fully-qualified class names of all annotated classes to be used with DWR.</p>
@@ -31,7 +31,7 @@
  * {@link org.directwebremoting.annotations.RemoteProxy RemoteProxy} and
  * {@link org.directwebremoting.annotations.RemoteMethod RemoteMethod} annotations:</p>
  *
- * <p><pre>
+ * <pre>
  * {@literal @RemoteProxy}
  * public class RemoteFunctions {
  *    {@literal @RemoteMethod}
@@ -39,7 +39,7 @@
  *      return 42;
  *    }
  * }
- * </pre></p>
+ * </pre>
  *
  * <p>Any method not annotated with {@code RemoteMethod} will not be available
  * for remote access.</p>
@@ -47,11 +47,11 @@
  * <p>To use a scripting name different from the class name, use the
  * {@code name} attribute of {@code RemoteProxy}:</p>
  *
- * <p><pre>
+ * <pre>
  * {@literal @RemoteProxy}(name="Functions")
  * public class RemoteFunctions {
  * }
- * </pre></p>
+ * </pre>
  *
  * <h3>Object Conversion</h3>
  *
@@ -59,7 +59,7 @@
  * {@link org.directwebremoting.annotations.DataTransferObject DataTransferObject} and
  * {@link org.directwebremoting.annotations.RemoteProperty RemoteProperty} annotations:</p>
  *
- * <p><pre>
+ * <pre>
  * {@literal @DataTransferObject}
  * public class Foo {
  *    {@literal @RemoteProperty}
@@ -74,7 +74,7 @@
  *       return foo * 42;
  *    }
  * }
- * </pre></p>
+ * </pre>
  *
  * <p>To use more sophisticated converters see the
  * {@link org.directwebremoting.annotations.DataTransferObject#converter converter} attribute of the

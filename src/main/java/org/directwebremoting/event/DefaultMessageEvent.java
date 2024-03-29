@@ -28,8 +28,8 @@ public class DefaultMessageEvent implements MessageEvent
     /**
      * Constructor for use with client-side originated messages
      * @param hub The hub used to send the data
-     * @param converterManager
-     * @param rawData
+     * @param converterManager ...
+     * @param rawData ...
      */
     public DefaultMessageEvent(Hub hub, ConverterManager converterManager, RealRawData rawData)
     {
@@ -40,17 +40,11 @@ public class DefaultMessageEvent implements MessageEvent
         source = Source.INTERNET;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.event.MessageEvent#getHub()
-     */
     public Hub getHub()
     {
         return hub;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.event.MessageEvent#getData(java.lang.Class)
-     */
     @SuppressWarnings("unchecked")
     public <T> T getData(Class<T> asType)
     {

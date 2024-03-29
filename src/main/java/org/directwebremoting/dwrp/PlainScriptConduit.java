@@ -24,26 +24,17 @@ import org.directwebremoting.util.MimeConstants;
  */
 public class PlainScriptConduit extends BaseScriptConduit
 {
-    /**
-     * Simple ctor
-     */
     public PlainScriptConduit(PrintWriter out, String instanceId, String scriptTagProtection)
     {
         super(out, instanceId);
         this.scriptTagProtection = scriptTagProtection;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.ScriptConduit#getOutboundMimeType()
-     */
     public String getOutboundMimeType()
     {
         return MimeConstants.MIME_JS;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.ScriptConduit#beginStreamAndChunk()
-     */
     public void beginStreamAndChunk()
     {
         if (scriptTagProtection != null)
@@ -52,9 +43,6 @@ public class PlainScriptConduit extends BaseScriptConduit
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.ScriptConduit#beginChunk()
-     */
     public void beginChunk()
     {
         if (!chunkOpen) {
@@ -64,9 +52,6 @@ public class PlainScriptConduit extends BaseScriptConduit
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.ScriptConduit#sendScript(java.lang.String)
-     */
     public void sendScript(String script)
     {
         if (log.isDebugEnabled()) {
@@ -76,9 +61,6 @@ public class PlainScriptConduit extends BaseScriptConduit
         out.println(script);
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.ScriptConduit#endChunk()
-     */
     public void endChunk()
     {
         if (chunkOpen) {
@@ -88,9 +70,6 @@ public class PlainScriptConduit extends BaseScriptConduit
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.ScriptConduit#endStream(java.io.PrintWriter, int)
-     */
     public void endStreamAndChunk() throws IOException
     {
         endChunk();

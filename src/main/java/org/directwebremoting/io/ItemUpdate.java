@@ -12,6 +12,9 @@ public class ItemUpdate
 {
     /**
      * Create an Item with its ID and data.
+     * @param itemId ...
+     * @param attribute ...
+     * @param newValue ...
      */
     public ItemUpdate(String itemId, String attribute, RawData newValue)
     {
@@ -37,6 +40,7 @@ public class ItemUpdate
     /**
      * Accessor for the property that we want to change on the Object with the
      * ID given in <code>itemId</code>.
+     * @return ...
      */
     public String getAttribute()
     {
@@ -46,24 +50,19 @@ public class ItemUpdate
     /**
      * Accessor for the value for the <code>attribute</code> that we want to
      * change on the Object with the ID given in <code>itemId</code>.
+     * @return ...
      */
     public RawData getNewValue()
     {
         return newValue;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
     @Override
     public int hashCode()
     {
         return 4783 + itemId.hashCode();
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
     @Override
     public boolean equals(Object obj)
     {

@@ -13,7 +13,7 @@ public class MethodDeclaration
 {
     /**
      * Initializes the logical method declaration from a reflected Java method.
-     * @param method
+     * @param method ...
      */
     public MethodDeclaration(Method method)
     {
@@ -22,11 +22,11 @@ public class MethodDeclaration
 
     /**
      * Initializes the logical method declaration from primitive data.
-     * @param moduleName
-     * @param methodName
-     * @param genericParameterTypes
-     * @param varArgs
-     * @param genericReturnType
+     * @param moduleName ...
+     * @param methodName ...
+     * @param genericParameterTypes ...
+     * @param varArgs ...
+     * @param genericReturnType ...
      */
     public MethodDeclaration(String moduleName, String methodName, Type[] genericParameterTypes, boolean varArgs, Type genericReturnType)
     {

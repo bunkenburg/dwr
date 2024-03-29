@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * A global filter that filters all remote accesses to classes.
  * This can only be applied to classes implementing the AjaxFilter interface.
- * @author Maik Schreiber <blizzy AT blizzy DOT de>
+ * @author Maik Schreiber [blizzy AT blizzy DOT de]
  * @author Joe Walker [joe at getahead dot ltd dot uk]
  */
 @Target(ElementType.TYPE)
@@ -17,6 +17,7 @@ public @interface GlobalFilter
 {
     /**
      * Parameters for this filter.
+     * @return ...
      */
     Param[] params() default {};
 }

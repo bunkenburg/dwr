@@ -30,6 +30,7 @@ public class FileJavaScriptHandler extends JavaScriptHandler
     /**
      * @param resource The name of the resource in the classpath that we read
      * our contents from
+     * @param copyright ...
      */
     public FileJavaScriptHandler(String resource, String copyright)
     {
@@ -82,7 +83,7 @@ public class FileJavaScriptHandler extends JavaScriptHandler
     /**
      * Gets the copyright text to be prepended to the response.
      * @return String copyright text
-     * @throws IOException
+     * @throws IOException ...
      */
     protected String getCopyright() throws IOException
     {

@@ -8,6 +8,7 @@ public class JsonBoolean extends JsonValue
 {
     /**
      * All JsonBoolean wrap a Java boolean value
+     * @param value ...
      */
     public JsonBoolean(boolean value)
     {
@@ -16,33 +17,25 @@ public class JsonBoolean extends JsonValue
 
     /**
      * All JsonBoolean wrap a Java boolean value
+     * @param text ...
      */
     public JsonBoolean(String text)
     {
         value = Boolean.parseBoolean(text);
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.json.JsonValue#getString()
-     */
     @Override
     public boolean getBoolean()
     {
         return value;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.json.JsonValue#toExternalRepresentation()
-     */
     @Override
     public String toExternalRepresentation()
     {
         return Boolean.toString(value);
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString()
     {

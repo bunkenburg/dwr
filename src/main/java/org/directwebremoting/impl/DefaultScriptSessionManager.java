@@ -210,6 +210,8 @@ public class DefaultScriptSessionManager implements ScriptSessionManager, Initia
 
     /**
      * Unlink any http sessions from this script session
+     * @param scriptSession ...
+     * @param httpSessionId ...
      */
     protected void disassociateScriptSessionAndHttpSession(DefaultScriptSession scriptSession, String httpSessionId)
     {
@@ -487,6 +489,7 @@ public class DefaultScriptSessionManager implements ScriptSessionManager, Initia
 
     /**
      * How often do we check for script sessions that need timing out
+     * @param scriptSessionCheckTime ...
      */
     public void setScriptSessionCheckTime(long scriptSessionCheckTime)
     {
@@ -500,15 +503,16 @@ public class DefaultScriptSessionManager implements ScriptSessionManager, Initia
 
     /**
      * How often do we check for script sessions that need timing out
+     * @param executor ...
      */
     public void setScheduledThreadPoolExecutor(ScheduledThreadPoolExecutor executor)
     {
         this.executor = executor;
     }
 
-   /*
+   /**
     * Accessor for the ConverterManager that we configure
-    * @param converterManager
+    * @param converterManager ...
     */
    public void setConverterManager(ConverterManager converterManager)
    {

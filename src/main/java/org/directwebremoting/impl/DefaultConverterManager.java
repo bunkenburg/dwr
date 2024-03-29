@@ -1,5 +1,6 @@
 package org.directwebremoting.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -64,8 +65,7 @@ public class DefaultConverterManager implements ConverterManager
      *
      * @see org.directwebremoting.ConverterManager#addConverter(java.lang.String, java.lang.String, java.util.Map)
      */
-    public void addConverter(String match, String type, Map<String, String> params) throws IllegalArgumentException, InstantiationException, IllegalAccessException
-    {
+    public void addConverter(String match, String type, Map<String, String> params) throws IllegalArgumentException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         Class<?> clazz = converterTypes.get(type);
         if (clazz == null)
         {
@@ -73,7 +73,7 @@ public class DefaultConverterManager implements ConverterManager
             return;
         }
 
-        Converter converter = (Converter) clazz.newInstance();
+        Converter converter = (Converter) clazz.getDeclaredConstructor().newInstance();
         LocalUtil.setParams(converter, params, ignore);
 
         // add the converter for the specified match

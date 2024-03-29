@@ -5,15 +5,12 @@ package org.directwebremoting.json.parse;
  */
 public class JsonParseException extends Exception
 {
-    /**
-     *
-     */
     public JsonParseException()
     {
     }
 
     /**
-     * @param message
+     * @param message ...
      */
     public JsonParseException(String message)
     {
@@ -21,7 +18,7 @@ public class JsonParseException extends Exception
     }
 
     /**
-     * @param cause
+     * @param cause ...
      */
     public JsonParseException(Throwable cause)
     {
@@ -29,8 +26,8 @@ public class JsonParseException extends Exception
     }
 
     /**
-     * @param message
-     * @param cause
+     * @param message ...
+     * @param cause ...
      */
     public JsonParseException(String message, Throwable cause)
     {

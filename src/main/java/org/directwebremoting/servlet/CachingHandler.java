@@ -87,17 +87,18 @@ public abstract class CachingHandler implements Handler
     /**
      * Create a String which can be cached and sent as a 302. Returning null
      * signals that the resource doesn't exist and should result in a 404.
-     * @param contextPath
-     * @param servletPath
-     * @param pathInfo
+     * @param contextPath ...
+     * @param servletPath ...
+     * @param pathInfo ...
      * @return The string to output for this resource
-     * @throws IOException
+     * @throws IOException ...
      */
     public abstract String generateCachableContent(String contextPath, String servletPath, String pathInfo) throws IOException;
 
     /**
      * Do we need to send the content for this file
      * @param req The HTTP request
+     * @param lastModified ...
      * @return true iff the ETags and If-Modified-Since headers say we have not changed
      */
     protected boolean isUpToDate(HttpServletRequest req, long lastModified)
@@ -189,7 +190,8 @@ public abstract class CachingHandler implements Handler
 	 * Returns the caching key which is based on the servlet path (DWR-470)
 	 * as well as the  cachedPath.
      *
-     * @param request
+     * @param request ...
+     * @return ...
      */
     protected String getCachingKey(HttpServletRequest request)
     {
@@ -238,7 +240,7 @@ public abstract class CachingHandler implements Handler
     /**
      * I wish Java had tuples
      */
-    class CachedResource
+    static class CachedResource
     {
         protected String contents;
         protected long lastModifiedTime;

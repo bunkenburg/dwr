@@ -1,5 +1,6 @@
 package org.directwebremoting.annotations;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import org.directwebremoting.convert.BasicObjectConverter;
@@ -16,7 +17,7 @@ public class AnnotationsConfiguratorTest
 {
 
     @Test
-    public void testConvert() throws IllegalAccessException, InstantiationException {
+    public void testConvert() throws IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
         AnnotationsConfigurator ac = new AnnotationsConfigurator();
         DefaultContainer dwrContainer = new DefaultContainer();
         DefaultConverterManager converterManager = new DefaultConverterManager();

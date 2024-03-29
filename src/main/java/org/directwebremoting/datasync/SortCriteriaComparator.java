@@ -19,6 +19,8 @@ public class SortCriteriaComparator<T> implements Comparator<T>
     /**
      * All SortCriteriaComparators need a set of things to sort on and a way to
      * get the values to sort
+     * @param sort ...
+     * @param comparatorFactory ...
      */
     public SortCriteriaComparator(List<SortCriterion> sort, ComparatorFactory<T> comparatorFactory)
     {

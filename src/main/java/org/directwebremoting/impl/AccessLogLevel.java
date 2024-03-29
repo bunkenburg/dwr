@@ -28,7 +28,7 @@ public enum AccessLogLevel
     // with a higher hierarchy will be displayed in the log.
     private final byte hierarchy;
 
-    private AccessLogLevel(String description, byte hierarchy) {
+    AccessLogLevel(String description, byte hierarchy) {
         this.description = description;
         this.hierarchy = hierarchy;
     }
@@ -39,7 +39,7 @@ public enum AccessLogLevel
      * will always return an AccessLogLevel.  If accessLogLevelString is not valid a default
      * of OFF will be returned unless we are in debug mode when EXCEPTION will be returned.
      *
-     * @param accessLogLevelString
+     * @param accessLogLevelString ...
      * @param debug - are we in debug mode
      * @return AccessLogLevel
      */

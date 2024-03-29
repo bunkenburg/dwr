@@ -32,6 +32,7 @@ public interface Hub
      * Reverse the action of {@link #subscribe(String, MessageListener)}
      * @param topicName The topic to subscribe to.
      * @param listener The object to notify of matching calls to publish()
+     * @return ...
      */
     boolean unsubscribe(String topicName, MessageListener listener);
 

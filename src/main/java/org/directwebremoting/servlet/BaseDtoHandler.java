@@ -14,9 +14,6 @@ import org.directwebremoting.util.LocalUtil;
  */
 public abstract class BaseDtoHandler extends GeneratedJavaScriptHandler
 {
-    /* (non-Javadoc)
-     * @see org.directwebremoting.servlet.TemplateHandler#generateTemplate(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
-     */
     @Override
     protected String generateTemplate(String contextPath, String servletPath, String pathInfo) throws IOException
     {
@@ -80,7 +77,7 @@ public abstract class BaseDtoHandler extends GeneratedJavaScriptHandler
      * Does the actual work of generating the dto script
      * @param contextPath TODO
      * @param servletPath TODO
-     * @param jsClassName
+     * @param jsClassName ...
      * @return dto script
      */
     public abstract String generateDtoScript(String contextPath, String servletPath, String jsClassName);
@@ -102,9 +99,6 @@ public abstract class BaseDtoHandler extends GeneratedJavaScriptHandler
         this.generateDtoClasses = generateDtoClasses;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString()
     {

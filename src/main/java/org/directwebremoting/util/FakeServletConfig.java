@@ -39,6 +39,7 @@ public class FakeServletConfig implements ServletConfig
 
     /**
      * Copy the values from another {@link ServletConfig} so we can modify them.
+     * @param servletConfig ...
      */
     public FakeServletConfig(ServletConfig servletConfig)
     {
@@ -53,17 +54,11 @@ public class FakeServletConfig implements ServletConfig
         }
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletConfig#getServletName()
-     */
     public String getServletName()
     {
         return name;
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletConfig#getServletContext()
-     */
     public ServletContext getServletContext()
     {
         return servletContext;
@@ -71,15 +66,14 @@ public class FakeServletConfig implements ServletConfig
 
     /**
      * Modify an init parameter
+     * @param name ...
+     * @param value ...
      */
     public void setInitParameter(String name, String value)
     {
         initParameters.put(name, value);
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletConfig#getInitParameter(java.lang.String)
-     */
     public String getInitParameter(String paramName)
     {
         Object obj = initParameters.get(paramName);
@@ -93,9 +87,6 @@ public class FakeServletConfig implements ServletConfig
         }
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletConfig#getInitParameterNames()
-     */
     public Enumeration<String> getInitParameterNames()
     {
         return Collections.enumeration(initParameters.keySet());

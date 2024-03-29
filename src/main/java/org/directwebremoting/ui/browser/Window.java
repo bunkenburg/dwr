@@ -120,6 +120,8 @@ public class Window
     /**
      * Open a new browser child window, pointing at given <code>url</code> and
      * identified with a given <code>windowName</code>.
+     * @param url ...
+     * @param windowName ...
      * @see #open(String, String, OptionBuilder) for more details
      */
     public static void open(String url, String windowName)
@@ -130,6 +132,8 @@ public class Window
     /**
      * Open a new browser child window, pointing at given <code>url</code> and
      * identified with a given <code>windowName</code>.
+     * @param url ...
+     * @param windowName ...
      * @see #open(String, String, OptionBuilder) for more details
      */
     public static void open(URL url, String windowName)
@@ -140,6 +144,8 @@ public class Window
     /**
      * Open a new browser child window, pointing at given <code>uri</code> and
      * identified with a given <code>windowName</code>.
+     * @param uri ...
+     * @param windowName ...
      * @see #open(String, String, OptionBuilder) for more details
      */
     public static void open(URI uri, String windowName)
@@ -150,8 +156,10 @@ public class Window
     /**
      * Open a new browser child window, pointing at given <code>url</code> and
      * identified with a given <code>windowName</code>.
+     * @param url ...
      * @param windowName The window name can be one of the special values:
      * _blank, _parent, _self, _top.
+     * @param builder ...
      */
     public static void open(String url, String windowName, OptionBuilder builder)
     {
@@ -161,6 +169,9 @@ public class Window
     /**
      * Open a new browser child window, pointing at given <code>url</code> and
      * identified with a given <code>windowName</code>.
+     * @param url ...
+     * @param windowName ...
+     * @param builder ...
      * @see #open(String, String, OptionBuilder) for more details
      */
     public static void open(URL url, String windowName, OptionBuilder builder)
@@ -171,6 +182,9 @@ public class Window
     /**
      * Open a new browser child window, pointing at given <code>uri</code> and
      * identified with a given <code>windowName</code>.
+     * @param uri ...
+     * @param windowName ...
+     * @param builder ...
      * @see #open(String, String, OptionBuilder) for more details
      */
     public static void open(URI uri, String windowName, OptionBuilder builder)
@@ -199,6 +213,8 @@ public class Window
          * the work area for applications of the user's operating system to the
          * leftmost border (resizing handle) of the browser window.
          * The new window can not be initially positioned off-screen.
+         * @param value ...
+         * @return ...
          */
         public OptionBuilder left(int value)
         {
@@ -210,6 +226,8 @@ public class Window
          * the work area for applications of the user's operating system to the
          * topmost border (resizing handle) of the browser window.
          * The new window can not be initially positioned off-screen.
+         * @param value ...
+         * @return ...
          */
         public OptionBuilder top(int value)
         {
@@ -221,6 +239,8 @@ public class Window
          * secondary window in pixels. The height value includes the height of
          * the horizontal scrollbar if present.
          * The minimum required value is 100.
+         * @param value ...
+         * @return ...
          */
         public OptionBuilder height(int value)
         {
@@ -238,6 +258,8 @@ public class Window
          * vertical scrollbar if present.
          * The width value does not include the sidebar if it is expanded.
          * The minimum required value is 100.
+         * @param value ...
+         * @return ...
          */
         public OptionBuilder width(int value)
         {
@@ -254,6 +276,7 @@ public class Window
          * menu-bar.
          * <p>
          * Certain browsers may ignore this hint in some situations.
+         * @return ...
          */
         public OptionBuilder hideMenubar()
         {
@@ -266,6 +289,7 @@ public class Window
          * toolbars.
          * <p>
          * Certain browsers may ignore this hint in some situations.
+         * @return ...
          */
         public OptionBuilder hideToolbar()
         {
@@ -277,6 +301,7 @@ public class Window
          * Location/Address bar
          * <p>
          * Certain browsers may ignore this hint in some situations.
+         * @return ...
          */
         public OptionBuilder hideLocation()
         {
@@ -288,6 +313,7 @@ public class Window
          * status bar.
          * <p>
          * Many browsers ignore this hint.
+         * @return ...
          */
         public OptionBuilder hideStatus()
         {
@@ -299,6 +325,7 @@ public class Window
          * <p>
          * Many browsers ignore this hint, and its use use is <strong>strongly</strong>
          * discouraged for accessibility reasons
+         * @return ...
          */
         public OptionBuilder notResizable()
         {
@@ -311,6 +338,7 @@ public class Window
          * window's viewport.
          * Certain browsers ignore this hint, and its use use is
          * <strong>strongly</strong> discouraged for accessibility reasons
+         * @return ...
          */
         public OptionBuilder hideScrollbars()
         {
@@ -319,6 +347,9 @@ public class Window
 
         /**
          * Helper to prevent lots of cut and paste in adding new options.
+         * @param name ...
+         * @param value ...
+         * @return ...
          */
         private OptionBuilder addOption(String name, Object value)
         {
@@ -329,6 +360,7 @@ public class Window
         /**
          * Create a string fit for the <code>windowFeatures</code> parameter
          * to window.open(url, name windowFeatures);
+         * @return ...
          */
         protected String createWindowFeatures()
         {

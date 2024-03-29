@@ -34,7 +34,9 @@ public class Directory
 
     /**
      * Look up the StoreProvider by ID.
+     * @param <T> ...
      * @param storeId The id by which the store can be reached
+     * @param type ...
      * @return The found StoreProvider or null if one is not found.
      */
     @SuppressWarnings("unchecked")

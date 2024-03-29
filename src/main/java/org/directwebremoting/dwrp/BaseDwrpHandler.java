@@ -16,7 +16,7 @@ public abstract class BaseDwrpHandler implements Handler
 {
     /**
      * Complain if GET is disallowed
-     * @param batch
+     * @param batch ...
      */
     protected void checkGetAllowed(Batch batch)
     {

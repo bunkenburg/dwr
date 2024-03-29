@@ -16,17 +16,11 @@ import org.directwebremoting.io.OutputStreamLoader;
  */
 public class OutputStreamLoaderInputStreamFactory implements InputStreamFactory
 {
-    /**
-     * We need an OutputStreamLoader
-     */
     public OutputStreamLoaderInputStreamFactory(OutputStreamLoader outputStreamLoader)
     {
         this.outputStreamLoader = outputStreamLoader;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.io.InputStreamFactory#getInputStream()
-     */
     public InputStream getInputStream() throws IOException
     {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -34,9 +28,6 @@ public class OutputStreamLoaderInputStreamFactory implements InputStreamFactory
         return new ByteArrayInputStream(out.toByteArray());
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.io.InputStreamFactory#close()
-     */
     public void close() throws IOException
     {
         outputStreamLoader = null;

@@ -11,9 +11,9 @@ public class BaseModule
     /**
      * Constructor. Path parameters are supplied for expanding path variables in
      * module paths.
-     * @param contextPath
-     * @param servletPath
-     * @param separator
+     * @param contextPath ...
+     * @param servletPath ...
+     * @param separator ..
      */
     public BaseModule(String contextPath, String servletPath, String separator)
     {
@@ -24,7 +24,7 @@ public class BaseModule
 
     /**
      * Adds the actual module content (script body).
-     * @param content
+     * @param content ...
      */
     public void addContent(String content)
     {
@@ -33,7 +33,7 @@ public class BaseModule
 
     /**
      * Expands ${contextPath} and ${servletPath} variables in the baseModulePath.
-     * @param baseModulePath
+     * @param baseModulePath ...
      * @return module path
      */
     public String expandModulePath(String baseModulePath)
@@ -63,7 +63,7 @@ public class BaseModule
         // - remove trailing separator (but leave leading separator)
         while(expandedBaseModulePath.indexOf(separator + separator) > 0)
         {
-            expandedBaseModulePath.replaceAll(separator + separator, separator);
+            expandedBaseModulePath = expandedBaseModulePath.replaceAll(separator + separator, separator);
         }
         if (!baseModulePath.startsWith(separator) && expandedBaseModulePath.startsWith(separator))
         {
@@ -82,8 +82,8 @@ public class BaseModule
      * ${contextPath} and ${servletPath} variables in the baseModulePath. The
      * module path segments in the resulting module name will be separated with
      * the configured separator (typically / or .).
-     * @param baseModulePath
-     * @param moduleName
+     * @param baseModulePath ...
+     * @param moduleName ...
      * @return module name rooted on baseModulePath
      */
     public String expandModulePath(String baseModulePath, String moduleName)

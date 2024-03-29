@@ -2,6 +2,7 @@ package org.directwebremoting.annotations;
 
 import java.beans.Introspector;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -121,9 +122,10 @@ public class AnnotationsConfigurator implements Configurator
      * @param container The IoC container to configure
      * @throws IllegalAccessException If annotation processing fails
      * @throws InstantiationException If annotation processing fails
+     * @throws InvocationTargetException ...
+     * @throws NoSuchMethodException ...
      */
-    protected void processClass(Class<?> clazz, Container container) throws InstantiationException, IllegalAccessException
-    {
+    protected void processClass(Class<?> clazz, Container container) throws InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         RemoteProxy createAnn = clazz.getAnnotation(RemoteProxy.class);
         if (createAnn != null)
         {
@@ -256,9 +258,10 @@ public class AnnotationsConfigurator implements Configurator
      * @param container The IoC container to configure
      * @throws InstantiationException If there are problems instantiating the Converter
      * @throws IllegalAccessException If there are problems instantiating the Converter
+     * @throws InvocationTargetException ...
+     * @throws NoSuchMethodException ...
      */
-    protected void processConvert(Class<?> clazz, DataTransferObject convertAnn, Container container) throws InstantiationException, IllegalAccessException
-    {
+    protected void processConvert(Class<?> clazz, DataTransferObject convertAnn, Container container) throws InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         Class<? extends Converter> converter = convertAnn.converter();
         String converterClass = converter.getName();
         Map<String, String> params = getParamsMap(convertAnn.params());
@@ -325,28 +328,26 @@ public class AnnotationsConfigurator implements Configurator
      * @param container The IoC container to configure
      * @throws InstantiationException In case we can't create the given clazz
      * @throws IllegalAccessException In case we can't create the given clazz
+     * @throws InvocationTargetException ...
+     * @throws NoSuchMethodException ...
      */
-    protected void processGlobalFilter(Class<?> clazz, GlobalFilter globalFilterAnn, Container container) throws InstantiationException, IllegalAccessException
-    {
+    protected void processGlobalFilter(Class<?> clazz, GlobalFilter globalFilterAnn, Container container) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         if (!AjaxFilter.class.isAssignableFrom(clazz))
         {
             throw new IllegalArgumentException(clazz.getName() + " is not an AjaxFilter implementation");
         }
 
         Map<String, String> filterParams = getParamsMap(globalFilterAnn.params());
-        AjaxFilter filter = (AjaxFilter) clazz.newInstance();
-        if (filter != null)
-        {
-            LocalUtil.setParams(filter, filterParams, null);
-            AjaxFilterManager filterManager = container.getBean(AjaxFilterManager.class);
-            filterManager.addAjaxFilter(filter);
-        }
+        AjaxFilter filter = (AjaxFilter) clazz.getDeclaredConstructor().newInstance();
+        LocalUtil.setParams(filter, filterParams, null);
+        AjaxFilterManager filterManager = container.getBean(AjaxFilterManager.class);
+        filterManager.addAjaxFilter(filter);
     }
 
     /**
-     * Utility to turn a Param array into a Map<String, String>.
+     * Utility to turn a Param array into a Map&lt;String, String&gt;.
      * @param params The params array from annotations
-     * @return A Map<String, String>
+     * @return A Map&lt;String, String&gt;
      */
     protected Map<String, String> getParamsMap(Param[] params)
     {

@@ -47,6 +47,7 @@ public class SimpleCharStream
 
     /**
      * @param i Eh? parameters to a getter?
+     * @return ...
      */
     protected int getTabSize(int i)
     {
@@ -240,8 +241,8 @@ public class SimpleCharStream
     /**
      * @deprecated
      * @see #getEndColumn
+     * @return ...
      */
-
     @Deprecated
     public int getColumn()
     {
@@ -251,8 +252,8 @@ public class SimpleCharStream
     /**
      * @deprecated
      * @see #getEndLine
+     * @return ...
      */
-
     @Deprecated
     public int getLine()
     {
@@ -437,6 +438,8 @@ public class SimpleCharStream
 
     /**
      * Method to adjust line and column numbers for the start of a token.
+     * @param newLine ...
+     * @param newCol ...
      */
     public void adjustBeginLineColumn(int newLine, int newCol)
     {

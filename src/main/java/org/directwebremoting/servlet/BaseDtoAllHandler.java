@@ -10,9 +10,6 @@ import org.directwebremoting.extend.ConverterManager;
  */
 public abstract class BaseDtoAllHandler extends GeneratedJavaScriptHandler
 {
-    /* (non-Javadoc)
-     * @see org.directwebremoting.servlet.TemplateHandler#generateTemplate(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
-     */
     @Override
     protected String generateTemplate(String contextPath, String servletPath, String pathInfo) throws IOException
     {
@@ -26,8 +23,8 @@ public abstract class BaseDtoAllHandler extends GeneratedJavaScriptHandler
 
     /**
      * Generates the full dtoall script by decorating the DTO classes returned by the Remoter.
-     * @param contextPath
-     * @param servletPath
+     * @param contextPath ...
+     * @param servletPath ...
      * @return string containing dtoall script
      */
     public abstract String generateDtoAllScript(String contextPath, String servletPath);

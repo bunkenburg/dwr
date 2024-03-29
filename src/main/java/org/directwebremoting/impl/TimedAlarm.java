@@ -14,7 +14,9 @@ import org.directwebremoting.extend.Sleeper;
 public class TimedAlarm implements Alarm
 {
     /**
+     * @param sleeper ...
      * @param waitTime How long we wait before the Alarm goes off
+     * @param executor ...
      */
     public TimedAlarm(final Sleeper sleeper, long waitTime, ScheduledThreadPoolExecutor executor)
     {
@@ -36,9 +38,6 @@ public class TimedAlarm implements Alarm
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.Alarm#cancel()
-     */
     public void cancel()
     {
         if (future != null)

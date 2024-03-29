@@ -12,35 +12,23 @@ import org.directwebremoting.io.InputStreamFactory;
  */
 public class SimpleInputStreamFactory implements InputStreamFactory
 {
-    /**
-     *
-     */
     public SimpleInputStreamFactory(InputStream in)
     {
         this.in = in;
         this.autoClose = true;
     }
 
-    /**
-     *
-     */
     public SimpleInputStreamFactory(InputStream in, boolean autoClose)
     {
         this.in = in;
         this.autoClose = autoClose;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.io.InputStreamFactory#getInputStream()
-     */
     public InputStream getInputStream() throws IOException
     {
         return in;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.io.InputStreamFactory#readFinished()
-     */
     public void close() throws IOException
     {
         if (autoClose)

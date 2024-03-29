@@ -60,6 +60,7 @@ public class Data
      * @param region For field documentation see {@link StoreRegion}.
      * @param listener The client side interface to pass async updates to.
      * Will be <code>null</code> if no async updates are required
+     * @return ...
      */
     public MatchedItems viewRegion(String storeId, StoreRegion region, StoreChangeListener<Object> listener)
     {
@@ -88,6 +89,7 @@ public class Data
     /**
      * Remove a subscription from the list of people that we are remembering
      * to keep updated
+     * @param storeId ...
      * @param receiver The client side interface to pass async updates to.
      * Will be <code>null</code> if no async updates are required
      */
@@ -100,6 +102,7 @@ public class Data
 
     /**
      * Update server side data.
+     * @param <T> ...
      * @param storeId The store into which data is to be altered/inserted. If
      * a store by the given name has not been registered then this method is
      * a no-op, however a message will be written to the log detailing the error

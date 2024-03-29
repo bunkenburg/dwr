@@ -246,6 +246,8 @@ public class BrowserDetect
 
     /**
      * This method is for debugging only
+     * @param request ...
+     * @return ...
      */
     public static String getUserAgentDebugString(HttpServletRequest request)
     {
@@ -280,6 +282,7 @@ public class BrowserDetect
 
     /**
      * @deprecated This method is for debugging only
+     * @param request ...
      */
     @Deprecated
     public static void debugBrowserVersions(HttpServletRequest request)

@@ -29,8 +29,10 @@ public class DefaultScriptSession implements RealScriptSession
     /**
      * Simple constructor
      * @param id The new unique identifier for this session
-     * @param manager The manager that created us
      * @param page The URL of the page on which we sit
+     * @param manager The manager that created us
+     * @param converterManager ...
+     * @param jsonOutput ...
      */
     protected DefaultScriptSession(String id, ScriptSessionManager manager, String page, ConverterManager converterManager, boolean jsonOutput)
     {
@@ -48,18 +50,12 @@ public class DefaultScriptSession implements RealScriptSession
         this.lastAccessedTime = creationTime;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.ScriptSession#getAttribute(java.lang.String)
-     */
     public Object getAttribute(String name)
     {
         invalidateIfNeeded();
         return attributes.get(name);
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.ScriptSession#setAttribute(java.lang.String, java.lang.Object)
-     */
     public void setAttribute(String name, Object value)
     {
         invalidateIfNeeded();
@@ -78,9 +74,6 @@ public class DefaultScriptSession implements RealScriptSession
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.ScriptSession#removeAttribute(java.lang.String)
-     */
     public void removeAttribute(String name)
     {
         invalidateIfNeeded();
@@ -92,9 +85,6 @@ public class DefaultScriptSession implements RealScriptSession
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.ScriptSession#getAttributeNames()
-     */
     public Iterator<String> getAttributeNames()
     {
         invalidateIfNeeded();
@@ -102,9 +92,6 @@ public class DefaultScriptSession implements RealScriptSession
         return keys.iterator();
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.ScriptSession#invalidate()
-     */
     public void invalidate()
     {
         invalidated = true;
@@ -125,34 +112,22 @@ public class DefaultScriptSession implements RealScriptSession
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.ScriptSession#isInvalidated()
-     */
     public boolean isInvalidated()
     {
         return invalidated;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.ScriptSession#getId()
-     */
     public String getId()
     {
         return id;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.ScriptSession#getCreationTime()
-     */
     public long getCreationTime()
     {
         invalidateIfNeeded();
         return creationTime;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.ScriptSession#getLastAccessedTime()
-     */
     public long getLastAccessedTime()
     {
         // For many accesses here we check to see if we should invalidate
@@ -164,9 +139,6 @@ public class DefaultScriptSession implements RealScriptSession
         return lastAccessedTime;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.ScriptSession#addScript(org.directwebremoting.ScriptBuffer)
-     */
     public void addScript(ScriptBuffer script)
     {
         invalidateIfNeeded();
@@ -187,9 +159,6 @@ public class DefaultScriptSession implements RealScriptSession
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.ScriptSession#addRunnable(org.directwebremoting.ScriptRunnable, org.directwebremoting.ScriptPhase)
-     */
     public void addRunnable(final Runnable runnable)
     {
         invalidateIfNeeded();
@@ -210,9 +179,6 @@ public class DefaultScriptSession implements RealScriptSession
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.RealScriptSession#setSleeper(org.directwebremoting.extend.Sleeper)
-     */
     public void setSleeper(Sleeper sleeper)
     {
         invalidateIfNeeded();
@@ -222,9 +188,6 @@ public class DefaultScriptSession implements RealScriptSession
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.RealScriptSession#clearSleeper()
-     */
     @SuppressWarnings("hiding")
     public void clearSleeper(Sleeper sleeper)
     {
@@ -238,9 +201,6 @@ public class DefaultScriptSession implements RealScriptSession
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.RealScriptSession#getScript(long)
-     */
     public Script getScript(long scriptIndex)
     {
         synchronized (scripts)
@@ -304,41 +264,26 @@ public class DefaultScriptSession implements RealScriptSession
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.ScriptSession#setPage(String)
-     */
     public void setPage(String page)
     {
         this.page = page;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.ScriptSession#getPage()
-     */
     public String getPage()
     {
         return page;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.RealScriptSession#setHttpSessionId(java.lang.String)
-     */
     public synchronized void setHttpSessionId(String httpSessionId)
     {
         this.httpSessionId = httpSessionId;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.ScriptSession#getHttpSessionId()
-     */
     public synchronized String getHttpSessionId()
     {
         return httpSessionId;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.RealScriptSession#updateLastAccessedTime()
-     */
     public void updateLastAccessedTime()
     {
         lastAccessedTime = System.currentTimeMillis();
@@ -379,25 +324,19 @@ public class DefaultScriptSession implements RealScriptSession
 
     /**
      * Set the time to wait for client to poll when asking for connection validation.
-     * @param connectionValidationTimeout
+     * @param connectionValidationTimeout ..
      */
     public void setConnectionValidationTimeout(int connectionValidationTimeout)
     {
         this.connectionValidationTimeout = connectionValidationTimeout;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
     @Override
     public int hashCode()
     {
         return 572 + id.hashCode();
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
     @Override
     public boolean equals(Object obj)
     {
@@ -421,9 +360,6 @@ public class DefaultScriptSession implements RealScriptSession
 
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString()
     {
@@ -432,6 +368,7 @@ public class DefaultScriptSession implements RealScriptSession
 
     /**
      * A very short name for debugging purposes
+     * @return ...
      */
     protected String getDebugName()
     {

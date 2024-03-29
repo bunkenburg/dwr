@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * A parameter consisting of a name/value pair.
- * @author Maik Schreiber <blizzy AT blizzy DOT de>
+ * @author Maik Schreiber [blizzy AT blizzy DOT de]
  * @author Joe Walker [joe at getahead dot ltd dot uk]
  */
 @Target(ElementType.TYPE)
@@ -16,11 +16,13 @@ public @interface Param
 {
     /**
      * The parameter's name.
+     * @return ...
      */
     String name();
 
     /**
      * The parameter's value.
+     * @return ...
      */
     String value();
 }

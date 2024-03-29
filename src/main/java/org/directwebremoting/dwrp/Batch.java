@@ -30,6 +30,8 @@ public class Batch
 {
     /**
      * Initialize the batch from an {@link HttpServletRequest}
+     * @param request ...
+     * @throws ServerException ...
      */
     public Batch(HttpServletRequest request) throws ServerException
     {
@@ -47,6 +49,8 @@ public class Batch
 
     /**
      * Initialize the batch from a set of pre-parsed parameters
+     * @param allParameters ...
+     * @param get ...
      */
     public Batch(Map<String, FormField> allParameters, boolean get)
     {
@@ -104,6 +108,7 @@ public class Batch
      * This is needed to cope with Jetty continuations that are not real
      * continuations.
      * @param paramName The name of the parameter sent
+     * @param defaultValue ...
      * @return The found value
      */
     protected String extractParameter(String paramName, String defaultValue)

@@ -27,7 +27,7 @@ public interface AccessControl
      * Complementing checks for a remoted Java class and method.
      * @param clazz An actual Java class
      * @param method An actual reflected Java method
-     * @throws SecurityException
+     * @throws SecurityException ...
      * @see AccessControl#assertGeneralExecutionIsPossible(String, MethodDeclaration)
      */
     void assertMethodExecutionIsPossible(Class<?> clazz, Method method) throws SecurityException;
@@ -54,7 +54,7 @@ public interface AccessControl
      * Complementing checks for a remoted Java class and method.
      * @param clazz An actual Java class
      * @param method An actual reflected Java method
-     * @throws SecurityException
+     * @throws SecurityException ...
      * @see AccessControl#assertGeneralDisplayable(String, MethodDeclaration)
      */
     void assertMethodDisplayable(Class<?> clazz, Method method) throws SecurityException;

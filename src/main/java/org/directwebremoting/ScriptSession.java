@@ -85,7 +85,7 @@ public interface ScriptSession
      * Add a Runnable to the waiting list for execution. A new poll request will
      * be triggered and the runnable will be executed at the beginning of it.
      * The WebContext may be used to access request details from within the Runnable.
-     * @param runnable
+     * @param runnable ...
      */
     void addRunnable(Runnable runnable);
 

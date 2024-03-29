@@ -11,6 +11,9 @@ public interface ComparatorFactory<T>
     /**
      * Return a Comparator which will sort 2 objects of type T based on the
      * values held in the given property
+     * @param property ...
+     * @param ascending ...
+     * @return ...
      */
     Comparator<? super T> getComparator(String property, boolean ascending);
 }

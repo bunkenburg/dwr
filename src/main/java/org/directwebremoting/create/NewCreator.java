@@ -49,9 +49,9 @@ public class NewCreator extends AbstractCreator implements Creator
     {
         try
         {
-            return clazz.newInstance();
+            return clazz.getDeclaredConstructor().newInstance();
         }
-        catch (IllegalAccessException ex)
+        catch (Exception ex)
         {
             throw new InstantiationException("Illegal Access to default constructor on " + clazz.getName());
         }

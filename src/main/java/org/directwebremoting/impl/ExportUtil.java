@@ -19,6 +19,7 @@ public class ExportUtil
     /**
      * Is this class the System export as from the system dwr.xml?
      * @param scriptName The script name of the exported object
+     * @param methodName ...
      * @return True if the scriptName represents the System export
      * @see org.directwebremoting.export.System
      */

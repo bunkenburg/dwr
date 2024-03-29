@@ -11,6 +11,8 @@ public interface JsonDecoder
 {
     /**
      * When the parse is finished, this gives access to the result
+     * @return ...
+     * @throws JsonParseException ...
      */
     Object getRoot() throws JsonParseException;
 
@@ -22,6 +24,8 @@ public interface JsonDecoder
      * in the parent object.
      * What follows is a series of addXxxx() calls, possibly nested
      * arrays and objects, followed by a call to {@link #endObject(String)}
+     * @param propertyName ...
+     * @throws JsonParseException ...
      */
     void beginObject(String propertyName) throws JsonParseException;
 
@@ -30,6 +34,8 @@ public interface JsonDecoder
      * This is called in a matching pair to {@link #beginObject(String)}
      * The <code>propertyName</code> argument will match the value given in the
      * corresponding {@link #beginObject(String)} call.
+     * @param propertyName ...
+     * @throws JsonParseException ...
      */
     void endObject(String propertyName) throws JsonParseException;
 
@@ -41,6 +47,8 @@ public interface JsonDecoder
      * in the parent object.
      * What follows is a series of addXxxxx() calls, possibly including nested
      * arrays and objects, followed by a call to {@link #endArray(String)}.
+     * @param propertyName ...
+     * @throws JsonParseException ...
      */
     void beginArray(String propertyName) throws JsonParseException;
 
@@ -49,6 +57,8 @@ public interface JsonDecoder
      * This is called in a matching pair to {@link #beginArray(String)}
      * The <code>propertyName</code> argument will match the value given in the
      * corresponding {@link #beginArray(String)} call.
+     * @param propertyName ...
+     * @throws JsonParseException ...
      * @see #beginArray(String)
      */
     void endArray(String propertyName) throws JsonParseException;
@@ -59,6 +69,9 @@ public interface JsonDecoder
      * argument will be the part of the JSON string before the ':'. If the
      * member is added to an array, then <code>propertyName</code> will be null.
      * See the note on {@link #beginObject(String)}
+     * @param propertyName ...
+     * @param value ...
+     * @throws JsonParseException ...
      */
     void addString(String propertyName, String value) throws JsonParseException;
 
@@ -73,6 +86,11 @@ public interface JsonDecoder
      * <li>JSON=3.14 results in addNumber("3", "14", null);
      * <li>JSON=2.9E8 results in addNumber("2", "9", "8");
      * </ul>
+     * @param propertyName ...
+     * @param intPart ...
+     * @param floatPart ...
+     * @param expPart ...
+     * @throws JsonParseException ...
      */
     void addNumber(String propertyName, String intPart, String floatPart, String expPart)throws JsonParseException;
 
@@ -80,6 +98,9 @@ public interface JsonDecoder
      * Add a boolean member.
      * See the note on {@link #addString(String, String)} for the meaning of the
      * <code>propertyName</code> argument.
+     * @param propertyName ...
+     * @param value ...
+     * @throws JsonParseException ...
      */
     void addBoolean(String propertyName, boolean value) throws JsonParseException;
 
@@ -87,6 +108,8 @@ public interface JsonDecoder
      * Add a null member.
      * See the note on {@link #addString(String, String)} for the meaning of the
      * <code>propertyName</code> argument.
+     * @param propertyName ...
+     * @throws JsonParseException ...
      */
     void addNull(String propertyName) throws JsonParseException;
 }

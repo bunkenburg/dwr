@@ -2,25 +2,17 @@ package org.directwebremoting.impl;
 
 public class DefaultServerLoadMonitor extends AbstractServerLoadMonitor
 {
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.ServerLoadMonitor#supportsStreaming()
-     */
+
     public boolean supportsStreaming()
     {
         return true;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.ServerLoadMonitor#getConnectedTime()
-     */
     public long getConnectedTime()
     {
         return connectedTime;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.ServerLoadMonitor#getDisconnectedTime()
-     */
     public int getDisconnectedTime()
     {
         return disconnectedTime;
@@ -28,7 +20,7 @@ public class DefaultServerLoadMonitor extends AbstractServerLoadMonitor
 
     /**
      * Setter to allow configuration from the container (f ex init-param)
-     * @param connectedTime
+     * @param connectedTime ...
      */
     public void setConnectedTime(long connectedTime)
     {
@@ -37,7 +29,7 @@ public class DefaultServerLoadMonitor extends AbstractServerLoadMonitor
 
     /**
      * Setter to allow configuration from the container (f ex init-param)
-     * @param disconnectedTime
+     * @param disconnectedTime ...
      */
     public void setDisconnectedTime(int disconnectedTime)
     {

@@ -20,6 +20,7 @@ public class DwrConvertedException extends RuntimeException
 
     /**
      * @param message The message to pass to the exceptionHandler in JavaScript
+     * @param data ...
      */
     public DwrConvertedException(String message, Map<?, ?> data)
     {

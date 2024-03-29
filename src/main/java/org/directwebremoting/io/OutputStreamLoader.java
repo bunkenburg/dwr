@@ -17,8 +17,10 @@ public interface OutputStreamLoader
 {
     /**
      * Write all the data to the given output stream.
+     * @param out ...
+     * @throws IOException ...
      */
-    public void load(OutputStream out) throws IOException;
+    void load(OutputStream out) throws IOException;
 
     /**
      * This method indicates that whether or not this resource has been read,
@@ -26,6 +28,7 @@ public interface OutputStreamLoader
      * Must be called by whatever calls {@link #load(OutputStream)} when it has
      * finished reading from the stream, or when it has decided that it never
      * will call {@link #load(OutputStream)}.
+     * @throws IOException ...
      */
-    public void close() throws IOException;
+    void close() throws IOException;
 }

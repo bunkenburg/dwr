@@ -24,6 +24,7 @@ public interface DownloadManager
      * Retrieve a FileGenerator given the id that it was stored under
      * @param id The id to lookup
      * @return The matching FileGenerator or null if no match was found
+     * @throws IOException ...
      */
     FileTransfer getFileTransfer(String id) throws IOException;
 }

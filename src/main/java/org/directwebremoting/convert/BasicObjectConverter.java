@@ -170,12 +170,11 @@ public abstract class BasicObjectConverter implements NamedConverter
      * We're using setter injection, create and populate a bean using property
      * setters
      */
-    private Object createUsingSetterInjection(Class<?> paramType, InboundVariable data, Map<String, String> tokens) throws InstantiationException, IllegalAccessException
-    {
+    private Object createUsingSetterInjection(Class<?> paramType, InboundVariable data, Map<String, String> tokens) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         Object bean;
         if (instanceType != null)
         {
-            bean = instanceType.newInstance();
+            bean = instanceType.getDeclaredConstructor().newInstance();
         }
         else
         {
@@ -224,17 +223,23 @@ public abstract class BasicObjectConverter implements NamedConverter
      *
      * @param paramType The type of parameter that needs to be instantiated
      * @return An instance of <code>paramType</code>
-     * @throws InstantiationException
-     * @throws IllegalAccessException
+     * @throws InstantiationException ...
+     * @throws IllegalAccessException ...
+     * @throws InvocationTargetException ...
+     * @throws NoSuchMethodException ...
      */
-    protected Object createParameterInstance(Class<?> paramType) throws InstantiationException, IllegalAccessException
-    {
-        return paramType.newInstance();
+    protected Object createParameterInstance(Class<?> paramType) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        return paramType.getDeclaredConstructor().newInstance();
     }
 
     /**
      * We have inbound data and a type that we need to convert it into, this
      * method performs the conversion.
+     * @param val ...
+     * @param  propType ...
+     * @param inboundContext ...
+     * @param property ...
+     * @return ...
      */
     protected Object convert(String val, Class<?> propType, InboundContext inboundContext, Property property)
     {
@@ -586,7 +591,7 @@ public abstract class BasicObjectConverter implements NamedConverter
     /**
      * Returns an immutable List of the inclusions.
      *
-     * @return
+     * @return ...
      */
     public List<String> getInclusions() {
         return Collections.unmodifiableList(this.inclusions);

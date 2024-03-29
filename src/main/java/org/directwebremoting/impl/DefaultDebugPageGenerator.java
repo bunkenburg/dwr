@@ -375,7 +375,7 @@ public class DefaultDebugPageGenerator implements DebugPageGenerator
 
     /**
      * Accessor for the ModuleManager that we configure
-     * @param moduleManager
+     * @param moduleManager ...
      */
     public void setModuleManager(ModuleManager moduleManager)
     {
@@ -426,7 +426,7 @@ public class DefaultDebugPageGenerator implements DebugPageGenerator
 
     /**
      * Setter for debug enabling
-     * @param debug
+     * @param debug ...
      */
     public void setDebug(boolean debug)
     {

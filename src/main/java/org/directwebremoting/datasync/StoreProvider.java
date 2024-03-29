@@ -44,6 +44,7 @@ public interface StoreProvider<T>
     /**
      * Extract the data referred to by the given region.
      * @param region A set of filter and sort criteria to restrict the fetched data
+     * @return ...
      */
     MatchedItems viewRegion(StoreRegion region);
 

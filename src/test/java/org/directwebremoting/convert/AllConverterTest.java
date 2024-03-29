@@ -70,18 +70,18 @@ public class AllConverterTest
     @Test
     public void byteConvert() throws Exception
     {
-        assertInboundConversion("127", Byte.class, new Byte("127"));
-        assertInboundConversion("-128", Byte.class, new Byte("-128"));
-        assertInboundConversion("0", Byte.class, new Byte("0"));
+        assertInboundConversion("127", Byte.class, Byte.valueOf("127"));
+        assertInboundConversion("-128", Byte.class, Byte.valueOf("-128"));
+        assertInboundConversion("0", Byte.class, Byte.valueOf("0"));
         assertInboundConversion("", Byte.class, null);
-        assertInboundConversion("127", Byte.TYPE, new Byte("127"));
-        assertInboundConversion("-128", Byte.TYPE, new Byte("-128"));
-        assertInboundConversion("0", Byte.TYPE, new Byte("0"));
-        assertInboundConversion("", Byte.TYPE, new Byte("0"));
+        assertInboundConversion("127", Byte.TYPE, Byte.valueOf("127"));
+        assertInboundConversion("-128", Byte.TYPE, Byte.valueOf("-128"));
+        assertInboundConversion("0", Byte.TYPE, Byte.valueOf("0"));
+        assertInboundConversion("", Byte.TYPE, Byte.valueOf("0"));
 
-        assertOutboundConversion(new Byte("127"), "127");
-        assertOutboundConversion(new Byte("-128"), "-128");
-        assertOutboundConversion(new Byte("0"), "0");
+        assertOutboundConversion(Byte.valueOf("127"), "127");
+        assertOutboundConversion(Byte.valueOf("-128"), "-128");
+        assertOutboundConversion(Byte.valueOf("0"), "0");
 
         assertInboundConversionFailure("128", Byte.class);
         assertInboundConversionFailure("-129", Byte.class);
@@ -94,15 +94,15 @@ public class AllConverterTest
     @Test
     public void shortConvert() throws Exception
     {
-        assertInboundConversion("-128", Short.class, new Short("-128"));
-        assertInboundConversion("0", Short.class, new Short("0"));
+        assertInboundConversion("-128", Short.class, Short.valueOf("-128"));
+        assertInboundConversion("0", Short.class, Short.valueOf("0"));
         assertInboundConversion("", Short.class, null);
-        assertInboundConversion("-128", Short.TYPE, new Short("-128"));
-        assertInboundConversion("0", Short.TYPE, new Short("0"));
-        assertInboundConversion("", Short.TYPE, new Short("0"));
+        assertInboundConversion("-128", Short.TYPE, Short.valueOf("-128"));
+        assertInboundConversion("0", Short.TYPE, Short.valueOf("0"));
+        assertInboundConversion("", Short.TYPE, Short.valueOf("0"));
 
-        assertOutboundConversion(new Short("-128"), "-128");
-        assertOutboundConversion(new Short("0"), "0");
+        assertOutboundConversion(Short.valueOf("-128"), "-128");
+        assertOutboundConversion(Short.valueOf("0"), "0");
 
         assertInboundConversionFailure("null", Short.class);
         assertInboundConversionFailure("null", Short.TYPE);
@@ -111,15 +111,15 @@ public class AllConverterTest
     @Test
     public void testIntegerConvert() throws Exception
     {
-        assertInboundConversion("-128", Integer.class, new Integer("-128"));
-        assertInboundConversion("0", Integer.class, new Integer("0"));
+        assertInboundConversion("-128", Integer.class, Integer.valueOf("-128"));
+        assertInboundConversion("0", Integer.class, Integer.valueOf("0"));
         assertInboundConversion("", Integer.class, null);
-        assertInboundConversion("-128", Integer.TYPE, new Integer("-128"));
-        assertInboundConversion("0", Integer.TYPE, new Integer("0"));
-        assertInboundConversion("", Integer.TYPE, new Integer("0"));
+        assertInboundConversion("-128", Integer.TYPE, Integer.valueOf("-128"));
+        assertInboundConversion("0", Integer.TYPE, Integer.valueOf("0"));
+        assertInboundConversion("", Integer.TYPE, Integer.valueOf("0"));
 
-        assertOutboundConversion(new Integer("-128"), "-128");
-        assertOutboundConversion(new Integer("0"), "0");
+        assertOutboundConversion(Integer.valueOf("-128"), "-128");
+        assertOutboundConversion(Integer.valueOf("0"), "0");
 
         assertInboundConversionFailure("null", Integer.class);
         assertInboundConversionFailure("null", Integer.TYPE);
@@ -128,15 +128,15 @@ public class AllConverterTest
     @Test
     public void longConvert() throws Exception
     {
-        assertInboundConversion("-128", Long.class, new Long("-128"));
-        assertInboundConversion("0", Long.class, new Long("0"));
+        assertInboundConversion("-128", Long.class, Long.valueOf("-128"));
+        assertInboundConversion("0", Long.class, Long.valueOf("0"));
         assertInboundConversion("", Long.class, null);
-        assertInboundConversion("-128", Long.TYPE, new Long("-128"));
-        assertInboundConversion("0", Long.TYPE, new Long("0"));
-        assertInboundConversion("", Long.TYPE, new Long("0"));
+        assertInboundConversion("-128", Long.TYPE, Long.valueOf("-128"));
+        assertInboundConversion("0", Long.TYPE, Long.valueOf("0"));
+        assertInboundConversion("", Long.TYPE, Long.valueOf("0"));
 
-        assertOutboundConversion(new Long("-128"), "-128");
-        assertOutboundConversion(new Long("0"), "0");
+        assertOutboundConversion(Long.valueOf("-128"), "-128");
+        assertOutboundConversion(Long.valueOf("0"), "0");
 
         assertInboundConversionFailure("null", Long.class);
         assertInboundConversionFailure("null", Long.TYPE);
@@ -145,15 +145,15 @@ public class AllConverterTest
     @Test
     public void floatConvert() throws Exception
     {
-        assertInboundConversion("-12.8", Float.class, new Float("-12.8"));
-        assertInboundConversion("0", Float.class, new Float("0"));
+        assertInboundConversion("-12.8", Float.class, Float.valueOf("-12.8"));
+        assertInboundConversion("0", Float.class, Float.valueOf("0"));
         assertInboundConversion("", Float.class, null);
-        assertInboundConversion("-12.8", Float.TYPE, new Float("-12.8"));
-        assertInboundConversion("0", Float.TYPE, new Float("0"));
-        assertInboundConversion("", Float.TYPE, new Float("0"));
+        assertInboundConversion("-12.8", Float.TYPE, Float.valueOf("-12.8"));
+        assertInboundConversion("0", Float.TYPE, Float.valueOf("0"));
+        assertInboundConversion("", Float.TYPE, Float.valueOf("0"));
 
-        assertOutboundConversion(new Float("-12.8"), "-12.8");
-        assertOutboundConversion(new Float("0"), "0.0");
+        assertOutboundConversion(Float.valueOf("-12.8"), "-12.8");
+        assertOutboundConversion(Float.valueOf("0"), "0.0");
 
         assertInboundConversionFailure("null", Float.class);
         assertInboundConversionFailure("null", Float.TYPE);
@@ -162,15 +162,15 @@ public class AllConverterTest
     @Test
     public void doubleConvert() throws Exception
     {
-        assertInboundConversion("-12.8", Double.class, new Double("-12.8"));
-        assertInboundConversion("0", Double.class, new Double("0"));
+        assertInboundConversion("-12.8", Double.class, Double.valueOf("-12.8"));
+        assertInboundConversion("0", Double.class, Double.valueOf("0"));
         assertInboundConversion("", Double.class, null);
-        assertInboundConversion("-12.8", Double.TYPE, new Double("-12.8"));
-        assertInboundConversion("0", Double.TYPE, new Double("0"));
-        assertInboundConversion("", Double.TYPE, new Double("0"));
+        assertInboundConversion("-12.8", Double.TYPE, Double.valueOf("-12.8"));
+        assertInboundConversion("0", Double.TYPE, Double.valueOf("0"));
+        assertInboundConversion("", Double.TYPE, Double.valueOf("0"));
 
-        assertOutboundConversion(new Double("-12.8"), "-12.8");
-        assertOutboundConversion(new Double("0"), "0.0");
+        assertOutboundConversion(Double.valueOf("-12.8"), "-12.8");
+        assertOutboundConversion(Double.valueOf("0"), "0.0");
 
         assertInboundConversionFailure("null", Double.class);
         assertInboundConversionFailure("null", Double.TYPE);
@@ -179,27 +179,27 @@ public class AllConverterTest
     @Test
     public void characterConvert() throws Exception
     {
-        assertInboundConversion("-", Character.class, new Character('-'));
-        assertInboundConversion("0", Character.class, new Character('0'));
-        assertInboundConversion("\"", Character.class, new Character('\"'));
-        assertInboundConversion("\'", Character.class, new Character('\''));
-        assertInboundConversion("\u0394", Character.class, new Character('\u0394'));
-        assertInboundConversion("-", Character.TYPE, new Character('-'));
-        assertInboundConversion("0", Character.TYPE, new Character('0'));
-        assertInboundConversion("\"", Character.TYPE, new Character('\"'));
-        assertInboundConversion("\'", Character.TYPE, new Character('\''));
-        assertInboundConversion("\u0394", Character.TYPE, new Character('\u0394'));
+        assertInboundConversion("-", Character.class, '-');
+        assertInboundConversion("0", Character.class, '0');
+        assertInboundConversion("\"", Character.class, '\"');
+        assertInboundConversion("'", Character.class, '\'');
+        assertInboundConversion("Δ", Character.class, 'Δ');
+        assertInboundConversion("-", Character.TYPE, '-');
+        assertInboundConversion("0", Character.TYPE, '0');
+        assertInboundConversion("\"", Character.TYPE, '\"');
+        assertInboundConversion("'", Character.TYPE, '\'');
+        assertInboundConversion("Δ", Character.TYPE, 'Δ');
 
-        assertOutboundConversion(new Character('-'), "\"-\"");
-        assertOutboundConversion(new Character('0'), "\"0\"");
-        assertOutboundConversion(new Character('\"'), "\"\\\"\"");
-        assertOutboundConversion(new Character('\''), "\"\\'\"");
-        assertOutboundConversion(new Character('\u0394'), "\"\\u0394\"");
-        assertOutboundConversion(new Character('-'), "\"-\"");
-        assertOutboundConversion(new Character('0'), "\"0\"");
-        assertOutboundConversion(new Character('\"'), "\"\\\"\"");
-        assertOutboundConversion(new Character('\''), "\"\\'\"");
-        assertOutboundConversion(new Character('\u0394'), "\"\\u0394\"");
+        assertOutboundConversion('-', "\"-\"");
+        assertOutboundConversion('0', "\"0\"");
+        assertOutboundConversion('\"', "\"\\\"\"");
+        assertOutboundConversion('\'', "\"\\'\"");
+        assertOutboundConversion('Δ', "\"\\u0394\"");
+        assertOutboundConversion('-', "\"-\"");
+        assertOutboundConversion('0', "\"0\"");
+        assertOutboundConversion('\"', "\"\\\"\"");
+        assertOutboundConversion('\'', "\"\\'\"");
+        assertOutboundConversion('Δ', "\"\\u0394\"");
 
         assertInboundConversionFailure("", Character.class);
         assertInboundConversionFailure("", Character.TYPE);
@@ -213,15 +213,15 @@ public class AllConverterTest
         assertInboundConversion("-", String.class, "-");
         assertInboundConversion("0", String.class, "0");
         assertInboundConversion("\"", String.class, "\"");
-        assertInboundConversion("\'", String.class, "\'");
-        assertInboundConversion("\u0394", String.class, "\u0394");
+        assertInboundConversion("'", String.class, "'");
+        assertInboundConversion("Δ", String.class, "Δ");
         assertInboundConversion("", String.class, "");
         assertInboundConversion("null", String.class, "null");
 
         assertOutboundConversion("-", "\"-\"");
         assertOutboundConversion("0", "\"0\"");
         assertOutboundConversion("\"", "\"\\\"\"");
-        assertOutboundConversion("\u0394", "\"\\u0394\"");
+        assertOutboundConversion("Δ", "\"\\u0394\"");
         assertOutboundConversion("", "\"\"");
         assertOutboundConversion("null", "\"null\"");
     }

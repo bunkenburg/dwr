@@ -15,9 +15,6 @@ import org.directwebremoting.util.LocalUtil;
  */
 public abstract class BaseInterfaceHandler extends GeneratedJavaScriptHandler
 {
-    /* (non-Javadoc)
-     * @see org.directwebremoting.servlet.TemplateHandler#generateTemplate(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
-     */
     @Override
     protected String generateTemplate(String contextPath, String servletPath, String pathInfo) throws IOException
     {
@@ -75,9 +72,9 @@ public abstract class BaseInterfaceHandler extends GeneratedJavaScriptHandler
 
     /**
      * Does the actual work of generating the interface script
-     * @param contextPath
+     * @param contextPath ...
      * @param servletPath TODO
-     * @param scriptName
+     * @param scriptName ...
      * @return interface script
      */
     public abstract String generateInterfaceScript(String contextPath, String servletPath, String scriptName);
@@ -108,9 +105,6 @@ public abstract class BaseInterfaceHandler extends GeneratedJavaScriptHandler
         this.generateDtoClasses = generateDtoClasses;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString()
     {

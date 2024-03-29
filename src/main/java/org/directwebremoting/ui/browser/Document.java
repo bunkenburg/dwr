@@ -13,6 +13,8 @@ public class Document
 {
     /**
      * Add a cookie to a remote browser/browsers
+     * @param name ...
+     * @param value ...
      */
     public static void setCookie(String name, String value)
     {
@@ -21,6 +23,7 @@ public class Document
 
     /**
      * Add a cookie to a remote browser/browsers
+     * @param cookie ...
      */
     public static void setCookie(Cookie cookie)
     {

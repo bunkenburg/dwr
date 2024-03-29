@@ -12,8 +12,8 @@ public class AmdModule extends BaseModule
     /**
      * Constructor. Path parameters are supplied for expanding path variables in
      * module paths.
-     * @param contextPath
-     * @param servletPath
+     * @param contextPath ...
+     * @param servletPath ...
      */
     public AmdModule(String contextPath, String servletPath)
     {
@@ -38,6 +38,7 @@ public class AmdModule extends BaseModule
 
     /**
      * Generates the module text
+     * @return ...
      */
     @Override
     public String toString()
@@ -48,7 +49,7 @@ public class AmdModule extends BaseModule
         buf.append("define(");
 
         // Dependency array
-        if (dependencies.size() > 0)
+        if (!dependencies.isEmpty())
         {
             buf.append("[");
             first = true;
@@ -58,7 +59,7 @@ public class AmdModule extends BaseModule
                 {
                     buf.append(", ");
                 }
-                buf.append("\"" + modulePath + "\"");
+                buf.append("\"").append(modulePath).append("\"");
                 first = false;
             }
             buf.append("], ");

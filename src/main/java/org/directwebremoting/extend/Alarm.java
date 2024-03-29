@@ -7,13 +7,13 @@ package org.directwebremoting.extend;
  * is called.
  * The alarm should not 'go off' after {@link #cancel()} has been called,
  * however, {@link Sleeper}s should still protect themselves from late calls to
- * {@link Sleeper#wakeUp()}.
+ * Sleeper#wakeUp().
  * @author Joe Walker [joe at getahead dot ltd dot uk]
  */
 public interface Alarm
 {
     /**
-     * Prevent further calls to {@link Sleeper#wakeUp()}.
+     * Prevent further calls to {@link Sleeper}.
      * See the note about late calls above.
      */
     void cancel();

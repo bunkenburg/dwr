@@ -9,8 +9,9 @@ import java.io.Writer;
 public interface JsonSerializer
 {
     /**
-     * @param data
-     * @param out
+     * @param data ...
+     * @param out ...
+     * @throws IOException ...
      */
     void toJson(Object data, Writer out) throws IOException;
 }

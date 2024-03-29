@@ -21,7 +21,7 @@ public interface AjaxFilter
     /**
      * The <code>doFilter</code> method of the AjaxFilter is called by DWR each
      * time an Ajax request is made on a method that this filter is configured
-     * against. The <code>AjaxFilterChain<code> passed in to this method allows
+     * against. The <code>AjaxFilterChain</code> passed in to this method allows
      * the filter to pass on method details to next entity in the chain.
      * <p>Typically the method would do the following:</p>
      * <ol>

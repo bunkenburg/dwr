@@ -25,19 +25,11 @@ import org.directwebremoting.util.VersionUtil;
  */
 public class DefaultServerContext implements ServerContext
 {
-    /* (non-Javadoc)
-     * @see org.directwebremoting.ServerContext#getAllScriptSessions()
-     */
-    public Collection<ScriptSession> getAllScriptSessions()
-    {
+    @Deprecated public Collection<ScriptSession> getAllScriptSessions() {
         return getScriptSessionManager().getAllScriptSessions();
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.ServerContext#getScriptSessionsByPage(java.lang.String)
-     */
-    public Collection<ScriptSession> getScriptSessionsByPage(String url)
-    {
+    @Deprecated  public Collection<ScriptSession> getScriptSessionsByPage(String url) {
         List<ScriptSession> matching = new ArrayList<ScriptSession>();
         Collection<ScriptSession> allScriptSessions = getScriptSessionManager().getAllScriptSessions();
         ScriptSessionFilter filter = new PageScriptSessionFilter(this, url);
@@ -53,11 +45,8 @@ public class DefaultServerContext implements ServerContext
         return matching;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.ServerContext#getScriptSessionById(java.lang.String)
-     */
-    public ScriptSession getScriptSessionById(String sessionId)
-    {
+
+    @Deprecated public ScriptSession getScriptSessionById(String sessionId) {
         // ScriptSessionManager().getScriptSession() can take a page and
         // httpSessionId so it can associate them, but we will have already done
         // that if we can as a result of work done creating a WebContext. For
@@ -67,15 +56,13 @@ public class DefaultServerContext implements ServerContext
 
     /**
      * Injection point for Container
+     * @param container ...
      */
     public void setContainer(Container container)
     {
         this.container = container;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.ServerContext#getContainer()
-     */
     public Container getContainer()
     {
         return container;
@@ -83,15 +70,13 @@ public class DefaultServerContext implements ServerContext
 
     /**
      * Injection point for ServletConfig
+     * @param servletConfig ...
      */
     public void setServletConfig(ServletConfig servletConfig)
     {
         this.servletConfig = servletConfig;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.ServerContext#getServletConfig()
-     */
     public ServletConfig getServletConfig()
     {
         return servletConfig;
@@ -99,31 +84,23 @@ public class DefaultServerContext implements ServerContext
 
     /**
      * Injection point for ServletContext
+     * @param servletContext ...
      */
     public void setServletContext(ServletContext servletContext)
     {
         this.servletContext = servletContext;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.ServerContext#getServletContext()
-     */
     public ServletContext getServletContext()
     {
         return servletContext;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.WebContext#getVersion()
-     */
     public String getVersion()
     {
         return VersionUtil.getLabel();
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.ServerContext#getContextPath()
-     */
     public String getContextPath()
     {
         UrlProcessor urlProcessor = container.getBean(UrlProcessor.class);
@@ -158,18 +135,12 @@ public class DefaultServerContext implements ServerContext
         return converterManager;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString()
     {
         return "DefaultServerContext[path=" + servletConfig.getServletName() + ", container=" + container.getClass().getSimpleName() + "]";
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
     @Override
     public boolean equals(Object obj)
     {

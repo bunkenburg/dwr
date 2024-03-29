@@ -1,5 +1,6 @@
 package org.directwebremoting.extend;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Map;
 
@@ -29,8 +30,10 @@ public interface CreatorManager
      * @throws InstantiationException If reflection based creation fails
      * @throws IllegalAccessException If reflection based creation fails
      * @throws IllegalArgumentException If we have a duplicate name
+     * @throws InvocationTargetException ...
+     * @throws NoSuchMethodException ...
      */
-    void addCreator(String typeName, Map<String, String> params) throws InstantiationException, IllegalAccessException, IllegalArgumentException;
+    void addCreator(String typeName, Map<String, String> params) throws InstantiationException, IllegalAccessException, IllegalArgumentException, NoSuchMethodException, InvocationTargetException;
 
     /**
      * Add a new creator.

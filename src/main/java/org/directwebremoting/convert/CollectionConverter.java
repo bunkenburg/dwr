@@ -88,9 +88,9 @@ public class CollectionConverter extends AbstractConverter
                 // If there is a problem creating the type then we have no way
                 // of completing this - they asked for a specific type and we
                 // can't create that type. I don't know of a way of finding
-                // subclasses that might be instaniable so we accept failure.
+                // subclasses that might be instantiable so we accept failure.
                 //noinspection unchecked
-                col = (Collection<Object>) paramType.newInstance();
+                col = (Collection<Object>) paramType.getDeclaredConstructor().newInstance();
             }
             // If they want a SortedSet then use TreeSet
             else if (SortedSet.class.isAssignableFrom(paramType))

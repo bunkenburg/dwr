@@ -41,6 +41,7 @@ public interface WebContext extends ServerContext
      * @see org.directwebremoting.extend.PageNormalizer for details on how pages
      * are converted from external form to this form.
      * @throws UnsupportedOperationException If this is part of a JSON call
+     * @return ...
      */
     String getCurrentPage() throws UnsupportedOperationException;
 

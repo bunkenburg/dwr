@@ -6,17 +6,12 @@ package org.directwebremoting.extend;
  */
 public class ArrayOutboundVariable extends NestedOutboundVariable
 {
-    /**
-     * Constructor
-     */
+
     public ArrayOutboundVariable(OutboundContext context)
     {
         super(context);
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.OutboundVariable#getDeclareCode()
-     */
     public String getDeclareCode()
     {
         if (isInline())
@@ -29,9 +24,6 @@ public class ArrayOutboundVariable extends NestedOutboundVariable
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.OutboundVariable#getBuildCode()
-     */
     public String getBuildCode()
     {
         if (isInline())
@@ -64,9 +56,6 @@ public class ArrayOutboundVariable extends NestedOutboundVariable
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.OutboundVariable#getAssignCode()
-     */
     public String getAssignCode()
     {
         if (isInline())

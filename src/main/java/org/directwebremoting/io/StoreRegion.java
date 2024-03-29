@@ -41,6 +41,7 @@ public final class StoreRegion
      * @param count The length of the region of interest to the viewer
      * @param sort The sort criteria to be used before the range is extracted
      * @param query The filter criteria to be used before the range is extracted
+     * @param queryOptions ...
      */
     public StoreRegion(int start, int count, List<SortCriterion> sort, Map<String, String> query, QueryOptions queryOptions)
     {
@@ -85,7 +86,7 @@ public final class StoreRegion
      * Accessor for the length of the region of interest to the viewer. If the
      * subscriber wishes to subscribe to 'the rest of the data', they should
      * use count = -1. Thus using start = 0, count = -1 is the entire data set.
-     * If start + count > size of data set, then less data will be sent than was
+     * If start + count &gt; size of data set, then less data will be sent than was
      * requested. If at a later date the store grows such that it is bigger than
      * the requested data set, the extra items will be included.
      * @return The length of the region of interest to the viewer
@@ -120,6 +121,7 @@ public final class StoreRegion
 
     /**
      * @deprecated For DWR internal use only. Use constructor injection
+     * @param query ...
      */
     @Deprecated
     public void setQuery(Map<String, String> query)
@@ -153,6 +155,7 @@ public final class StoreRegion
 
     /**
      * @deprecated For DWR internal use only. Use constructor injection
+     * @param queryOptions ...
      */
     @Deprecated
     public void setQueryOptions(QueryOptions queryOptions)
@@ -160,18 +163,12 @@ public final class StoreRegion
         throw new IllegalAccessError();
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString()
     {
         return "StoreRegion[start=" + start + ",count=" + count + ",sort=" + sort + ",query=" + query + ", options=" + queryOptions + "]";
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
     @Override
     public int hashCode()
     {
@@ -182,9 +179,6 @@ public final class StoreRegion
         return hash;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
     @Override
     public boolean equals(Object obj)
     {

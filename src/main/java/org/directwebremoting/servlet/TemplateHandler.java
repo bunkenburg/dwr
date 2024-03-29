@@ -40,10 +40,11 @@ public abstract class TemplateHandler extends CachingHandler
     /**
      * Generate a template to undergo search and replace processing according to
      * the search and replace pairs from {@link #getSearchReplacePairs(String, String, String)}.
-     * @param contextPath
-     * @param servletPath
-     * @param pathInfo
+     * @param contextPath ...
+     * @param servletPath ...
+     * @param pathInfo ...
      * @return A template string containing ${} sections to be replaced
+     * @throws IOException ...
      */
     protected abstract String generateTemplate(String contextPath, String servletPath, String pathInfo) throws IOException;
 
@@ -51,9 +52,9 @@ public abstract class TemplateHandler extends CachingHandler
      * Mostly when we send a file out, we don't change anything so the default
      * set of search and replaces is empty.
      * Engine.js can override this with strings to customize the output
-     * @param contextPath
-     * @param servletPath
-     * @param pathInfo
+     * @param contextPath ...
+     * @param servletPath ...
+     * @param pathInfo ...
      * @return a map of search (key) and replace (value) strings
      */
     protected Map<String, String> getSearchReplacePairs(String contextPath, String servletPath, String pathInfo)

@@ -24,7 +24,10 @@ public class ParseException extends JsonParseException
      * This constructor calls its super class with the empty string
      * to force the "toString" method of parent class "Throwable" to
      * print the error message in the form:
-     *     ParseException: <result of getMessage>
+     *     ParseException: &lt;result of getMessage&gt;
+     * @param currentTokenVal ...
+     * @param expectedTokenSequencesVal ...
+     * @param tokenImageVal ...
      */
     public ParseException(Token currentTokenVal, int[][] expectedTokenSequencesVal, String[] tokenImageVal)
     {
@@ -94,6 +97,7 @@ public class ParseException extends JsonParseException
      * from the parser), then this method is called during the printing
      * of the final stack trace, and hence the correct error message
      * gets displayed.
+     * @return ...
      */
     @Override
     public String getMessage()
@@ -159,6 +163,8 @@ public class ParseException extends JsonParseException
      * Used to convert raw characters to their escaped version
      * when these raw version cannot be used as part of an ASCII
      * string literal.
+     * @param str ...
+     * @return ...
      */
     protected String add_escapes(String str)
     {
@@ -198,7 +204,7 @@ public class ParseException extends JsonParseException
                 if ((ch = str.charAt(i)) < 0x20 || ch > 0x7e)
                 {
                     String s = "0000" + Integer.toString(ch, 16);
-                    retval.append("\\u" + s.substring(s.length() - 4, s.length()));
+                    retval.append("\\u").append(s.substring(s.length() - 4));
                 }
                 else
                 {

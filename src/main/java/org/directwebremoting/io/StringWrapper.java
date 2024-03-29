@@ -13,16 +13,14 @@ package org.directwebremoting.io;
 public class StringWrapper
 {
     /**
-     * All StringWrappers must have a string to wrap 
+     * All StringWrappers must have a string to wrap
+     * @param data ...
      */
     public StringWrapper(String data)
     {
         this.data = data;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString()
     {

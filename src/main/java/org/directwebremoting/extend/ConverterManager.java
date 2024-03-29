@@ -1,5 +1,6 @@
 package org.directwebremoting.extend;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Map;
 
@@ -27,8 +28,10 @@ public interface ConverterManager
      * @throws InstantiationException If reflection based creation fails
      * @throws IllegalAccessException If reflection based creation fails
      * @throws IllegalArgumentException If we have a duplicate name
+     * @throws InvocationTargetException ...
+     * @throws NoSuchMethodException ...
      */
-    void addConverter(String match, String type, Map<String, String> params) throws IllegalArgumentException, InstantiationException, IllegalAccessException;
+    void addConverter(String match, String type, Map<String, String> params) throws IllegalArgumentException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException;
 
     /**
      * Add a new converter based on a match string
@@ -97,8 +100,10 @@ public interface ConverterManager
     /**
      * Convert an object from being a string into an object of some type.
      * Designed for use with converters that have a working map passed to them
+     * @param <T> ...
      * @param paramType The type that you want the object to be
      * @param data The string version of the object
+     * @param thc ...
      * @return The convertible object
      * @throws ConversionException If the conversion failed for some reason
      */
@@ -109,7 +114,7 @@ public interface ConverterManager
      * be converted outside of the normal automatic conversion process when the
      * type can't be known until later. This method helps us with those cases
      * without exposing too much of what {@link RawData} holds.
-     * @param <T>
+     * @param <T> ...
      * @param paramType The type we wish to convert to
      * @param rawData The RawData object holding data to be converted
      * @return The convertible object

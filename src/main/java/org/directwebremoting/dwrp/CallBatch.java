@@ -25,6 +25,7 @@ public class CallBatch extends Batch
     /**
      * Parse an inbound request into a Calls object
      * @param request The original browser's request
+     * @throws ServerException ...
      */
     public CallBatch(HttpServletRequest request) throws ServerException
     {

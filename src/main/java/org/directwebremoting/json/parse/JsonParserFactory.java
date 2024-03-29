@@ -40,13 +40,15 @@ public class JsonParserFactory
      * Internal method to allow us to get the Builder from which we
      * will get JsonParser objects.
      * Do NOT call this method from outside of DWR.
+     * @param container ...
+     * @return ...
      */
     public static JsonParser attach(Container container)
     {
         return factory.attach(container);
     }
 
-    private static Factory<JsonParser> factory = Factory.create(JsonParserBuilder.class);
+    private static final Factory<JsonParser> factory = Factory.create(JsonParserBuilder.class);
 
     /**
      * Hack to get around Generics not being implemented by erasure

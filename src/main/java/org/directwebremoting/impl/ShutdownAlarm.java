@@ -18,7 +18,8 @@ public class ShutdownAlarm implements Alarm
     /**
      * Register ourselves with the ServerLoadMonitor so we can raise an
      * Alarm if we get shutdown
-     * @param serverLoadMonitor
+     * @param sleeper ...
+     * @param serverLoadMonitor ..
      */
     public ShutdownAlarm(Sleeper sleeper, ServerLoadMonitor serverLoadMonitor)
     {
@@ -27,9 +28,6 @@ public class ShutdownAlarm implements Alarm
         this.serverLoadMonitor.threadWaitStarting(waitController);
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.Alarm#cancel()
-     */
     public void cancel()
     {
         serverLoadMonitor.threadWaitEnding(waitController);
@@ -40,18 +38,12 @@ public class ShutdownAlarm implements Alarm
      */
     private final WaitController waitController = new WaitController()
     {
-        /* (non-Javadoc)
-         * @see org.directwebremoting.extend.WaitController#shutdown()
-         */
         public void shutdown()
         {
             sleeper.wakeUpToClose();
             shutdown = true;
         }
 
-        /* (non-Javadoc)
-         * @see org.directwebremoting.extend.WaitController#isShutdown()
-         */
         public boolean isShutdown()
         {
             return shutdown;

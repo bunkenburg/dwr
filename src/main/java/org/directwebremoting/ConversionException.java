@@ -39,6 +39,7 @@ public class ConversionException extends RuntimeException
      * Construct a ConversionException with a description message and exception
      * @param paramType The type we were trying to marshall
      * @param message error description
+     * @param ex ...
      */
     public ConversionException(Class<?> paramType, String message, Throwable ex)
     {

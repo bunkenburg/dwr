@@ -14,7 +14,9 @@ import org.directwebremoting.extend.ScriptConduit;
 public abstract class BaseScriptConduit implements ScriptConduit
 {
     /**
-     * Simple ctor
+     * Simple constructor
+     * @param out ...
+     * @param instanceId ...
      */
     public BaseScriptConduit(PrintWriter out, String instanceId)
     {
@@ -29,6 +31,7 @@ public abstract class BaseScriptConduit implements ScriptConduit
      * 3) runtimeexception (unchecked).
      * 4) error - default for production.
      * 5) off.
+     * @param accessLogLevel ...
      */
     public void setAccessLogLevel(String accessLogLevel)
     {

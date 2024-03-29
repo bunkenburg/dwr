@@ -29,6 +29,8 @@ public class JsonRpcCallsJsonDecoder extends StatefulJsonDecoder
 {
     /**
      * Force creators to give us the beans we need
+     * @param converterManager ...
+     * @param moduleManager ...
      */
     public JsonRpcCallsJsonDecoder(ConverterManager converterManager, ModuleManager moduleManager)
     {
@@ -36,9 +38,6 @@ public class JsonRpcCallsJsonDecoder extends StatefulJsonDecoder
         this.moduleManager = moduleManager;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.json.parse.impl.StatefulJsonDecoder#addMemberToArray(java.lang.Object, java.lang.Object)
-     */
     @Override
     protected void addMemberToArray(Object parent, Object member) throws JsonParseException
     {
@@ -54,9 +53,6 @@ public class JsonRpcCallsJsonDecoder extends StatefulJsonDecoder
         array.add(member);
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.json.parse.impl.StatefulJsonDecoder#addMemberToObject(java.lang.Object, java.lang.String, java.lang.Object)
-     */
     @SuppressWarnings("unchecked")
     @Override
     protected void addMemberToObject(Object parent, String propertyName, Object member) throws JsonParseException
@@ -149,9 +145,6 @@ public class JsonRpcCallsJsonDecoder extends StatefulJsonDecoder
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.json.parse.impl.StatefulJsonDecoder#createArray(java.lang.Object, java.lang.String)
-     */
     @Override
     protected Object createArray(Object parent, String propertyName) throws JsonParseException
     {
@@ -175,9 +168,6 @@ public class JsonRpcCallsJsonDecoder extends StatefulJsonDecoder
         return new ArrayList<Object>();
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.json.parse.impl.StatefulJsonDecoder#createObject(java.lang.Object, java.lang.String)
-     */
     @Override
     protected Object createObject(Object parent, String propertyName) throws JsonParseException
     {

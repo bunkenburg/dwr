@@ -17,25 +17,19 @@ public class ReflectionJsonDecoder extends StatefulJsonDecoder
     private final Class<?> marshallInto;
 
     /**
-     * @param marshallInto
+     * @param marshallInto ...
      */
     public ReflectionJsonDecoder(Class<?> marshallInto)
     {
         this.marshallInto = marshallInto;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.json.parse.impl.StatefulJsonDecoder#createObject(Object, String)
-     */
     @Override
     protected Object createObject(Object parent, String propertyName) throws JsonParseException
     {
         return createArray(parent, propertyName);
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.json.parse.impl.StatefulJsonDecoder#createArray(java.lang.Object, java.lang.String)
-     */
     @Override
     protected Object createArray(Object parent, String propertyName) throws JsonParseException
     {
@@ -50,9 +44,6 @@ public class ReflectionJsonDecoder extends StatefulJsonDecoder
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.json.parse.impl.StatefulJsonDecoder#addMember(java.lang.Object, java.lang.String, java.lang.Object)
-     */
     @Override
     protected void addMemberToObject(Object parent, String propertyName, Object member) throws JsonParseException
     {
@@ -60,31 +51,13 @@ public class ReflectionJsonDecoder extends StatefulJsonDecoder
         {
             LocalUtil.setProperty(parent, propertyName, member);
         }
-        catch (SecurityException ex)
-        {
-            throw new JsonParseException(ex);
-        }
-        catch (IllegalArgumentException ex)
-        {
-            throw new JsonParseException(ex);
-        }
-        catch (NoSuchMethodException ex)
-        {
-            throw new JsonParseException(ex);
-        }
-        catch (IllegalAccessException ex)
-        {
-            throw new JsonParseException(ex);
-        }
-        catch (InvocationTargetException ex)
+        catch (SecurityException | InvocationTargetException | IllegalArgumentException | NoSuchMethodException |
+               IllegalAccessException ex)
         {
             throw new JsonParseException(ex);
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.json.parse.impl.StatefulJsonDecoder#addMember(java.lang.Object, java.lang.Object)
-     */
     @Override
     protected void addMemberToArray(Object parent, Object member)
     {
@@ -101,13 +74,9 @@ public class ReflectionJsonDecoder extends StatefulJsonDecoder
     {
         try
         {
-            return type.newInstance();
+            return type.getDeclaredConstructor().newInstance();
         }
-        catch (InstantiationException ex)
-        {
-            throw new JsonParseException(ex);
-        }
-        catch (IllegalAccessException ex)
+        catch (Exception ex)
         {
             throw new JsonParseException(ex);
         }

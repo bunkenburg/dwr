@@ -127,6 +127,10 @@ public class JsonRpcCallHandler implements Handler
 
     /**
      * Create an output data packet that a JSON-RPC client can understand
+     * @param data ...
+     * @param response ...
+     * @param httpStatus ...
+     * @throws IOException ...
      */
     protected void writeResponse(Object data, HttpServletResponse response, int httpStatus) throws IOException
     {
@@ -138,7 +142,7 @@ public class JsonRpcCallHandler implements Handler
 
     /**
      * Accessor for the ConverterManager that we configure
-     * @param converterManager
+     * @param converterManager ...
      */
     public void setConverterManager(ConverterManager converterManager)
     {
@@ -152,6 +156,7 @@ public class JsonRpcCallHandler implements Handler
 
     /**
      * Are we allowing remote hosts to contact us using JSON?
+     * @param jsonRpcEnabled ...
      */
     public void setJsonRpcEnabled(boolean jsonRpcEnabled)
     {
@@ -193,7 +198,7 @@ public class JsonRpcCallHandler implements Handler
 
     /**
      * Accessor for the ModuleManager that we configure
-     * @param moduleManager
+     * @param moduleManager ...
      */
     public void setModuleManager(ModuleManager moduleManager)
     {

@@ -80,7 +80,7 @@ public class StaticCreator extends AbstractCreator implements Creator
 
     /**
      * Sets the name of the method that will be called to retrieve the static instance of this class.
-     * @param the new getInstanceMethodName
+     * @param instanceMethodName the new getInstanceMethodName
      */
     public void setInstanceMethodName(String instanceMethodName)
     {

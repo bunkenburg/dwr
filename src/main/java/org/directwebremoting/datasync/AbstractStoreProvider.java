@@ -69,6 +69,7 @@ public abstract class AbstractStoreProvider<T> implements StoreProvider<T>
      * the value from the <code>filter</code> map.
      * @param pojo The object to be tested to see if it matches
      * @param query The set of property/matches to test the value against
+     * @param options ...
      * @return True if the value contains properties that match the filter
      */
     protected static boolean passesFilter(Object pojo, Map<String, String> query, QueryOptions options)
@@ -123,6 +124,7 @@ public abstract class AbstractStoreProvider<T> implements StoreProvider<T>
     /**
      * Chop out the part we are interested in and return the data converted to
      * a MatchedItems data set destined for the web.
+     * @param <U> ...
      * @param sortedData The complete set of data we're extracting from
      * @param start The initial index to start from.
      * @param count The number of data items to return (-1 means, to the end)
@@ -180,6 +182,7 @@ public abstract class AbstractStoreProvider<T> implements StoreProvider<T>
      * Convert from {@link RawData} to the type that this {@link StoreProvider}
      * supports.
      * @param rawData The data from the Internet
+     * @param toType ...
      * @return An object of the type supported by this store
      */
     protected Object convert(RawData rawData, Class<?> toType)
@@ -202,8 +205,8 @@ public abstract class AbstractStoreProvider<T> implements StoreProvider<T>
 
     /**
      *
-     * @param listener
-     * @param itemIds
+     * @param listener ...
+     * @param itemIds ...
      */
     protected synchronized void setWatchedSet(StoreChangeListener<T> listener, Collection<String> itemIds)
     {
@@ -260,7 +263,7 @@ public abstract class AbstractStoreProvider<T> implements StoreProvider<T>
 
     /**
      * Unsubscribe from anything the listener was previously subscribed to
-     * @param listener
+     * @param listener ...
      */
     protected synchronized void clearWatchedSet(StoreChangeListener<T> listener)
     {
@@ -300,6 +303,8 @@ public abstract class AbstractStoreProvider<T> implements StoreProvider<T>
 
     /**
      * Cause a listener update
+     * @param item ...
+     * @param attributes ...
      */
     protected synchronized void fireItemChanged(Item item, Collection<String> attributes)
     {
@@ -317,6 +322,7 @@ public abstract class AbstractStoreProvider<T> implements StoreProvider<T>
 
     /**
      * Cause a listener update
+     * @param item ...
      */
     protected synchronized void fireItemAdded(Item item)
     {
@@ -335,6 +341,7 @@ public abstract class AbstractStoreProvider<T> implements StoreProvider<T>
 
     /**
      * Cause a listener update
+     * @param itemId ...
      */
     protected synchronized void fireItemRemoved(String itemId)
     {

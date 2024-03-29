@@ -20,15 +20,15 @@ public class MethodMatchingProxyFactory
             Object backingObject;
             if (constructorArgs.length == 0 && backingClass.getConstructors().length == 0) {
                 // Default constructor
-                backingObject = backingClass.newInstance();
+                backingObject = backingClass.getDeclaredConstructor().newInstance();
             } else {
                 // Look up explicit constructor
                 Class<?>[] backingArgsClasses = new Class<?>[constructorArgs.length];
                 for(int i=0; i<constructorArgs.length; i++) {
                     backingArgsClasses[i] = constructorArgs[i].getClass();
                 }
-                Constructor<?> ctor = backingClass.getConstructor(backingArgsClasses);
-                backingObject = ctor.newInstance(constructorArgs);
+                Constructor<?> constructor = backingClass.getConstructor(backingArgsClasses);
+                backingObject = constructor.newInstance(constructorArgs);
             }
 
             // Wrap with a proxy conforming to the fronting interface
@@ -38,8 +38,7 @@ public class MethodMatchingProxyFactory
         catch (Exception ex)
         {
             if (ex instanceof RuntimeException) {
-                RuntimeException rex = (RuntimeException) ex;
-                throw rex;
+                throw (RuntimeException) ex;
             } else {
                 throw new RuntimeException(ex);
             }

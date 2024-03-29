@@ -13,9 +13,6 @@ import org.directwebremoting.util.LocalUtil;
  */
 public class NestedProperty implements Property
 {
-    /**
-     *
-     */
     public NestedProperty(Property parent, Object method, Type parentParameterType, int parameterNumber, int newParameterNumber)
     {
         this.parent = parent;
@@ -42,41 +39,26 @@ public class NestedProperty implements Property
         this.newParameterNumber = newParameterNumber;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.Property#getName()
-     */
     public String getName()
     {
         return "NestedProperty";
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.Property#getPropertyType()
-     */
     public Class<?> getPropertyType()
     {
         return LocalUtil.toClass(parameterType, toString());
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.Property#getValue(java.lang.Object)
-     */
     public Object getValue(Object bean) throws ConversionException
     {
         throw new UnsupportedOperationException("Can't get value from nested property");
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.Property#setValue(java.lang.Object, java.lang.Object)
-     */
     public void setValue(Object bean, Object value) throws ConversionException
     {
         throw new UnsupportedOperationException("Can't set value to nested property");
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.Property#createChild(int)
-     */
     public Property createChild(int aNewParameterNumber)
     {
         return new NestedProperty(this, object, parameterType, parameterNumber, aNewParameterNumber);
@@ -90,18 +72,12 @@ public class NestedProperty implements Property
         return parameterType;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
     @Override
     public int hashCode()
     {
         return object.hashCode() + parameterNumber;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
     @Override
     public boolean equals(Object obj)
     {
@@ -135,9 +111,6 @@ public class NestedProperty implements Property
         return this.parameterNumber == that.parameterNumber;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString()
     {

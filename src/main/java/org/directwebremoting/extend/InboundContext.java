@@ -80,7 +80,7 @@ public final class InboundContext
      * @param key The name of the variable
      * @param type The javascript type of the variable
      * @param value The value of the variable
-     * @param has value been URL decoded?
+     * @param urlDecoded value been URL decoded?
      */
     public void createInboundVariable(int callNum, String key, String type, String value, boolean urlDecoded)
     {
@@ -241,6 +241,7 @@ public final class InboundContext
      * @param callNum The call number to work on
      * @param destParamCount The number of parameters to the method that we are
      * calling, from which we can work out the size of the varargs array
+     * @return ...
      */
     public InboundVariable createArrayWrapper(int callNum, int destParamCount)
     {

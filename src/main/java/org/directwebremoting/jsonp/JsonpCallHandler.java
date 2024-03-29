@@ -199,6 +199,9 @@ public class JsonpCallHandler implements Handler
 
     /**
      * Create output for some data and write it to the given stream.
+     * @param out ...
+     * @param data ...
+     * @param callback ...
      */
     public void writeData(PrintWriter out, Object data, String callback)
     {
@@ -242,17 +245,14 @@ public class JsonpCallHandler implements Handler
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.Marshaller#isConvertable(java.lang.Class)
-     */
-    public boolean isConvertable(Class<?> paramType)
+    public boolean isConvertible(Class<?> paramType)
     {
         return converterManager.isConvertable(paramType);
     }
 
     /**
      * Accessor for the ConverterManager that we configure
-     * @param converterManager
+     * @param converterManager ...
      */
     public void setConverterManager(ConverterManager converterManager)
     {
@@ -266,7 +266,7 @@ public class JsonpCallHandler implements Handler
 
     /**
      * Accessor for the ModuleManager that we configure
-     * @param moduleManager
+     * @param moduleManager ...
      */
     public void setModuleManager(ModuleManager moduleManager)
     {
@@ -294,6 +294,7 @@ public class JsonpCallHandler implements Handler
 
     /**
      * Are we allowing remote hosts to contact us using JSON?
+     * @param jsonpEnabled ...
      */
     public void setJsonpEnabled(boolean jsonpEnabled)
     {

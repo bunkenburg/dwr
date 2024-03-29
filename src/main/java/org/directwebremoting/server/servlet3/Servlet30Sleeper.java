@@ -16,8 +16,11 @@ import org.directwebremoting.impl.BaseSleeper;
  */
 public class Servlet30Sleeper extends BaseSleeper
 {
-    /**
-     * @throws IOException
+    /** @param request ...
+     * @param response ...
+     * @param scriptSession ...
+     * @param conduit ...
+     * @throws IOException ...
      */
     public Servlet30Sleeper(HttpServletRequest request, HttpServletResponse response, RealScriptSession scriptSession, ScriptConduit conduit) throws IOException
     {
@@ -28,9 +31,6 @@ public class Servlet30Sleeper extends BaseSleeper
         workInProgress = true; // block doing work until we officially enter sleep
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.impl.BaseSleeper#enterSleep()
-     */
     @Override
     protected void enterSleep()
     {
@@ -52,9 +52,6 @@ public class Servlet30Sleeper extends BaseSleeper
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.impl.BaseSleeper#wakeUp()
-     */
     @Override
     protected void wakeUp()
     {
@@ -94,9 +91,6 @@ public class Servlet30Sleeper extends BaseSleeper
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.impl.BaseSleeper#close()
-     */
     @Override
     protected void close()
     {

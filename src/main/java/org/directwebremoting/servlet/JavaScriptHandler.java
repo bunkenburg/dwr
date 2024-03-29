@@ -57,6 +57,7 @@ public abstract class JavaScriptHandler extends TemplateHandler
 
     /**
      * In debug mode we don't do compression at all
+     * @param debug ...
      */
     public void setDebug(boolean debug)
     {

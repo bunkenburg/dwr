@@ -13,6 +13,9 @@ public class ObjectOutboundVariable extends NestedOutboundVariable
 {
     /**
      * Constructor for when we have a Javascript type to populate
+     * @param context ...
+     * @param type ...
+     * @param scriptClassName ...
      */
     public ObjectOutboundVariable(OutboundContext context, Class<?> type, String scriptClassName)
     {
@@ -27,11 +30,12 @@ public class ObjectOutboundVariable extends NestedOutboundVariable
         }
 
         this.scriptClassName = scriptClassName;
-        this.isNamed = scriptClassName != null && scriptClassName.length() > 0;
+        this.isNamed = scriptClassName != null && !scriptClassName.isEmpty();
     }
 
     /**
      * Constructor for when we don't have a Javascript type to populate
+     * @param context ...
      */
     public ObjectOutboundVariable(OutboundContext context)
     {
@@ -41,9 +45,6 @@ public class ObjectOutboundVariable extends NestedOutboundVariable
         this.isNamed = false;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.NestedOutboundVariable#setChildren(java.util.Collection)
-     */
     @Override
     public void setChildren(Collection<OutboundVariable> children)
     {
@@ -53,6 +54,7 @@ public class ObjectOutboundVariable extends NestedOutboundVariable
     /**
      * We setup the children later than construction time so we can check for
      * recursive references.
+     * @param childMap ...
      */
     public void setChildren(Map<String, OutboundVariable> childMap)
     {
@@ -60,9 +62,6 @@ public class ObjectOutboundVariable extends NestedOutboundVariable
         super.setChildren(childMap.values());
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.NestedOutboundVariable#getDeclareCode()
-     */
     public String getDeclareCode()
     {
         if (isInline())
@@ -82,9 +81,6 @@ public class ObjectOutboundVariable extends NestedOutboundVariable
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.OutboundVariable#getBuildCode()
-     */
     public String getBuildCode()
     {
         if (isInline())
@@ -130,9 +126,6 @@ public class ObjectOutboundVariable extends NestedOutboundVariable
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.OutboundVariable#getAssignCode()
-     */
     public String getAssignCode()
     {
         if (isInline())
@@ -200,9 +193,6 @@ public class ObjectOutboundVariable extends NestedOutboundVariable
         }
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString()
     {

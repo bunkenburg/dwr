@@ -22,6 +22,8 @@ public class SortCriterion
 {
     /**
      * All SortCriterion need an attribute and sort order.
+     * @param attribute ...
+     * @param descending ...
      */
     public SortCriterion(String attribute, boolean descending)
     {
@@ -42,6 +44,7 @@ public class SortCriterion
 
     /**
      * Are we sorting in descending order?
+     * @return ...
      */
     public boolean isDescending()
     {
@@ -51,24 +54,19 @@ public class SortCriterion
     /**
      * Are we sorting in ascending order?
      * This is the logical negative of {@link #isDescending()}
+     * @return ...
      */
     public boolean isAscending()
     {
         return !descending;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
     @Override
     public int hashCode()
     {
         return attribute.hashCode() + (descending ? 7 : 11);
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
     @Override
     public boolean equals(Object obj)
     {
@@ -94,17 +92,9 @@ public class SortCriterion
             return false;
         }
 
-        if (!LocalUtil.equals(this.attribute, that.attribute))
-        {
-            return false;
-        }
-
-        return true;
+        return LocalUtil.equals(this.attribute, that.attribute);
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString()
     {

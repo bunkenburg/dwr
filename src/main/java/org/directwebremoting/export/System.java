@@ -32,6 +32,7 @@ public class System
     /**
      * Generates and returns a new unique id suitable to use for the
      * CSRF session cookie. This method is itself exempted from CSRF checking.
+     * @return ...
      */
     public String generateId()
     {
@@ -164,9 +165,6 @@ public class System
      */
     protected class BrowserMessageListener implements MessageListener
     {
-        /**
-         *
-         */
         public BrowserMessageListener(ScriptSession session, String topic, String subscriptionId)
         {
             this.session = session;
@@ -174,9 +172,6 @@ public class System
             this.subscriptionId = subscriptionId;
         }
 
-        /* (non-Javadoc)
-         * @see org.directwebremoting.event.MessageListener#onMessage(org.directwebremoting.event.MessageEvent)
-         */
         public void onMessage(MessageEvent message)
         {
             ScriptBuffer script = new ScriptBuffer();

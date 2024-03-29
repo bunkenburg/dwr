@@ -76,6 +76,7 @@ public class FormField
     /**
      * Returns an InputStream that can be used to retrieve the contents of the file.
      * @return An InputStream that can be used to retrieve the contents of the file.
+     * @throws IOException ...
      */
     public InputStream getInputStream() throws IOException
     {
@@ -107,6 +108,7 @@ public class FormField
 
     /**
      * Returns the contents of the file item as a String.
+     * @return ...
      */
     public String getString()
     {

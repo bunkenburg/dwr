@@ -165,7 +165,7 @@ public class StartupUtil
             {
                 Loggers.STARTUP.debug("Using alternate Container implementation: " + typeName);
                 Class<?> type = LocalUtil.classForName(typeName);
-                container = (Container) type.newInstance();
+                container = (Container) type.getDeclaredConstructor().newInstance();
             }
 
             if (container instanceof DefaultContainer)
@@ -208,7 +208,7 @@ public class StartupUtil
 
             Loggers.STARTUP.debug("Using alternate Container implementation: " + typeName);
             Class<?> type = LocalUtil.classForName(typeName);
-            return (DefaultContainer) type.newInstance();
+            return (DefaultContainer) type.getDeclaredConstructor().newInstance();
         }
         catch (Exception ex)
         {
@@ -368,12 +368,12 @@ public class StartupUtil
                 if (abstractionImpl instanceof String)
                 {
                     String abstractionImplName = (String) abstractionImpl;
-                    if (abstractionImplName.trim().length() == 0)
+                    if (abstractionImplName.trim().isEmpty())
                     {
                         continue;
                     }
                     Class<ContainerAbstraction> abstractionClass = (Class<ContainerAbstraction>) LocalUtil.classForName(abstractionImplName);
-                    abstraction = abstractionClass.newInstance();                }
+                    abstraction = abstractionClass.getDeclaredConstructor().newInstance();                }
                 else
                 {
                     abstraction = (ContainerAbstraction) abstractionImpl;
@@ -452,14 +452,10 @@ public class StartupUtil
                     Loggers.STARTUP.error("  - Can't cast: " + impl.getName() + " to " + toResolve.getName());
                 }
 
-                impl.newInstance();
+                impl.getDeclaredConstructor().newInstance();
                 container.addParameter(LocalUtil.originalDwrClassName(toResolve.getName()), impl.getName());
 
                 return;
-            }
-            catch (Exception ex)
-            {
-                Loggers.STARTUP.debug("  - Can't use : " + implName + " to implement " + toResolve.getName() + ". This is probably not an error unless you were expecting to use it. Reason: " + ex);
             }
             catch (Throwable t)
             {
@@ -514,16 +510,12 @@ public class StartupUtil
                 {
                     @SuppressWarnings("unchecked")
                     Class<? extends ScriptSessionListener> i = (Class<? extends ScriptSessionListener>) impl;
-                    ScriptSessionListener instance = i.newInstance();
+                    ScriptSessionListener instance = i.getDeclaredConstructor().newInstance();
 
                     manager.addScriptSessionListener(instance);
                 }
             }
-            catch (Exception ex)
-            {
-                Loggers.STARTUP.error("  - Can't use : " + implName + " to implement " + ScriptSessionListener.class.getName() + ". Reason: " + ex);
-            }
-            catch (NoClassDefFoundError ex)
+            catch (Exception | NoClassDefFoundError ex)
             {
                 Loggers.STARTUP.error("  - Can't use : " + implName + " to implement " + ScriptSessionListener.class.getName() + ". Reason: " + ex);
             }
@@ -626,6 +618,7 @@ public class StartupUtil
     /**
      * Configure using the users dwr.xml that sits next in WEB-INF
      * @param container The container to configure
+     * @param servletConfig ...
      * @throws ParserConfigurationException If the config file parse fails
      * @throws IOException If the config file read fails
      * @throws SAXException If the config file parse fails

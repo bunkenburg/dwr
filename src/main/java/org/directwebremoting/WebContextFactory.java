@@ -36,6 +36,7 @@ public class WebContextFactory
      * Internal method to allow us to get the WebContextBuilder from which we
      * will get WebContext objects.
      * Do NOT call this method from outside of DWR.
+     * @param container ...
      */
     public static void attach(Container container)
     {
@@ -52,6 +53,7 @@ public class WebContextFactory
          * Accessor for the WebContext that is associated with this thread.
          * This method is only for use internally to DWR.
          * @see WebContextFactory#get()
+         * @return ...
          */
         WebContext get();
 
@@ -70,6 +72,7 @@ public class WebContextFactory
          * Uses an existing WebContext for example from another thread.
          * This method is only for use internally to DWR.
          * @see #disengageThread()
+         * @param webContext ...
          */
         void engageThread(WebContext webContext);
 

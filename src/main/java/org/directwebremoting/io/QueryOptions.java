@@ -33,7 +33,7 @@ public final class QueryOptions
     }
 
     /**
-     * An {@link org.directwebremoting.datasync.Index} will include
+     * An org.directwebremoting.datasync will include
      * or exclude items detecting capital letters.
      *
      * @return false unless the client request determines otherwise

@@ -16,6 +16,8 @@ public class MatchedItems
      * If there is data to return, then both of these must be set.
      * Note that totalMatchCount == viewedMatches.size() ONLY when there is
      * no filtering going on.
+     * @param viewedMatches ...
+     * @param totalMatchCount ...
      */
     public MatchedItems(List<Item> viewedMatches, int totalMatchCount)
     {
@@ -39,6 +41,7 @@ public class MatchedItems
 
     /**
      * Accessor for the total number of matches (before start/count filtering)
+     * @return ...
      */
     public int getTotalMatchCount()
     {
@@ -47,15 +50,13 @@ public class MatchedItems
 
     /**
      * Accessor for the matched items (after start/count filtering)
+     * @return ...
      */
     public List<Item> getViewedMatches()
     {
         return viewedMatches;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString()
     {

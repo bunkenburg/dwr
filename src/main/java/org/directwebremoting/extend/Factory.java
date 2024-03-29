@@ -16,6 +16,9 @@ public class Factory<T>
 {
     /**
      * Make it easy for Factories to create a Factory instance.
+     * @param <T> ...
+     * @param created ...
+     * @return ...
      */
     public static <T> Factory<T> create(Class<? extends Builder<T>> created)
     {
@@ -24,6 +27,7 @@ public class Factory<T>
 
     /**
      * We need to know what type of builder to extract from the Container
+     * @param created ...
      */
     public Factory(Class<? extends Builder<T>> created)
     {
@@ -32,6 +36,7 @@ public class Factory<T>
 
     /**
      * Accessor for the current object managed by this factory instance.
+     * @return ...
      */
     public T get()
     {
@@ -72,6 +77,8 @@ public class Factory<T>
      * created objects. Do NOT call this method from outside of DWR.
      * This function should <em>only</em> be called during startup.
      * our Container Builder from.
+     * @param container ...
+     * @return ...
      */
     public T attach(Container container)
     {

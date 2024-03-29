@@ -29,6 +29,7 @@ public class DefaultContainer extends AbstractContainer implements Container
 {
     /**
      * Set the class that should be used to implement the given interface
+     * @param <T> ...
      * @param base The interface to implement
      * @param bean The new implementation
      * @throws ContainerConfigurationException If the specified beans could not be used
@@ -40,6 +41,7 @@ public class DefaultContainer extends AbstractContainer implements Container
 
     /**
      * Set the class that should be used to implement the given interface
+     * @param <T> ...
      * @param base The interface to implement
      * @param implementation The new implementation
      * @throws ContainerConfigurationException If the specified beans could not be used
@@ -51,6 +53,7 @@ public class DefaultContainer extends AbstractContainer implements Container
 
     /**
      * Set the class that should be used to implement the given interface
+     * @param <T> ...
      * @param base The interface to implement
      * @param implementation The new implementation
      * @throws ContainerConfigurationException If the specified beans could not be used
@@ -84,7 +87,7 @@ public class DefaultContainer extends AbstractContainer implements Container
             try
             {
                 Class<?> impl = LocalUtil.classForName((String) value);
-                value = impl.newInstance();
+                value = impl.getDeclaredConstructor().newInstance();
             }
             catch (ClassNotFoundException ex)
             {
@@ -97,6 +100,8 @@ public class DefaultContainer extends AbstractContainer implements Container
             catch (IllegalAccessException ex)
             {
                 throw new ContainerConfigurationException("Unable to access " + value);
+            } catch (InvocationTargetException | NoSuchMethodException e) {
+                throw new RuntimeException(e);
             }
         }
 
@@ -152,7 +157,6 @@ public class DefaultContainer extends AbstractContainer implements Container
      * feature of all servlet containers that they complete the init process
      * of a Servlet before they begin servicing requests.
      * @see DefaultContainer#addParameter(String, Object)
-     * @noinspection UnnecessaryLabelOnContinueStatement
      */
     public void setupFinished()
     {
@@ -165,12 +169,8 @@ public class DefaultContainer extends AbstractContainer implements Container
         callInitializingBeans();
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.Container#newInstance(java.lang.Class)
-     */
-    public <T> T newInstance(Class<T> type) throws InstantiationException, IllegalAccessException
-    {
-        T t = type.newInstance();
+    public <T> T newInstance(Class<T> type) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        T t = type.getDeclaredConstructor().newInstance();
         initializeBean(t);
         return t;
     }

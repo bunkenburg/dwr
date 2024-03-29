@@ -8,6 +8,7 @@ public class JsonNumber extends JsonValue
 {
     /**
      * All JsonNumbers wrap something stored as a double
+     * @param value ...
      */
     public JsonNumber(int value)
     {
@@ -16,6 +17,7 @@ public class JsonNumber extends JsonValue
 
     /**
      * All JsonNumbers wrap something stored as a double
+     * @param value ...
      */
     public JsonNumber(long value)
     {
@@ -24,6 +26,7 @@ public class JsonNumber extends JsonValue
 
     /**
      * All JsonNumbers wrap something stored as a double
+     * @param value ...
      */
     public JsonNumber(double value)
     {
@@ -32,51 +35,37 @@ public class JsonNumber extends JsonValue
 
     /**
      * Parse the input string as a double
+     * @param text ...
      */
     public JsonNumber(String text)
     {
         this.value = Double.parseDouble(text);
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.json.JsonValue#getDouble()
-     */
     @Override
     public double getDouble()
     {
         return value;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.json.JsonValue#getLong()
-     */
     @Override
     public long getLong()
     {
         return (long) value;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.json.JsonValue#getInteger()
-     */
     @Override
     public int getInteger()
     {
         return (int) value;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.json.JsonValue#toExternalRepresentation()
-     */
     @Override
     public String toExternalRepresentation()
     {
         return Double.toString(value);
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString()
     {

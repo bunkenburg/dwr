@@ -1,5 +1,6 @@
 package org.directwebremoting.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -48,8 +49,7 @@ public class DefaultCreatorManager implements CreatorManager, UninitializingBean
     /* (non-Javadoc)
      * @see org.directwebremoting.CreatorManager#addCreator(java.lang.String, java.lang.String, java.util.Map)
      */
-    public void addCreator(String typeName, Map<String, String> params) throws InstantiationException, IllegalAccessException, IllegalArgumentException
-    {
+    public void addCreator(String typeName, Map<String, String> params) throws InstantiationException, IllegalAccessException, IllegalArgumentException, NoSuchMethodException, InvocationTargetException {
         Class<? extends Creator> clazz = creatorTypes.get(typeName);
         if (clazz == null)
         {
@@ -57,7 +57,7 @@ public class DefaultCreatorManager implements CreatorManager, UninitializingBean
             return;
         }
 
-        Creator creator = clazz.newInstance();
+        Creator creator = clazz.getDeclaredConstructor().newInstance();
 
         LocalUtil.setParams(creator, params, ignore);
         creator.setProperties(params);
@@ -253,7 +253,8 @@ public class DefaultCreatorManager implements CreatorManager, UninitializingBean
 
     /**
      * When initApplicationScopeCreatorsAtStartup = true we need somewhere to
-     * store the objects
+     * store the
+     * @param servletContext ...
      */
     public void setServletContext(ServletContext servletContext)
     {

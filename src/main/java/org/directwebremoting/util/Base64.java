@@ -210,6 +210,7 @@ public class Base64 {
      * Encodes hex octects into Base64.
      *
      * @param binaryData Array containing binary data to encode.
+     * @param isChunked ...
      * @return Base64-encoded data.
      */
     public static byte[] encodeBase64(byte[] binaryData, boolean isChunked) {
@@ -467,6 +468,8 @@ public class Base64 {
 
     /**
      * encode an Object
+     * @param pObject ...
+     * @return ...
      */
     public Object encode(Object pObject) throws IllegalArgumentException {
 

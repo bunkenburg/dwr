@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * Make method available for remote access.
- * @author Maik Schreiber <blizzy AT blizzy DOT de>
+ * @author Maik Schreiber [blizzy AT blizzy DOT de]
  * @author Joe Walker [joe at getahead dot ltd dot uk]
  */
 @Target(ElementType.METHOD)

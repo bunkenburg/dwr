@@ -1,19 +1,6 @@
 package org.directwebremoting.datasync;
 
-import java.util.AbstractMap;
-import java.util.AbstractSet;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -28,13 +15,15 @@ import org.directwebremoting.util.LocalUtil;
 import org.directwebremoting.util.Pair;
 
 /**
- * A simple implementation of StoreProvider that uses a Map<String, ?>.
+ * A simple implementation of StoreProvider that uses a Map&lt;String, ?&gt;.
  * @author Joe Walker [joe at getahead dot ltd dot uk]
  */
 public class MapStoreProvider<T> extends AbstractStoreProvider<T> implements StoreProvider<T>
 {
     /**
      * Initialize the MapStoreProvider from an existing map + specified type.
+     * @param datamap ...
+     * @param type ...
      */
     public MapStoreProvider(Map<String, T> datamap, Class<T> type)
     {
@@ -43,6 +32,9 @@ public class MapStoreProvider<T> extends AbstractStoreProvider<T> implements Sto
 
     /**
      * Initialize the MapStoreProvider from an existing map + specified type.
+     * @param datamap ...
+     * @param type ...
+     * @param comparatorFactory ...
      */
     public MapStoreProvider(Map<String, T> datamap, Class<T> type, ComparatorFactory<T> comparatorFactory)
     {
@@ -51,6 +43,7 @@ public class MapStoreProvider<T> extends AbstractStoreProvider<T> implements Sto
 
     /**
      * Initialize an empty MapStoreProvider from the specified type.
+     * @param type ...
      */
     public MapStoreProvider(Class<T> type)
     {
@@ -61,7 +54,11 @@ public class MapStoreProvider<T> extends AbstractStoreProvider<T> implements Sto
      * Initialize the MapStoreProvider from an existing map + specified type
      * along with some sort criteria to be used when the client does not specify
      * sorting.
-     */
+     * @param map ...
+     * @param type ...
+     * @param defaultCriteria ...
+     * @param comparatorFactory ...
+     * */
     public MapStoreProvider(Map<String, T> map, Class<T> type, List<SortCriterion> defaultCriteria, ComparatorFactory<T> comparatorFactory)
     {
         super(type);
@@ -72,18 +69,12 @@ public class MapStoreProvider<T> extends AbstractStoreProvider<T> implements Sto
         data.put(baseRegion, index);
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.datasync.StoreProvider#viewRegion(org.directwebremoting.datasync.StoreRegion)
-     */
     public synchronized MatchedItems viewRegion(StoreRegion region)
     {
         Index index = getIndex(region);
         return selectMatchedItems(index.getSortedData(), region.getStart(), region.getCount());
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.datasync.StoreProvider#viewRegion(org.directwebremoting.datasync.StoreRegion, org.directwebremoting.datasync.StoreChangeListener)
-     */
     public synchronized MatchedItems viewRegion(StoreRegion region, StoreChangeListener<T> listener)
     {
         MatchedItems matchedItems = viewRegion(region);
@@ -98,32 +89,23 @@ public class MapStoreProvider<T> extends AbstractStoreProvider<T> implements Sto
         return matchedItems;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.datasync.StoreProvider#viewItem(java.lang.String, org.directwebremoting.io.StoreChangeListener)
-     */
     public Item viewItem(String itemId, StoreChangeListener<T> listener)
     {
         Item item = viewItem(itemId);
 
         if (item != null)
         {
-            addWatchedSet(listener, Arrays.asList(item.getItemId()));
+            addWatchedSet(listener, Collections.singletonList(item.getItemId()));
         }
 
         return item;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.datasync.StoreProvider#unsubscribe(org.directwebremoting.datasync.StoreChangeListener)
-     */
     public synchronized void unsubscribe(StoreChangeListener<T> listener)
     {
         setWatchedSet(listener, null);
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.datasync.StoreProvider#put(java.lang.String, java.lang.Object)
-     */
     public synchronized void put(String itemId, T value)
     {
         put(itemId, value, true);
@@ -137,9 +119,6 @@ public class MapStoreProvider<T> extends AbstractStoreProvider<T> implements Sto
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.datasync.StoreProvider#update(java.util.List)
-     */
     public synchronized void update(List<ItemUpdate> changes) throws SecurityException
     {
         // First off group the changes by ID so we can fire updates together
@@ -165,7 +144,7 @@ public class MapStoreProvider<T> extends AbstractStoreProvider<T> implements Sto
             {
                 try
                 {
-                    t = type.newInstance();
+                    t = type.getConstructor().newInstance();
                 }
                 catch (Exception ex)
                 {
@@ -216,11 +195,7 @@ public class MapStoreProvider<T> extends AbstractStoreProvider<T> implements Sto
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.datasync.AbstractStoreProvider#getObject(java.lang.String)
-     */
-    @Override
-    protected synchronized T getObject(String itemId)
+    @Override protected synchronized T getObject(String itemId)
     {
         return data.get(baseRegion).index.get(itemId);
     }
@@ -233,35 +208,22 @@ public class MapStoreProvider<T> extends AbstractStoreProvider<T> implements Sto
     {
         final Index original = data.get(baseRegion);
 
-        return new AbstractMap<String, T>()
-        {
-            /* (non-Javadoc)
-             * @see java.util.AbstractMap#put(K, V)
-             */
-            @Override
-            public T put(String itemId, T value)
+        return new AbstractMap<String, T>() {
+            @Override public T put(String itemId, T value)
             {
                 T old = getObject(itemId);
                 MapStoreProvider.this.put(itemId, value);
                 return old;
             }
 
-            /* (non-Javadoc)
-             * @see java.util.AbstractMap#remove(java.lang.Object)
-             */
-            @Override
-            public T remove(Object itemId)
+            @Override public T remove(Object itemId)
             {
                 T old = MapStoreProvider.this.getObject((String) itemId);
                 MapStoreProvider.this.put((String) itemId, (T) null);
                 return old;
             }
 
-            /* (non-Javadoc)
-             * @see java.util.AbstractMap#entrySet()
-             */
-            @Override
-            public Set<Entry<String, T>> entrySet()
+            @Override public Set<Entry<String, T>> entrySet()
             {
                 return new AbstractSet<Entry<String, T>>()
                 {
@@ -322,12 +284,6 @@ public class MapStoreProvider<T> extends AbstractStoreProvider<T> implements Sto
         if (region == null)
         {
             region = baseRegion;
-        }
-
-        if (region.getSort() == null)
-        {
-            // we need to change to the default sorting
-            region = new StoreRegion(region.getStart(), region.getCount(), baseRegion.getSort(), region.getQuery(), region.getQueryOptions());
         }
 
         Index index = data.get(region);
@@ -412,6 +368,7 @@ public class MapStoreProvider<T> extends AbstractStoreProvider<T> implements Sto
 
         /**
          * Accessor for the sorted data
+         * @return ...
          */
         public SortedSet<Pair<String, T>> getSortedData()
         {
@@ -420,6 +377,7 @@ public class MapStoreProvider<T> extends AbstractStoreProvider<T> implements Sto
 
         /**
          * Remove an item from this cache of data
+         * @param itemId ...
          */
         public void remove(String itemId)
         {
@@ -429,7 +387,9 @@ public class MapStoreProvider<T> extends AbstractStoreProvider<T> implements Sto
         }
 
         /**
-         * Add an item thats already in a pair
+         * Add an item that's already in a pair
+         * @param pair ...
+         * @param notify ...
          */
         public void put(Pair<String, T> pair, boolean notify)
         {
@@ -461,6 +421,9 @@ public class MapStoreProvider<T> extends AbstractStoreProvider<T> implements Sto
 
         /**
          * Add an entry by separate objects
+         * @param itemId ...
+         * @param t ...
+         * @param notify ...
          */
         public void put(String itemId, T t, boolean notify)
         {
@@ -525,23 +488,16 @@ public class MapStoreProvider<T> extends AbstractStoreProvider<T> implements Sto
                 return false;
             }
 
-            Index that = (Index) obj;
-            if (!LocalUtil.equals(this.options, that.options))
-            {
+            @SuppressWarnings("unchecked") Index that = (Index) obj;
+            if (!LocalUtil.equals(this.options, that.options)) {
                 return false;
             }
 
-            if (!LocalUtil.equals(this.query, that.query))
-            {
+            if (!LocalUtil.equals(this.query, that.query)) {
                 return false;
             }
 
-            if (!LocalUtil.equals(this.sort, that.sort))
-            {
-                return false;
-            }
-
-            return true;
+            return LocalUtil.equals(this.sort, that.sort);
         }
 
         @Override
@@ -581,12 +537,7 @@ public class MapStoreProvider<T> extends AbstractStoreProvider<T> implements Sto
 
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public synchronized String toString()
-    {
+    @Override public synchronized String toString() {
         Index original = data.get(baseRegion);
         return "MapStoreProvider[type=" + type.getSimpleName() + ",entries=" + original.index.size() + ",indexes=" + data.size() + "]";
     }
@@ -599,13 +550,11 @@ public class MapStoreProvider<T> extends AbstractStoreProvider<T> implements Sto
     /**
      * There will always be at least one entry in the {@link #data} map with
      * this key.
-     * @protectedBy(this)
      */
     protected final StoreRegion baseRegion;
 
     /**
      * We actually store a number of indexes to the real data.
-     * @protectedBy(this)
      */
     protected final Map<StoreRegion, Index> data = new HashMap<StoreRegion, Index>();
 

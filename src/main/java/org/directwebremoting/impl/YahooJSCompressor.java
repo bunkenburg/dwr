@@ -23,6 +23,7 @@ public class YahooJSCompressor implements Compressor
 {
     /**
      * Constructor: YahooJSCompressor using default property values.
+     * @throws InstantiationException ...
      */
     public YahooJSCompressor() throws InstantiationException
     {
@@ -32,7 +33,8 @@ public class YahooJSCompressor implements Compressor
     /**
      * Constructor: YahooJSCompressor using the property map passed in.
      *
-     * @param specifiedCompressorParameters
+     * @param specifiedCompressorParameters ...
+     * @throws InstantiationException ...
      */
     public YahooJSCompressor(Map<String, Object> specifiedCompressorParameters) throws InstantiationException
     {
@@ -46,15 +48,12 @@ public class YahooJSCompressor implements Compressor
         }
         catch (Exception e)
         {
-            // We don't care about this!  The instansiation above is just to ensure that the Yahoo compressor is
+            // We don't care about this!  The instantiation above is just to ensure that the Yahoo compressor is
             // on the classpath.  If the actual test compression fails we don't need to do anything.
         }
         setCompressorParameters(specifiedCompressorParameters);
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.Compressor#compressJavaScript(java.lang.String)
-     */
     public String compressJavaScript(String script) throws IOException
     {
         StringReader stringReader = new StringReader(script);
@@ -63,8 +62,7 @@ public class YahooJSCompressor implements Compressor
         yuiJavaScriptCompressor.compress(stringWriter, (Integer) compressorParameters.get(PARAMETER_LINEBREAK), (Boolean) compressorParameters.get(PARAMETER_MUNGE),
                 (Boolean) compressorParameters.get(PARAMETER_VERBOSE), (Boolean) compressorParameters.get(PARAMETER_PRESERVE_ALL_SEMICOLONS),
                 (Boolean) compressorParameters.get(PARAMETER_DISABLE_OPTIMIZATIONS));
-        String compressedScript = stringWriter.toString();
-        return compressedScript;
+        return stringWriter.toString();
     }
 
     /**

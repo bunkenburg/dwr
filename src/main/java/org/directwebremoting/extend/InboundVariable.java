@@ -30,7 +30,7 @@ public final class InboundVariable
      * @param key The name of the variable that this was transfered as
      * @param type The type information from javascript
      * @param value The javascript variable converted to a string
-     * @param has the data already been URL decoded?
+     * @param urlDecoded the data already been URL decoded?
      */
     public InboundVariable(InboundContext context, String key, String type, String value, boolean urlDecoded)
     {
@@ -55,7 +55,7 @@ public final class InboundVariable
      * @param key The name of the variable that this was transfered as
      * @param type The type information from javascript
      * @param fileField The javascript variable converted to a FormField
-     * @param has the data already been URL decoded?
+     * @param urlDecoded the data already been URL decoded?
      */
     public InboundVariable(InboundContext context, String key, String type, FormField fileField, boolean urlDecoded)
     {
@@ -85,6 +85,7 @@ public final class InboundVariable
      * Constructor for when we need to temporarily create an InboundVariable
      * for sorting out varargs
      * @param context How we lookup references
+     * @param members ...
      */
     public InboundVariable(InboundContext context, InboundVariable[] members)
     {
@@ -98,6 +99,7 @@ public final class InboundVariable
 
     /**
      * Accessor of the context of the variable: the other related variables
+     * @return ...
      */
     public InboundContext getContext()
     {
@@ -198,15 +200,13 @@ public final class InboundVariable
 
     /**
      * Nasty hack to get around varargs
+     * @return ...
      */
     public InboundVariable[] getMembers()
     {
         return members;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString()
     {
@@ -218,9 +218,6 @@ public final class InboundVariable
         return type + ProtocolConstants.INBOUND_TYPE_SEPARATOR + formField.toString();
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
     @Override
     public boolean equals(Object obj)
     {

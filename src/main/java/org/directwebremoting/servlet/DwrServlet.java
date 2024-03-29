@@ -30,13 +30,9 @@ import org.directwebremoting.impl.StartupUtil;
  * <li>The exec 'page' that executes the method and returns data to the iframe</li>
  * </ul>
  * @author Joe Walker [joe at getahead dot ltd dot uk]
- * @noinspection RefusedBequest
  */
 public class DwrServlet extends HttpServlet
 {
-    /* (non-Javadoc)
-     * @see javax.servlet.GenericServlet#init(javax.servlet.ServletConfig)
-     */
     @Override
     public void init(ServletConfig servletConfig) throws ServletException
     {
@@ -79,6 +75,8 @@ public class DwrServlet extends HttpServlet
      * of Container. This allows subclasses to override the implementation
      * method.
      * Part of {@link #init(ServletConfig)}.
+     * @param servletConfig ...
+     * @return ...
      * @throws ServletException Children might need to throw even if we don't
      */
     protected Container createContainer(ServletConfig servletConfig) throws ServletException
@@ -90,6 +88,10 @@ public class DwrServlet extends HttpServlet
      * Specializations of DwrServlet might want to configure it differently
      * from the default
      * Part of {@link #init(ServletConfig)}.
+     * @param defaultContainer ...
+     * @param servletConfig ...
+     * @throws ServletException ...
+     * @throws IOException ...
      */
     protected void configureContainer(Container defaultContainer, ServletConfig servletConfig) throws ServletException, IOException
     {
@@ -107,18 +109,12 @@ public class DwrServlet extends HttpServlet
         }
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
-     */
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException
     {
         doPost(req, resp);
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
-     */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
@@ -134,9 +130,6 @@ public class DwrServlet extends HttpServlet
         }
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.GenericServlet#destroy()
-     */
     @Override
     public void destroy()
     {
@@ -155,6 +148,7 @@ public class DwrServlet extends HttpServlet
 
     /**
      * Accessor for the IoC container.
+     * @return ...
      */
     public Container getContainer()
     {

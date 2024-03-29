@@ -114,7 +114,8 @@ public final class LocalUtil
      * Check whether the given CharSequence has actual text.
      * More specifically, returns <code>true</code> if the string not <code>null</code>,
      * its length is greater than 0, and it contains at least one non-whitespace character.
-     * <p><pre>
+     *
+     * <pre>
      * LocalUtil.hasText(null) = false
      * LocalUtil.hasText("") = false
      * LocalUtil.hasText(" ") = false
@@ -147,7 +148,8 @@ public final class LocalUtil
     /**
      * Check that the given CharSequence is neither <code>null</code> nor of length 0.
      * Note: Will return <code>true</code> for a CharSequence that purely consists of whitespace.
-     * <p><pre>
+     *
+     * <pre>
      * LocalUtil.hasLength(null) = false
      * LocalUtil.hasLength("") = false
      * LocalUtil.hasLength(" ") = true
@@ -249,7 +251,7 @@ public final class LocalUtil
      * Determines whether the supplied string is a valid script name to use for
      * remoted classes.
      *
-     * @param test
+     * @param test ...
      * @return true if the string is a valid script name
      */
     public static boolean isValidScriptName(String test)
@@ -261,7 +263,7 @@ public final class LocalUtil
      * Determines whether the supplied string is a valid class name to use for
      * class-mapped data classes.
      *
-     * @param test
+     * @param test ...
      * @return true if the string is a valid mapped class name
      */
     public static boolean isValidMappedClassName(String test)
@@ -274,7 +276,7 @@ public final class LocalUtil
      * inside html element attributes and url:s, and is a valid hierarchical
      * identifier wrt to dot ("package") segments.
      *
-     * @param test
+     * @param test ...
      * @return true if string is safe
      */
     public static boolean isSafeHierarchicalIdentifierInBrowser(String test)
@@ -286,7 +288,7 @@ public final class LocalUtil
         String[] segments = test.split("\\.");
         for (String segment : segments)
         {
-            if (segment.equals(""))
+            if (segment.isEmpty())
             {
                 return false;
             }
@@ -302,7 +304,7 @@ public final class LocalUtil
      * Tests if a string contains only characters that will allow safe use
      * inside html element attributes and url:s.
      *
-     * @param test
+     * @param test ...
      * @return true if string is safe
      */
     public static boolean isSafeIdentifierInBrowser(String test)
@@ -538,7 +540,7 @@ public final class LocalUtil
 
     /**
      *
-     * @param request
+     * @param request ...
      * @return String
      */
     public static String getFullUrlToDwrServlet(HttpServletRequest request) {
@@ -603,7 +605,7 @@ public final class LocalUtil
         }
         catch (IOException ex)
         {
-            buffer.append("[Unable to read body: " + ex + "]\n");
+            buffer.append("[Unable to read body: ").append(String.valueOf(ex)).append("]\n");
         }
         finally {
             try
@@ -641,6 +643,7 @@ public final class LocalUtil
 
     /**
      * Go Java! How many people have written this code?
+     * @param <T> ...
      * @param en The Enumeration that we want to iterate over
      * @return An implementation of {@link Iterable} for use in a for each loop
      */
@@ -677,8 +680,9 @@ public final class LocalUtil
 
     /**
      * Go Java! Why do I even need to do this?
+     * @param <T> ...
      * @param en The Enumeration that we want to iterate over
-     * @param type For when we were given an Enumeration<?> and need an Iterator<T>
+     * @param type For when we were given an Enumeration&lt;?&gt; and need an Iterator&lt;T&gt;
      * @return An implementation of {@link Iterable} for use in a for each loop
      */
     @SuppressWarnings("unchecked")
@@ -832,7 +836,7 @@ public final class LocalUtil
      * @param object anything
      * @return true if this object is an Integer, Long, Float, Double, Boolean...
      */
-    public static final boolean isWrapper(Object object)
+    public static boolean isWrapper(Object object)
     {
         boolean wrapper = false;
         if (object != null)
@@ -846,6 +850,7 @@ public final class LocalUtil
      * Set a property on an object using reflection
      * @param real The object type to find the setter on
      * @param key The name of the property to set.
+     * @return ...
      */
     public static Class<?> getPropertyType(Class<?> real, String key)
     {
@@ -928,6 +933,7 @@ public final class LocalUtil
     /**
      * A very simple conversion function for all the IoC style setup and
      * reflection that we are doing.
+     * @param <T> ...
      * @param value The value to convert
      * @param paramType The type to convert to. Currently any primitive types and
      * String are supported.
@@ -958,7 +964,7 @@ public final class LocalUtil
 
         if (paramType == Boolean.class)
         {
-            if (trimValue.length() == 0)
+            if (trimValue.isEmpty())
             {
                 return null;
             }
@@ -983,7 +989,7 @@ public final class LocalUtil
 
         if (paramType == Integer.TYPE)
         {
-            if (trimValue.length() == 0)
+            if (trimValue.isEmpty())
             {
                 return (T) Integer.valueOf(0);
             }
@@ -993,7 +999,7 @@ public final class LocalUtil
 
         if (paramType == Short.class)
         {
-            if (trimValue.length() == 0)
+            if (trimValue.isEmpty())
             {
                 return null;
             }
@@ -1003,7 +1009,7 @@ public final class LocalUtil
 
         if (paramType == Short.TYPE)
         {
-            if (trimValue.length() == 0)
+            if (trimValue.isEmpty())
             {
                 return (T) Short.valueOf((short) 0);
             }
@@ -1013,7 +1019,7 @@ public final class LocalUtil
 
         if (paramType == Byte.class)
         {
-            if (trimValue.length() == 0)
+            if (trimValue.isEmpty())
             {
                 return null;
             }
@@ -1023,7 +1029,7 @@ public final class LocalUtil
 
         if (paramType == Byte.TYPE)
         {
-            if (trimValue.length() == 0)
+            if (trimValue.isEmpty())
             {
                 return (T) Byte.valueOf((byte) 0);
             }
@@ -1033,7 +1039,7 @@ public final class LocalUtil
 
         if (paramType == Long.class)
         {
-            if (trimValue.length() == 0)
+            if (trimValue.isEmpty())
             {
                 return null;
             }
@@ -1043,7 +1049,7 @@ public final class LocalUtil
 
         if (paramType == Long.TYPE)
         {
-            if (trimValue.length() == 0)
+            if (trimValue.isEmpty())
             {
                 return (T) Long.valueOf(0);
             }
@@ -1053,7 +1059,7 @@ public final class LocalUtil
 
         if (paramType == Float.class)
         {
-            if (trimValue.length() == 0)
+            if (trimValue.isEmpty())
             {
                 return null;
             }
@@ -1063,7 +1069,7 @@ public final class LocalUtil
 
         if (paramType == Float.TYPE)
         {
-            if (trimValue.length() == 0)
+            if (trimValue.isEmpty())
             {
                 return (T) Float.valueOf(0);
             }
@@ -1073,7 +1079,7 @@ public final class LocalUtil
 
         if (paramType == Double.class)
         {
-            if (trimValue.length() == 0)
+            if (trimValue.isEmpty())
             {
                 return null;
             }
@@ -1083,7 +1089,7 @@ public final class LocalUtil
 
         if (paramType == Double.TYPE)
         {
-            if (trimValue.length() == 0)
+            if (trimValue.isEmpty())
             {
                 return (T) Double.valueOf(0.0D);
             }
@@ -1103,7 +1109,7 @@ public final class LocalUtil
      */
     public static boolean isSimpleName(String name)
     {
-        if (name.length() == 0)
+        if (name.isEmpty())
         {
             return false;
         }
@@ -1218,7 +1224,7 @@ public final class LocalUtil
      * Converts a remapped DWR classname to the corresponding original name in
      * the org.directwebremoting package.
      *
-     * @param className
+     * @param className ...
      * @return full class name relative original DWR package
      */
     public static String originalDwrClassName(String className)
@@ -1234,7 +1240,7 @@ public final class LocalUtil
      * Converts a DWR classname in the original org.directwebremoting package
      * to the corresponding name in the remapped package, if applicable.
      *
-     * @param className
+     * @param className ...
      * @return full class name relative remapped DWR package
      */
     public static String remappedDwrClassName(String className)
@@ -1250,7 +1256,7 @@ public final class LocalUtil
      * Determines if a classname resides in the DWR original package
      * (org.directwebremoting).
      *
-     * @param className
+     * @param className ...
      * @return true if class in original DWR package
      */
     public static boolean isClassNameInDwrOriginalPackage(String className)
@@ -1260,34 +1266,24 @@ public final class LocalUtil
             return false;
         }
 
-        if (className.indexOf(DwrConstants.PACKAGE_NAME, 1) >= 0)
-        {
-            return false;
-        }
-
-        return true;
+        return className.indexOf(DwrConstants.PACKAGE_NAME, 1) < 0;
     }
 
     /**
      * Determines if a classname resides in the remapped package, if
      * applicable.
      *
-     * @param className
+     * @param className ...
      * @return true if class in remapped DWR package
      */
     public static boolean isClassNameInDwrRemappedPackage(String className)
     {
-        if (packageNamePrefixAndDot.length() == 0)
+        if (packageNamePrefixAndDot.isEmpty())
         {
             return false;
         }
 
-        if (!className.startsWith(packageNamePrefixAndDot + DwrConstants.PACKAGE_NAME))
-        {
-            return false;
-        }
-
-        return true;
+        return className.startsWith(packageNamePrefixAndDot + DwrConstants.PACKAGE_NAME);
     }
 
     /**
@@ -1339,7 +1335,7 @@ public final class LocalUtil
         // Check we can create it
         try
         {
-            clazz.newInstance();
+            clazz.getDeclaredConstructor().newInstance();
         }
         catch (InstantiationException ex)
         {
@@ -1459,7 +1455,7 @@ public final class LocalUtil
         // Check we can create it
         try
         {
-            return clazz.newInstance();
+            return clazz.getDeclaredConstructor().newInstance();
         }
         catch (InstantiationException ex)
         {
@@ -1522,7 +1518,7 @@ public final class LocalUtil
      */
     public static String remappedResourcePath(String path)
     {
-        if (resourcePathPrefix.length() > 0)
+        if (!resourcePathPrefix.isEmpty())
         {
             return resourcePathPrefix + (path.startsWith("/") ? "" : "/") + path;
         }
@@ -1535,7 +1531,7 @@ public final class LocalUtil
     /**
      * Open a stream to an internal file resource located in the DWR package tree.
      *
-     * @param path
+     * @param path ...
      * @return an open stream
      */
     public static InputStream getInternalResourceAsStream(String path)
@@ -1546,7 +1542,7 @@ public final class LocalUtil
     /**
      * Open a stream to a file resource located on the classpath.
      *
-     * @param path
+     * @param path ...
      * @return an open stream
      */
     public static URL getResource(String path)
@@ -1604,13 +1600,13 @@ public final class LocalUtil
      * if necessary. The <code>setAccessible(true)</code> method is only called
      * when actually necessary, to avoid unnecessary conflicts with a JVM
      * SecurityManager (if active).
-     * @param ctor the constructor to make accessible
+     * @param constructor the constructor to make accessible
      * @see java.lang.reflect.Constructor#setAccessible
      */
-    public static void makeAccessible(Constructor<?> ctor) {
-            if ((!Modifier.isPublic(ctor.getModifiers()) || !Modifier.isPublic(ctor.getDeclaringClass().getModifiers()))
-                            && !ctor.isAccessible()) {
-                    ctor.setAccessible(true);
+    public static void makeAccessible(Constructor<?> constructor) {
+            if ((!Modifier.isPublic(constructor.getModifiers()) || !Modifier.isPublic(constructor.getDeclaringClass().getModifiers()))
+                            && !constructor.isAccessible()) {
+                    constructor.setAccessible(true);
             }
     }
 
@@ -1670,10 +1666,12 @@ public final class LocalUtil
      * Utility to find a getter and return it's value from an object
      * If Java had the option to temporarily do dynamic typing there would be
      * no need for this.
+     * @param <T> ...
      * @param pojo The POJO to extract some data from.
      * @param propertyName The name of the property form which we form a getter
      * name by upper-casing the first letter (in the EN locale) and prefixing
      * with 'get'
+     * @param type ...
      * @return The value of property, or null if it does not exist
      */
     @SuppressWarnings("unchecked")
@@ -1713,8 +1711,11 @@ public final class LocalUtil
     }
 
     /**
-     * Utility to find a Class<?> from a Type if possible, assuming String.class
+     * Utility to find a Class&lt;?&gt; from a Type if possible, assuming String.class
      * if the conversion can't be made
+     * @param parameterType ...
+     * @param debugContext ...
+     * @return ...
      */
     public static Class<?> toClass(Type parameterType, String debugContext)
     {
@@ -1787,21 +1788,19 @@ public final class LocalUtil
      */
     public static String capitalize(String input)
     {
-        String capitalized = input;
         if (hasText(input))
         {
-            StringBuffer buf = new StringBuffer(input.length());
-            buf.append(Character.toUpperCase(input.charAt(0)));
-            buf.append(input.substring(1));
-            return buf.toString();
+            return Character.toUpperCase(input.charAt(0)) +
+                    input.substring(1);
         }
-        return capitalized;
+        return input;
     }
 
     /**
      * Obtains the write method for a property.
      *
-     * @param property any
+     * @param clazz ...
+     * @param property ...
      * @return any
      */
     public static Method getWriteMethod(Class<?> clazz, PropertyDescriptor property)
@@ -1841,14 +1840,10 @@ public final class LocalUtil
     {
         if (methods != null)
         {
-            for (int index = 0; index < methods.length; index++)
-            {
-                Method method = methods[index];
+            for (Method method : methods) {
                 Class<?>[] params = method.getParameterTypes();
-                if (name.equals(method.getName()) && (params != null) && (params.length == 1))
-                {
-                    if (type.isAssignableFrom(params[0]))
-                    {
+                if (name.equals(method.getName()) && params.length == 1) {
+                    if (type.isAssignableFrom(params[0])) {
                         return method;
                     }
                 }
@@ -1860,35 +1855,35 @@ public final class LocalUtil
     /**
      * Determines if a JavaScript type is assignable to the passed in Java class.
      *
-     * @param javaScriptType
-     * @param clazz
+     * @param javaScriptType ...
+     * @param clazz ...
      * @return boolean
      */
     public static boolean isJavaScriptTypeAssignableTo(String javaScriptType, Class<?> clazz)
     {
         if ("array".equals(javaScriptType))
         {
-            return isJavaScriptArrayConvertableTo(clazz);
+            return isJavaScriptArrayConvertibleTo(clazz);
         }
         else if ("boolean".equals(javaScriptType))
         {
-            return isJavaScriptBooleanConvertableTo(clazz);
+            return isJavaScriptBooleanConvertibleTo(clazz);
         }
         else if ("number".equals(javaScriptType))
         {
-            return isJavaScriptNumberConvertableTo(clazz);
+            return isJavaScriptNumberConvertibleTo(clazz);
         }
         else if ("string".equals(javaScriptType))
         {
-            return isJavaScriptStringConvertableTo(clazz);
+            return isJavaScriptStringConvertibleTo(clazz);
         }
         else if ("date".equals(javaScriptType))
         {
-            return isJavaScriptDateConvertableTo(clazz);
+            return isJavaScriptDateConvertibleTo(clazz);
         }
         else if ("Object_Object".equals(javaScriptType))
         {
-            return isJavaScriptObjectConvertableTo(clazz);
+            return isJavaScriptObjectConvertibleTo(clazz);
         }
         // We may need to revisit this, we aren't explicitly handling some types including:
         // "reference", "null", "Object_ObjectWithLightClassMapping", etc.
@@ -1901,7 +1896,7 @@ public final class LocalUtil
      * @param type
      * @return boolean
      */
-    private static boolean isJavaScriptArrayConvertableTo(Class<?> type)
+    private static boolean isJavaScriptArrayConvertibleTo(Class<?> type)
     {
         return (type.isArray() || Collection.class.isAssignableFrom(type));
     }
@@ -1912,9 +1907,9 @@ public final class LocalUtil
      * @param type
      * @return boolean
      */
-    private static boolean isJavaScriptObjectConvertableTo(Class<?> type)
+    private static boolean isJavaScriptObjectConvertibleTo(Class<?> type)
     {
-        return !(isTypeSimplyConvertable(type) || isJavaScriptArrayConvertableTo(type));
+        return !(isTypeSimplyConvertable(type) || isJavaScriptArrayConvertibleTo(type));
     }
 
     /**
@@ -1923,7 +1918,7 @@ public final class LocalUtil
      * @param type
      * @return boolean
      */
-    private static boolean isJavaScriptBooleanConvertableTo(Class<?> type)
+    private static boolean isJavaScriptBooleanConvertibleTo(Class<?> type)
     {
         return (boolean.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type));
     }
@@ -1936,7 +1931,7 @@ public final class LocalUtil
      * @param type
      * @return boolean
      */
-    private static boolean isJavaScriptNumberConvertableTo(Class<?> type)
+    private static boolean isJavaScriptNumberConvertibleTo(Class<?> type)
     {
         return (TYPES_COMPATIBLE_WITH_JS_NUMBER.contains(type));
     }
@@ -1947,7 +1942,7 @@ public final class LocalUtil
      * @param type
      * @return boolean
      */
-    private static boolean isJavaScriptStringConvertableTo(Class<?> type)
+    private static boolean isJavaScriptStringConvertibleTo(Class<?> type)
     {
         return String.class.isAssignableFrom(type) || char.class.equals(type) || Locale.class.equals(type) || Currency.class.equals(type);
     }
@@ -1957,7 +1952,7 @@ public final class LocalUtil
      * @param type
      * @return boolean
      */
-    private static boolean isJavaScriptDateConvertableTo(Class<?> type)
+    private static boolean isJavaScriptDateConvertibleTo(Class<?> type)
     {
         return (Date.class.isAssignableFrom(type));
     }
@@ -1975,20 +1970,20 @@ public final class LocalUtil
      * Package to add as prefix to DWR's default Java package (when remapping
      * DWR in classpath)
      */
-    private static String packageNamePrefixAndDot;
+    private static final String packageNamePrefixAndDot;
 
     /**
      * Path to add as prefix to DWR's default resource path (when remapping DWR
      * in classpath)
      */
-    private static String resourcePathPrefix;
+    private static final String resourcePathPrefix;
 
     /**
      * The time on the script files
      */
     private static final long CLASSLOAD_TIME;
 
-    private static Map<Class<?>, Class<?>> primitiveWrapperMap = new HashMap<Class<?>, Class<?>>();
+    private static final Map<Class<?>, Class<?>> primitiveWrapperMap = new HashMap<Class<?>, Class<?>>();
 
     static
     {
@@ -2007,7 +2002,7 @@ public final class LocalUtil
      */
     private static final Log log = LogFactory.getLog(LocalUtil.class);
 
-    /**
+    /*
      * Initialize at start time
      */
     static
@@ -2025,7 +2020,7 @@ public final class LocalUtil
             throw new Error("Disallowed remapping of DWR classes.");
         }
         packageNamePrefixAndDot = actualPackage.substring(0, actualPackage.indexOf(expectedPackage));
-        if (packageNamePrefixAndDot.length() > 0)
+        if (!packageNamePrefixAndDot.isEmpty())
         {
             resourcePathPrefix = "/" + packageNamePrefixAndDot.replace('.', '/').substring(0, packageNamePrefixAndDot.length() - 1);
             log.info("Detected repackaging of DWR - using packageNamePrefix=" + packageNamePrefixAndDot + ", resourcePathPrefix=" +   resourcePathPrefix);
@@ -2038,6 +2033,8 @@ public final class LocalUtil
 
     /**
      * Find the leaf cause of an exception chain.
+     * @param ex ...
+     * @return ...
      */
     public static Throwable getRootCause(Throwable ex)
     {
