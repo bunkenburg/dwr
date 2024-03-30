@@ -30,9 +30,7 @@ import org.directwebremoting.util.Loggers;
  */
 public class AnnotationsConfigurator implements Configurator
 {
-    /* (non-Javadoc)
-     * @see org.directwebremoting.Configurator#configure(org.directwebremoting.Container)
-     */
+
     public void configure(Container container)
     {
         for (Class<?> clazz : getClasses(container))
