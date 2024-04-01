@@ -12,10 +12,8 @@ import java.lang.reflect.Proxy;
  */
 public class MethodMatchingProxyFactory
 {
-    public static <T> T createProxy(Class<T> interfaceClass, Class<?> backingClass, Object... constructorArgs)
-    {
-        try
-        {
+    public static <T> T createProxy(Class<T> interfaceClass, Class<?> backingClass, Object... constructorArgs) {
+        try {
             // Instantiate backing class object
             Object backingObject;
             if (constructorArgs.length == 0 && backingClass.getConstructors().length == 0) {
@@ -34,9 +32,7 @@ public class MethodMatchingProxyFactory
             // Wrap with a proxy conforming to the fronting interface
             Object proxy = Proxy.newProxyInstance(MethodMatchingProxyFactory.class.getClassLoader(), new Class[]{interfaceClass}, new MethodMatchingInvocationHandler(backingObject));
             return interfaceClass.cast(proxy);
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             if (ex instanceof RuntimeException) {
                 throw (RuntimeException) ex;
             } else {
@@ -45,8 +41,7 @@ public class MethodMatchingProxyFactory
         }
     }
 
-    private static class MethodMatchingInvocationHandler implements InvocationHandler
-    {
+    private static class MethodMatchingInvocationHandler implements InvocationHandler {
         private final Object backingObject;
 
         public MethodMatchingInvocationHandler(Object backingObject)
@@ -54,8 +49,7 @@ public class MethodMatchingProxyFactory
             this.backingObject = backingObject;
         }
 
-        public Object invoke(Object proxy, Method proxyMethod, Object[] args) throws Throwable
-        {
+        public Object invoke(Object proxy, Method proxyMethod, Object[] args) throws Throwable {
             try {
                 Method backingMethod = backingObject.getClass().getMethod(proxyMethod.getName(), proxyMethod.getParameterTypes());
                 return backingMethod.invoke(backingObject, args);

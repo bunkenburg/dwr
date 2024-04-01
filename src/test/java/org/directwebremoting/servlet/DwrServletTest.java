@@ -14,12 +14,10 @@ import org.junit.Test;
 /**
  * @author Joe Walker [joe at getahead dot ltd dot uk]
  */
-public class DwrServletTest
-{
+public class DwrServletTest {
     @Test
     @Ignore // TODO: need to adjust dirs (which WEB-INF dir is supposed to be used here???)
-    public void doGet() throws Exception
-    {
+    public void doGet() throws Exception {
         DwrServlet servlet = new DwrServlet();
 
         ServletContext servletContext = FakeServletContextFactory.create("test/web");

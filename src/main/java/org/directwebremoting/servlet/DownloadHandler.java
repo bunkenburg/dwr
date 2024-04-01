@@ -16,45 +16,33 @@ import org.directwebremoting.util.LocalUtil;
  * a DownloadManager to purge files from the system that have been downloaded.
  * @author Joe Walker [joe at getahead dot ltd dot uk]
  */
-public class DownloadHandler implements Handler
-{
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.Handler#handle(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
-     */
-    public void handle(HttpServletRequest request, HttpServletResponse response) throws IOException
-    {
+public class DownloadHandler implements Handler {
+    public void handle(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String id = request.getPathInfo();
 
-        if (!id.startsWith(downloadHandlerUrl))
-        {
+        if (!id.startsWith(downloadHandlerUrl)) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
         id = id.substring(downloadHandlerUrl.length());
 
         FileTransfer transfer = downloadManager.getFileTransfer(id);
-        if (transfer == null)
-        {
+        if (transfer == null) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
-        }
-        else
-        {
-            if (transfer.getSize() > 0)
-            {
+        } else {
+            if (transfer.getSize() > 0) {
                 response.setContentLength((int) transfer.getSize());
             }
 
             String defaultType = "attachment";
             String type = null;
             String suppliedType = request.getParameter("contentDispositionType");
-            if (suppliedType != null && suppliedType.matches("^[-A-Za-z]+$"))
-            {
+            if (suppliedType != null && suppliedType.matches("^[-A-Za-z]+$")) {
                 type = suppliedType;
             }
 
             String filename = transfer.getFilename();
 
-            if (type != null || filename != null)
-            {
+            if (type != null || filename != null) {
                 response.setHeader("Content-disposition",
                     (type != null ? type : defaultType)
                     + (filename != null ? "; filename=\"" + filename + "\"" : ""));
@@ -63,13 +51,10 @@ public class DownloadHandler implements Handler
             response.setContentType(transfer.getMimeType());
 
             OutputStreamLoader loader = null;
-            try
-            {
+            try {
                 loader = transfer.getOutputStreamLoader();
                 loader.load(response.getOutputStream());
-            }
-            finally
-            {
+            } finally {
                 LocalUtil.close(loader);
             }
         }

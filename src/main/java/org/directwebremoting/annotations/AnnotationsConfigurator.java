@@ -65,7 +65,7 @@ public class AnnotationsConfigurator implements Configurator
                 for (String element : classesStr.split(","))
                 {
                     element = element.trim();
-                    if (element.length() == 0)
+                    if (element.isEmpty())
                     {
                         continue;
                     }
@@ -161,23 +161,19 @@ public class AnnotationsConfigurator implements Configurator
         creatorManager.addCreatorType(creatorName, creatorClassName);
 
         // Set up the params map from specific attributes and parameter attribute annotations
-        Map<String, String> params = new HashMap<String, String>();
-        params.putAll(getParamsMap(createAnn.creatorParams()));
-        if (createAnn.name() != null && !createAnn.name().equals(""))
+        Map<String, String> params = new HashMap<String, String>(getParamsMap(createAnn.creatorParams()));
+        if (createAnn.name() != null && !createAnn.name().isEmpty())
         {
             params.put("javascript", createAnn.name());
         }
         params.put("scope", createAnn.scope().getValue());
 
         // Add default class (remoted class)
-        if (params.get("class") == null)
-        {
-            params.put("class", clazz.getName());
-        }
+        params.computeIfAbsent("class", k -> clazz.getName());
 
         // Add default scriptName
         String scriptName = params.get("javascript");
-        if (scriptName == null || scriptName.equals(""))
+        if (scriptName == null || scriptName.isEmpty())
         {
             scriptName = clazz.getSimpleName();
             params.put("javascript", scriptName);

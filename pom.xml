@@ -5,19 +5,21 @@
     <groupId>cat.inspiracio</groupId>
     <artifactId>dwr</artifactId>
     <packaging>jar</packaging>
-    <version>3.0.1</version>
+    <version>3.1.0-SNAPSHOT</version>
     <name>Direct Web Remoting</name>
     <url>http://directwebremoting.org/dwr/index.html</url>
 
     <description>
         DWR is easy Ajax for Java. It makes it simple to call Java code directly from Javascript.
         It gets rid of almost all the boilerplate code between the web browser and your Java code.
+
+        This version 3.1.0 works with Servlet 3.1.0.
     </description>
 
     <developers>
         <developer>
             <name>Joe Walker</name>
-            <id>joe</id>
+            <email>joe at getahead dot org</email>
         </developer>
         <developer>
             <name>David Marginian</name>
@@ -59,9 +61,7 @@
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
 
-    <!--http://central.sonatype.org/pages/apache-maven.html
-		Release of a new version: mvn clean deploy
-	-->
+    <!--http://central.sonatype.org/pages/apache-maven.html Release of a new version: mvn clean deploy-->
     <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
@@ -263,17 +263,18 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.0.1</version>
+            <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/javax.servlet.jsp/jsp-api -->
+        <!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
-            <artifactId>jsp-api</artifactId>
-            <version>2.2</version>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <version>2.3.3</version>
             <scope>provided</scope>
         </dependency>
+
 
         <!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
         <dependency>

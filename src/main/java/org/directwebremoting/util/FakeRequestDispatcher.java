@@ -13,8 +13,7 @@ import org.apache.commons.logging.Log;
  * @author Juergen Hoeller
  * @author Joe Walker [joe at getahead dot ltd dot uk]
  */
-public class FakeRequestDispatcher implements RequestDispatcher
-{
+public class FakeRequestDispatcher implements RequestDispatcher {
     /**
      * Create a new FakeRequestDispatcher for the given URL.
      * @param url the URL to dispatch to.
@@ -24,43 +23,30 @@ public class FakeRequestDispatcher implements RequestDispatcher
         this.url = url;
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.RequestDispatcher#forward(javax.servlet.ServletRequest, javax.servlet.ServletResponse)
-     */
-    public void forward(ServletRequest request, ServletResponse response)
-    {
-        if (response.isCommitted())
-        {
+    public void forward(ServletRequest request, ServletResponse response) {
+        if (response.isCommitted()) {
             throw new IllegalStateException("Cannot perform forward - response is already committed");
         }
 
-        if (!(response instanceof FakeHttpServletResponse))
-        {
+        if (!(response instanceof FakeHttpServletResponse)) {
             throw new IllegalArgumentException("FakeRequestDispatcher requires FakeHttpServletResponse");
         }
 
         ((FakeHttpServletResponse) response).setForwardedUrl(url);
 
-        if (log.isDebugEnabled())
-        {
+        if (log.isDebugEnabled()) {
             log.debug("FakeRequestDispatcher: forwarding to URL [" + url + "]");
         }
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.RequestDispatcher#include(javax.servlet.ServletRequest, javax.servlet.ServletResponse)
-     */
-    public void include(ServletRequest request, ServletResponse response)
-    {
-        if (!(response instanceof FakeHttpServletResponse))
-        {
+    public void include(ServletRequest request, ServletResponse response) {
+        if (!(response instanceof FakeHttpServletResponse)) {
             throw new IllegalArgumentException("FakeRequestDispatcher requires FakeHttpServletResponse");
         }
 
         ((FakeHttpServletResponse) response).setIncludedUrl(url);
 
-        if (log.isDebugEnabled())
-        {
+        if (log.isDebugEnabled()) {
             log.debug("FakeRequestDispatcher: including URL [" + url + "]");
         }
     }

@@ -22,9 +22,7 @@ public class DefaultAccessControlTest
 
     private FakeHttpServletRequest request;
 
-    @Before
-    public void setUp()
-    {
+    @Before public void setUp() {
         request = FakeHttpServletRequestFactory.create();
     }
 

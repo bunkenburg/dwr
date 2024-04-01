@@ -55,8 +55,7 @@ import org.xml.sax.SAXException;
  * Some utilities to help get DWR up and running
  * @author Joe Walker [joe at getahead dot ltd dot uk]
  */
-public class StartupUtil
-{
+public class StartupUtil {
     /**
      * Init parameter: Set a dwr.xml config file.
      * This is only a prefix since we might have more than 1 config file.
@@ -92,23 +91,17 @@ public class StartupUtil
      * @return A new initialized container.
      * @throws ContainerConfigurationException If we can't use a bean
      */
-    public static Container outOfContainerInit() throws ContainerConfigurationException
-    {
-        try
-        {
+    public static Container outOfContainerInit() throws ContainerConfigurationException {
+        try {
             ServletConfig servletConfig = new FakeServletConfig("test", FakeServletContextFactory.create());
             logStartup("DWR:OutOfContainer", servletConfig);
             Container container = createAndSetupDefaultContainer(servletConfig);
             configureContainerFully(container, servletConfig);
 
             return container;
-        }
-        catch (ContainerConfigurationException ex)
-        {
+        } catch (ContainerConfigurationException ex) {
             throw ex;
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             throw new ContainerConfigurationException(ex);
         }
     }
@@ -118,11 +111,9 @@ public class StartupUtil
      * called.
      * @param container The container created by {@link #outOfContainerInit()}.
      */
-    public static void outOfContainerDestroy(Container container)
-    {
+    public static void outOfContainerDestroy(Container container) {
         WebContextBuilder webContextBuilder = container.getBean(WebContextBuilder.class);
-        if (webContextBuilder != null)
-        {
+        if (webContextBuilder != null) {
             webContextBuilder.disengageThread();
         }
     }
@@ -132,8 +123,7 @@ public class StartupUtil
      * @param name The servlet name (so we can distinguish implementations)
      * @param config The servlet config
      */
-    public static void logStartup(String name, ServletConfig config)
-    {
+    public static void logStartup(String name, ServletConfig config) {
         ServletContext servletContext = config.getServletContext();
 
         // SERVLET24: Use getContextPath directly in 2.5
@@ -150,32 +140,24 @@ public class StartupUtil
      * @return A setup implementation of DefaultContainer
      * @throws ContainerConfigurationException If the specified class could not be found or instantiated
      */
-    public static Container createAndSetupDefaultContainer(ServletConfig servletConfig) throws ContainerConfigurationException
-    {
+    public static Container createAndSetupDefaultContainer(ServletConfig servletConfig) throws ContainerConfigurationException {
         Container container;
 
-        try
-        {
+        try {
             String typeName = servletConfig.getInitParameter(LocalUtil.originalDwrClassName(Container.class.getName()));
-            if (typeName == null)
-            {
+            if (typeName == null) {
                 container = new DefaultContainer();
-            }
-            else
-            {
+            } else {
                 Loggers.STARTUP.debug("Using alternate Container implementation: " + typeName);
                 Class<?> type = LocalUtil.classForName(typeName);
                 container = (Container) type.getDeclaredConstructor().newInstance();
             }
 
-            if (container instanceof DefaultContainer)
-            {
+            if (container instanceof DefaultContainer) {
                 DefaultContainer defaultContainer = (DefaultContainer) container;
                 setupDefaultContainer(defaultContainer, servletConfig);
             }
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             throw new ContainerConfigurationException(ex);
         }
 
@@ -196,22 +178,17 @@ public class StartupUtil
      * @throws ContainerConfigurationException If the specified class could not be found
      * @see ServletConfig#getInitParameter(String)
      */
-    public static DefaultContainer createDefaultContainer(ServletConfig servletConfig) throws ContainerConfigurationException
-    {
-        try
-        {
+    public static DefaultContainer createDefaultContainer(ServletConfig servletConfig) throws ContainerConfigurationException {
+        try {
             String typeName = servletConfig.getInitParameter(LocalUtil.originalDwrClassName(Container.class.getName()));
-            if (typeName == null)
-            {
+            if (typeName == null) {
                 return new DefaultContainer();
             }
 
             Loggers.STARTUP.debug("Using alternate Container implementation: " + typeName);
             Class<?> type = LocalUtil.classForName(typeName);
             return (DefaultContainer) type.getDeclaredConstructor().newInstance();
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             throw new ContainerConfigurationException(ex);
         }
     }
@@ -225,8 +202,7 @@ public class StartupUtil
      * @param servletConfig The source of init parameters
      * @throws ContainerConfigurationException If we can't use a bean
      */
-    public static void setupDefaultContainer(DefaultContainer container, ServletConfig servletConfig) throws ContainerConfigurationException
-    {
+    public static void setupDefaultContainer(DefaultContainer container, ServletConfig servletConfig) throws ContainerConfigurationException {
         Loggers.STARTUP.debug("Setup: Getting parameters from defaults.properties:");
         setupDefaults(container);
 
@@ -277,41 +253,28 @@ public class StartupUtil
      * For example 'interactivity. This method resolves those shortcuts by
      * adding new values into the container.
      */
-    private static void applyParameterShortcuts(DefaultContainer container)
-    {
+    private static void applyParameterShortcuts(DefaultContainer container) {
         Object bean = container.getBean("interactivity");
-        if (bean != null)
-        {
-            if (bean instanceof String)
-            {
+        if (bean != null) {
+            if (bean instanceof String) {
                 String level = (String) bean;
-                if ("stateless".equals(level))
-                {
+                if ("stateless".equals(level)) {
                     container.addImplementation(ScriptSessionManager.class, TransientScriptSessionManager.class);
-                }
-                else if ("passiveReverseAjax".equals(level))
-                {
+                } else if ("passiveReverseAjax".equals(level)) {
                     // The default - do nothing
-                }
-                else if ("activeReverseAjax".equals(level))
-                {
+                } else if ("activeReverseAjax".equals(level)) {
                     container.addParameter("activeReverseAjaxEnabled", "true");
-                }
-                else
-                {
+                } else {
                     Loggers.STARTUP.error("Illegal value for 'interactivity' parameter of '" + level + "'. Valid values are [stateless|passiveReverseAjax|activeReverseAjax]. Ignoring.");
                 }
-            }
-            else
-            {
+            } else {
                 Loggers.STARTUP.error("Found non-string value for 'interactivity' parameter. Ignoring.");
             }
         }
 
         String allowGetForSafariButMakeForgeryEasier = container.getParameter("allowGetForSafariButMakeForgeryEasier");
         String allowGetButMakeForgeryEasier = container.getParameter("allowGetButMakeForgeryEasier");
-        if (allowGetForSafariButMakeForgeryEasier != null && allowGetButMakeForgeryEasier == null)
-        {
+        if (allowGetForSafariButMakeForgeryEasier != null && allowGetButMakeForgeryEasier == null) {
             container.addParameter("allowGetButMakeForgeryEasier", allowGetForSafariButMakeForgeryEasier);
         }
     }
@@ -325,81 +288,58 @@ public class StartupUtil
      * @throws ContainerConfigurationException If we can't use a bean
      */
     @SuppressWarnings("unchecked")
-    public static void resolveMultipleImplementations(DefaultContainer container, ServletConfig servletConfig) throws ContainerConfigurationException
-    {
-    	try
-    	{
+    public static void resolveMultipleImplementations(DefaultContainer container, ServletConfig servletConfig) throws ContainerConfigurationException {
+    	try {
             resolveMultipleImplementation(container, LocalUtil.originalDwrClassName("org.directwebremoting.dwrp.FileUpload"));
-    	}
-    	catch(Exception fue)
-    	{
+    	} catch(Exception fue) {
     		Loggers.STARTUP.debug("A FileUpload implementation is not available. Details: " + fue, fue);
     	}
-    	try
-    	{
+    	try {
             resolveMultipleImplementation(container, LocalUtil.originalDwrClassName("org.directwebremoting.extend.Compressor"));
-        } catch(Exception ce)
-        {
+        } catch(Exception ce) {
         	Loggers.STARTUP.debug("A Compressor implemenation is not available. Details: " + ce, ce);
         }
 
         Object value = container.getBean(LocalUtil.originalDwrClassName(ContainerAbstraction.class.getName()));
         List<Object> abstractionImpls = new ArrayList<Object>();
-        if (value instanceof String)
-        {
+        if (value instanceof String) {
             Collections.addAll(abstractionImpls, ((String) value).replace(",", " ").split(" "));
-        }
-        else
-        {
+        } else {
             abstractionImpls.add(value);
         }
         Loggers.STARTUP.debug("- Selecting a " + ContainerAbstraction.class.getSimpleName() + " from " + abstractionImpls);
 
-        for (Object abstractionImpl : abstractionImpls)
-        {
-            try
-            {
-                if (abstractionImpl == null)
-                {
+        for (Object abstractionImpl : abstractionImpls) {
+            try {
+                if (abstractionImpl == null) {
                     continue;
                 }
 
                 ContainerAbstraction abstraction;
-                if (abstractionImpl instanceof String)
-                {
+                if (abstractionImpl instanceof String) {
                     String abstractionImplName = (String) abstractionImpl;
-                    if (abstractionImplName.trim().isEmpty())
-                    {
+                    if (abstractionImplName.trim().isEmpty()) {
                         continue;
                     }
                     Class<ContainerAbstraction> abstractionClass = (Class<ContainerAbstraction>) LocalUtil.classForName(abstractionImplName);
                     abstraction = abstractionClass.getDeclaredConstructor().newInstance();                }
-                else
-                {
+                else {
                     abstraction = (ContainerAbstraction) abstractionImpl;
                 }
 
-                if (abstraction.isNativeEnvironment(servletConfig))
-                {
+                if (abstraction.isNativeEnvironment(servletConfig)) {
                     Loggers.STARTUP.info("Starting: Using container abstraction " + abstraction.getClass().getName());
                     container.addImplementation(ContainerAbstraction.class, abstraction.getClass());
 
                     String loadMonitorImplName = container.getParameter(LocalUtil.originalDwrClassName(ServerLoadMonitor.class.getName()));
-                    if (loadMonitorImplName == null)
-                    {
+                    if (loadMonitorImplName == null) {
                         Class<? extends ServerLoadMonitor> loadMonitorImpl = abstraction.getServerLoadMonitorImplementation();
                         container.addImplementation(ServerLoadMonitor.class, loadMonitorImpl);
                     }
 
                     return;
                 }
-            }
-            catch (Exception ex)
-            {
-                Loggers.STARTUP.debug("  - Can't use : " + abstractionImpl + " to implement " + ContainerAbstraction.class.getName() + ". This is probably not an error unless you were expecting to use it. Reason: " + ex);
-            }
-            catch (NoClassDefFoundError ex)
-            {
+            } catch (Exception | NoClassDefFoundError ex) {
                 Loggers.STARTUP.debug("  - Can't use : " + abstractionImpl + " to implement " + ContainerAbstraction.class.getName() + ". This is probably not an error unless you were expecting to use it. Reason: " + ex);
             }
         }
@@ -414,21 +354,16 @@ public class StartupUtil
      * @param container The container which has a multiple implementation
      * @param toResolveString The class name which needs disambiguating
      */
-    protected static void resolveMultipleImplementation(DefaultContainer container, String toResolveString)
-    {
+    protected static void resolveMultipleImplementation(DefaultContainer container, String toResolveString) {
         Class<?> toResolve = null;
-        try
-        {
+        try {
             toResolve = LocalUtil.classForName(toResolveString);
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             Loggers.STARTUP.debug(toResolveString + " is not available. Details: " + ex);
         }
 
         Object implObjs = container.getBean(toResolveString);
-        if (implObjs == null || ! (implObjs instanceof String))
-        {
+        if (implObjs == null || ! (implObjs instanceof String)) {
             // Found no value or instance that was already instantiated, do nothing
             return;
         }
@@ -437,18 +372,14 @@ public class StartupUtil
         Loggers.STARTUP.debug("- Selecting a " + toResolveString + " from " + implNames);
 
         implNames = implNames.replace(',', ' ');
-        for (String implName : implNames.split(" "))
-        {
-            if (implName.equals(""))
-            {
+        for (String implName : implNames.split(" ")) {
+            if (implName.equals("")) {
                 continue;
             }
 
-            try
-            {
+            try {
                 Class<?> impl = LocalUtil.classForName(implName);
-                if (!toResolve.isAssignableFrom(impl))
-                {
+                if (!toResolve.isAssignableFrom(impl)) {
                     Loggers.STARTUP.error("  - Can't cast: " + impl.getName() + " to " + toResolve.getName());
                 }
 
@@ -456,9 +387,7 @@ public class StartupUtil
                 container.addParameter(LocalUtil.originalDwrClassName(toResolve.getName()), impl.getName());
 
                 return;
-            }
-            catch (Throwable t)
-            {
+            } catch (Throwable t) {
                 Loggers.STARTUP.debug("  - Can't use : " + implName + " to implement " + toResolve.getName() + ". This is probably not an error unless you were expecting to use it. Reason: " + t);
             }
         }
@@ -471,19 +400,16 @@ public class StartupUtil
      * @param servletConfig Information about the environment
      * @throws ContainerConfigurationException If we can't use a bean
      */
-    public static void resolveListenerImplementations(DefaultContainer container, ServletConfig servletConfig) throws ContainerConfigurationException
-    {
+    public static void resolveListenerImplementations(DefaultContainer container, ServletConfig servletConfig) throws ContainerConfigurationException {
         ScriptSessionManager manager = container.getBean(ScriptSessionManager.class);
 
         Object scriptSessionListenerClasses = container.getBean(LocalUtil.originalDwrClassName(ScriptSessionListener.class.getName()));
-        if (scriptSessionListenerClasses == null)
-        {
+        if (scriptSessionListenerClasses == null) {
             Loggers.STARTUP.debug("- No implementations of " + ScriptSessionListener.class.getSimpleName() + " to register");
             return;
         }
 
-        if (! (scriptSessionListenerClasses instanceof String))
-        {
+        if (! (scriptSessionListenerClasses instanceof String)) {
             // Found instance that was already instantiated, do nothing
             return;
         }
@@ -492,31 +418,23 @@ public class StartupUtil
         Loggers.STARTUP.debug("- Creating list of " + ScriptSessionListener.class.getSimpleName() + " from " + implNames);
 
         implNames = implNames.replace(',', ' ');
-        for (String implName : implNames.split(" "))
-        {
-            if (implName.equals(""))
-            {
+        for (String implName : implNames.split(" ")) {
+            if (implName.equals("")) {
                 continue;
             }
 
-            try
-            {
+            try {
                 Class<?> impl = LocalUtil.classForName(implName);
-                if (!ScriptSessionListener.class.isAssignableFrom(impl))
-                {
+                if (!ScriptSessionListener.class.isAssignableFrom(impl)) {
                     Loggers.STARTUP.error("  - Can't cast: " + impl.getName() + " to " + ScriptSessionListener.class.getName());
-                }
-                else
-                {
+                } else {
                     @SuppressWarnings("unchecked")
                     Class<? extends ScriptSessionListener> i = (Class<? extends ScriptSessionListener>) impl;
                     ScriptSessionListener instance = i.getDeclaredConstructor().newInstance();
 
                     manager.addScriptSessionListener(instance);
                 }
-            }
-            catch (Exception | NoClassDefFoundError ex)
-            {
+            } catch (Exception | NoClassDefFoundError ex) {
                 Loggers.STARTUP.error("  - Can't use : " + implName + " to implement " + ScriptSessionListener.class.getName() + ". Reason: " + ex);
             }
         }
@@ -527,23 +445,18 @@ public class StartupUtil
      * @param container The container to configure
      * @throws ContainerConfigurationException If we can't use a bean
      */
-    public static void setupDefaults(DefaultContainer container) throws ContainerConfigurationException
-    {
-        try
-        {
+    public static void setupDefaults(DefaultContainer container) throws ContainerConfigurationException {
+        try {
             InputStream in = LocalUtil.getInternalResourceAsStream(DwrConstants.SYSTEM_DEFAULT_PROPERTIES_PATH);
             Properties defaults = new Properties();
             defaults.load(in);
 
-            for (Map.Entry<?, ?> entry : defaults.entrySet())
-            {
+            for (Map.Entry<?, ?> entry : defaults.entrySet()) {
                 String key = (String) entry.getKey();
                 String value = (String) entry.getValue();
                 container.addParameter(key, value);
             }
-        }
-        catch (IOException ex)
-        {
+        } catch (IOException ex) {
             throw new ContainerConfigurationException("Failed to load system defaults", ex);
         }
     }
@@ -560,11 +473,9 @@ public class StartupUtil
      * @param propertyName The property name (for injection and lookup)
      * @throws ContainerConfigurationException From {@link DefaultContainer#addParameter(String, Object)}
      */
-    public static void createPathMapping(DefaultContainer container, String url, Class<? extends Handler> handler, String propertyName) throws ContainerConfigurationException
-    {
+    public static void createPathMapping(DefaultContainer container, String url, Class<? extends Handler> handler, String propertyName) throws ContainerConfigurationException {
         container.addParameter(PathConstants.PATH_PREFIX + url, handler.getName());
-        if (propertyName != null)
-        {
+        if (propertyName != null) {
             container.addParameter(propertyName, url);
         }
     }
@@ -579,8 +490,7 @@ public class StartupUtil
      * @param handler The class of Handler
      * @throws ContainerConfigurationException From {@link DefaultContainer#addParameter(String, Object)}
      */
-    public static void createPathMapping(DefaultContainer container, String url, Class<? extends Handler> handler) throws ContainerConfigurationException
-    {
+    public static void createPathMapping(DefaultContainer container, String url, Class<? extends Handler> handler) throws ContainerConfigurationException {
         createPathMapping(container, url, handler, null);
     }
 
@@ -590,11 +500,9 @@ public class StartupUtil
      * @param servletConfig The servlet configuration (null to ignore)
      * @throws ContainerConfigurationException If we can't use a bean
      */
-    public static void setupFromServletConfig(DefaultContainer container, ServletConfig servletConfig) throws ContainerConfigurationException
-    {
+    public static void setupFromServletConfig(DefaultContainer container, ServletConfig servletConfig) throws ContainerConfigurationException {
         Enumeration<String> en = servletConfig.getInitParameterNames();
-        while (en.hasMoreElements())
-        {
+        while (en.hasMoreElements()) {
             String name = en.nextElement();
             String value = servletConfig.getInitParameter(name);
             container.addParameter(name, value);
@@ -608,8 +516,7 @@ public class StartupUtil
      * @throws IOException If the config file read fails
      * @throws SAXException If the config file parse fails
      */
-    public static void configureFromSystemDwrXml(Container container) throws IOException, ParserConfigurationException, SAXException
-    {
+    public static void configureFromSystemDwrXml(Container container) throws IOException, ParserConfigurationException, SAXException {
         DwrXmlConfigurator system = new DwrXmlConfigurator();
         system.setClassResourceName(DwrConstants.SYSTEM_DWR_XML_PATH);
         system.configure(container);
@@ -623,8 +530,7 @@ public class StartupUtil
      * @throws IOException If the config file read fails
      * @throws SAXException If the config file parse fails
      */
-    public static void configureFromDefaultDwrXml(Container container, ServletConfig servletConfig) throws IOException, ParserConfigurationException, SAXException
-    {
+    public static void configureFromDefaultDwrXml(Container container, ServletConfig servletConfig) throws IOException, ParserConfigurationException, SAXException {
         DwrXmlConfigurator local = new DwrXmlConfigurator();
         local.setServletResourceName(servletConfig.getServletContext(), DwrConstants.USER_DWR_XML_PATH);
         local.configure(container);
@@ -640,41 +546,32 @@ public class StartupUtil
      * @throws ParserConfigurationException If the config file parse fails
      * @throws IOException If the config file read fails
      */
-    public static boolean configureFromInitParams(Container container, ServletConfig servletConfig) throws IOException, ParserConfigurationException, SAXException
-    {
+    public static boolean configureFromInitParams(Container container, ServletConfig servletConfig) throws IOException, ParserConfigurationException, SAXException {
         Enumeration<String> en = servletConfig.getInitParameterNames();
         boolean foundConfig = false;
-        while (en.hasMoreElements())
-        {
+        while (en.hasMoreElements()) {
             String name = en.nextElement();
             String value = servletConfig.getInitParameter(name);
 
             // if the init param starts with "config" then try to load it
-            if (name.startsWith(INIT_CONFIG))
-            {
+            if (name.startsWith(INIT_CONFIG)) {
                 foundConfig = true;
 
                 StringTokenizer st = new StringTokenizer(value, "\n,");
-                while (st.hasMoreTokens())
-                {
+                while (st.hasMoreTokens()) {
                     String fileName = st.nextToken().trim();
                     DwrXmlConfigurator local = new DwrXmlConfigurator();
                     local.setServletResourceName(servletConfig.getServletContext(), fileName);
                     local.configure(container);
                 }
-            }
-            else if (name.equals(INIT_CUSTOM_CONFIGURATOR))
-            {
+            } else if (name.equals(INIT_CUSTOM_CONFIGURATOR)) {
                 foundConfig = true;
 
-                try
-                {
+                try {
                     Configurator configurator = LocalUtil.classNewInstance(INIT_CUSTOM_CONFIGURATOR, value, Configurator.class);
                     configurator.configure(container);
                     Loggers.STARTUP.debug("Loaded config from: " + value);
-                }
-                catch (Exception ex)
-                {
+                } catch (Exception ex) {
                     Loggers.STARTUP.error("Failed to start custom configurator", ex);
                 }
             }
@@ -691,11 +588,9 @@ public class StartupUtil
      * @param container The container to configure
      * @return true if the configuration worked.
      */
-    public static boolean configureFromAnnotations(Container container)
-    {
+    public static boolean configureFromAnnotations(Container container) {
         Object data = container.getBean("classes");
-        if (null != data)
-        {
+        if (null != data) {
             Configurator configurator = new AnnotationsConfigurator();
             configurator.configure(container);
 
@@ -710,11 +605,9 @@ public class StartupUtil
      * @param container The container to configure
      * @param configurators A list of configurators to run against the container
      */
-    public static void configure(Container container, List<Configurator> configurators)
-    {
+    public static void configure(Container container, List<Configurator> configurators) {
         // Allow all the configurators to have a go
-        for (Configurator configurator : configurators)
-        {
+        for (Configurator configurator : configurators) {
             Loggers.STARTUP.debug("Adding config from " + configurator);
             configurator.configure(container);
         }
@@ -728,33 +621,26 @@ public class StartupUtil
      * @throws ParserConfigurationException If the config file parse fails
      * @throws IOException If the config file read fails
      */
-    public static void configureContainerFully(Container container, ServletConfig servletConfig) throws IOException, ParserConfigurationException, SAXException
-    {
+    public static void configureContainerFully(Container container, ServletConfig servletConfig) throws IOException, ParserConfigurationException, SAXException {
         configureFromSystemDwrXml(container);
         boolean foundConfig = configureFromInitParams(container, servletConfig);
 
         // The default dwr.xml file that sits by web.xml
-        boolean skip = Boolean.valueOf(servletConfig.getInitParameter(INIT_SKIP_DEFAULT));
+        boolean skip = Boolean.parseBoolean(servletConfig.getInitParameter(INIT_SKIP_DEFAULT));
         IOException delayedIOException = null;
-        if (!foundConfig && !skip)
-        {
-            try
-            {
+        if (!foundConfig && !skip) {
+            try {
                 configureFromDefaultDwrXml(container, servletConfig);
-            }
-            catch (IOException ex)
-            {
+            } catch (IOException ex) {
                 // This is fatal unless we are on JDK5+ AND using annotations
                 delayedIOException = ex;
             }
         }
 
-        if (!configureFromAnnotations(container))
-        {
+        if (!configureFromAnnotations(container)) {
             Loggers.STARTUP.debug("Java5 AnnotationsConfigurator disabled");
 
-            if (delayedIOException != null)
-            {
+            if (delayedIOException != null) {
                 throw delayedIOException;
             }
         }
@@ -767,14 +653,12 @@ public class StartupUtil
      * @param container The container to publish
      * @param servletConfig Source of initParams to dictate publishing and contexts to publish to
      */
-    private static void publishContainer(Container container, ServerContext serverContext, ServletConfig servletConfig)
-    {
+    private static void publishContainer(Container container, ServerContext serverContext, ServletConfig servletConfig) {
         ServletContext servletContext = servletConfig.getServletContext();
 
         // Push the container into a list that holds all the known containers
         SerializableContainerListWrapper containers = (SerializableContainerListWrapper) servletContext.getAttribute(ATTRIBUTE_CONTAINER_LIST);
-        if (containers == null)
-        {
+        if (containers == null) {
             containers = new SerializableContainerListWrapper();
         }
         containers.add(container);
@@ -782,10 +666,8 @@ public class StartupUtil
 
         // Attempt to set the singleton ServerContext, unsetting for all if
         // there is already one
-        synchronized (contextMap)
-        {
-            switch (foundContexts)
-            {
+        synchronized (contextMap) {
+            switch (foundContexts) {
             case 0:
                 // No-one has been here before - set us as the default
                 singletonServerContext = serverContext;
@@ -814,10 +696,8 @@ public class StartupUtil
      * we can get at it using this method.
      * @return The one-and-only ServerContext or null if there are more than 1.
      */
-    public static ServerContext getSingletonServerContext()
-    {
-        synchronized (contextMap)
-        {
+    public static ServerContext getSingletonServerContext() {
+        synchronized (contextMap) {
             return singletonServerContext;
         }
     }
@@ -826,8 +706,7 @@ public class StartupUtil
      * Returns a Collection of all ServerContexts in which DWR has been defined.
      * @return Collection of ServerContexts.
      */
-    public static Collection<ServerContext> getAllServerContexts()
-    {
+    public static Collection<ServerContext> getAllServerContexts() {
         Collection<ServerContext> reply = new ArrayList<ServerContext>();
         reply.addAll(contextMap.values());
         return Collections.unmodifiableCollection(reply);
@@ -838,13 +717,11 @@ public class StartupUtil
      * @param servletContext The context in which {@link Container}s are stored.
      * @return a list of published {@link Container}s.
      */
-    public static List<Container> getAllPublishedContainers(ServletContext servletContext)
-    {
+    public static List<Container> getAllPublishedContainers(ServletContext servletContext) {
         List<Container> reply = new ArrayList<Container>();
 
         SerializableContainerListWrapper containers = (SerializableContainerListWrapper) servletContext.getAttribute(ATTRIBUTE_CONTAINER_LIST);
-        if (containers != null)
-        {
+        if (containers != null) {
             reply.addAll(containers.getAll());
         }
 
@@ -855,23 +732,17 @@ public class StartupUtil
      * Create a bunch of debug information about a container
      * @param container The container to print debug information about
      */
-    public static void debugConfig(Container container)
-    {
-        if (Loggers.STARTUP.isDebugEnabled())
-        {
+    public static void debugConfig(Container container) {
+        if (Loggers.STARTUP.isDebugEnabled()) {
             // Container level debug
             Loggers.STARTUP.debug("Container");
             Loggers.STARTUP.debug("  Type: " + container.getClass().getName());
-            for (String name : container.getBeanNames())
-            {
+            for (String name : container.getBeanNames()) {
                 Object object = container.getBean(name);
 
-                if (object instanceof String)
-                {
+                if (object instanceof String) {
                     Loggers.STARTUP.debug("  Param: " + name + " = " + object + " (" + object.getClass().getName() + ")");
-                }
-                else
-                {
+                } else {
                     Loggers.STARTUP.debug("  Bean: " + name + " = " + object + " (" + object.getClass().getName() + ")");
                 }
             }
@@ -895,8 +766,7 @@ public class StartupUtil
             CreatorManager creatorManager = container.getBean(CreatorManager.class);
             Loggers.STARTUP.debug("CreatorManager");
             Loggers.STARTUP.debug("  Type: " + creatorManager.getClass().getName());
-            for (String creatorName : creatorManager.getCreatorNames(false))
-            {
+            for (String creatorName : creatorManager.getCreatorNames(false)) {
                 Creator creator = creatorManager.getCreator(creatorName, false);
                 Loggers.STARTUP.debug("  Creator: " + creatorName + " = " + creator + " (" + creator.getClass().getName() + ")");
             }
@@ -930,26 +800,21 @@ public class StartupUtil
      * warnings if things are not serializable even though this is not required.
      * @author Mike Wilson
      */
-    public static class SerializableContainerListWrapper implements Serializable
-    {
+    public static class SerializableContainerListWrapper implements Serializable {
         transient List<Container> list = null;
 
-        public void add(Container container)
-        {
+        public void add(Container container) {
             ensureCreated();
             list.add(container);
         }
 
-        public Collection<Container> getAll()
-        {
+        public Collection<Container> getAll() {
             ensureCreated();
             return list;
         }
 
-        private void ensureCreated()
-        {
-            if (list == null)
-            {
+        private void ensureCreated() {
+            if (list == null) {
                 list = new ArrayList<Container>();
             }
         }

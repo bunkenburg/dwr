@@ -42,8 +42,7 @@ public class JsonRpcCallHandlerTest
         creatorManager.addCreator(creator);
 
         List<String> validTests = TestUtil.parseTestInput(getClass(), "validJsonRpc.txt");
-        for (String test : validTests)
-        {
+        for (String test : validTests) {
             FakeHttpServletRequest request = FakeHttpServletRequestFactory.create();
             request.setContent(test);
             FakeHttpServletResponse response = new FakeHttpServletResponse();

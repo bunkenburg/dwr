@@ -37,12 +37,14 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * Backing class for Servlet 2.4 fake ServletContext.
+ * <p>
+ * Note: does not implement interface as we are mapping versions in runtime
+ *
  * @author Rod Johnson
  * @author Juergen Hoeller
  * @author Joe Walker [joe at getahead dot ltd dot uk]
  */
-class FakeServletContextObject24 // Note: does not implement interface as we are mapping versions in runtime
-{
+class FakeServletContextObject24 {
     /**
      * Create a new FakeServletContext, using no base path and a
      * DefaultResourceLoader (i.e. the classpath root as WAR root).
@@ -56,14 +58,12 @@ class FakeServletContextObject24 // Note: does not implement interface as we are
      * Create a new FakeServletContext, using a DefaultResourceLoader.
      * @param resourceBasePath the WAR root directory (should not end with a slash)
      */
-    public FakeServletContextObject24(String resourceBasePath)
-    {
+    public FakeServletContextObject24(String resourceBasePath) {
         this.resourceBasePath = (resourceBasePath != null ? resourceBasePath : "");
 
         // Use JVM temp dir as ServletContext temp dir.
         String tempDir = System.getProperty("java.io.tmpdir");
-        if (tempDir != null)
-        {
+        if (tempDir != null) {
             attributes.put("javax.servlet.context.tempdir", new File(tempDir));
         }
     }
@@ -74,11 +74,9 @@ class FakeServletContextObject24 // Note: does not implement interface as we are
      * @param path the path as specified
      * @return the full resource path
      */
-    protected String getResourceLocation(String path)
-    {
+    protected String getResourceLocation(String path) {
         String output = path;
-        if (!output.startsWith("/"))
-        {
+        if (!output.startsWith("/")) {
             output = "/" + output;
         }
         output = resourceBasePath + output;
@@ -91,152 +89,87 @@ class FakeServletContextObject24 // Note: does not implement interface as we are
         throw new UnsupportedOperationException("getContext");
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletContext#getMajorVersion()
-     */
     public int getMajorVersion()
     {
         return 2;
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletContext#getMinorVersion()
-     */
     public int getMinorVersion()
     {
         return 4;
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletContext#getMimeType(java.lang.String)
-     */
     public String getMimeType(String filePath)
     {
         throw new UnsupportedOperationException("getMimeType");
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletContext#getResourcePaths(java.lang.String)
-     */
     public Set<String> getResourcePaths(String path)
     {
         throw new UnsupportedOperationException();
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletContext#getResource(java.lang.String)
-     */
-    public URL getResource(String path) throws MalformedURLException
-    {
-        throw new UnsupportedOperationException();
-    }
+    public URL getResource(String path) throws MalformedURLException {throw new UnsupportedOperationException();}
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletContext#getResourceAsStream(java.lang.String)
-     */
-    public InputStream getResourceAsStream(String path)
-    {
-        try
-        {
+    public InputStream getResourceAsStream(String path) {
+        try {
             return new FileInputStream(resourceBasePath + path);
         }
-        catch (FileNotFoundException ex)
-        {
+        catch (FileNotFoundException ex) {
             return null;
         }
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletContext#getRequestDispatcher(java.lang.String)
-     */
-    public RequestDispatcher getRequestDispatcher(String path)
-    {
-        if (!path.startsWith("/"))
-        {
+    public RequestDispatcher getRequestDispatcher(String path) {
+        if (!path.startsWith("/")) {
             throw new IllegalArgumentException("RequestDispatcher path at ServletContext level must start with '/'");
         }
         return new FakeRequestDispatcher(path);
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletContext#getNamedDispatcher(java.lang.String)
-     */
-    public RequestDispatcher getNamedDispatcher(String path)
-    {
+    public RequestDispatcher getNamedDispatcher(String path) {
         throw new UnsupportedOperationException("getNamedDispatcher");
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletContext#getServlet(java.lang.String)
-     */
-    @Deprecated
-    public Servlet getServlet(String name)
+    @Deprecated public Servlet getServlet(String name)
     {
         throw new UnsupportedOperationException("getServlet");
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletContext#getServlets()
-     */
-    @Deprecated
-    public Enumeration<Servlet> getServlets()
+    @Deprecated public Enumeration<Servlet> getServlets()
     {
         throw new UnsupportedOperationException("getServlets");
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletContext#getServletNames()
-     */
-    @Deprecated
-    public Enumeration<String> getServletNames()
-    {
+    @Deprecated public Enumeration<String> getServletNames() {
         throw new UnsupportedOperationException("getServletNames");
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletContext#log(java.lang.String)
-     */
     public void log(String message)
     {
         log.info(message);
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletContext#log(java.lang.Exception, java.lang.String)
-     */
-    @Deprecated
-    public void log(Exception ex, String message)
+    @Deprecated public void log(Exception ex, String message)
     {
         log.warn(message, ex);
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletContext#log(java.lang.String, java.lang.Throwable)
-     */
     public void log(String message, Throwable ex)
     {
         log.warn(message, ex);
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletContext#getRealPath(java.lang.String)
-     */
     public String getRealPath(String path)
     {
         throw new UnsupportedOperationException();
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletContext#getServerInfo()
-     */
     public String getServerInfo()
     {
         return "FakeServletContext";
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletContext#getInitParameter(java.lang.String)
-     */
     public String getInitParameter(String name)
     {
         return initParameters.get(name);
@@ -252,48 +185,29 @@ class FakeServletContextObject24 // Note: does not implement interface as we are
         initParameters.put(name, value);
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletContext#getInitParameterNames()
-     */
     public Enumeration<String> getInitParameterNames()
     {
         return Collections.enumeration(initParameters.keySet());
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletContext#getAttribute(java.lang.String)
-     */
     public Object getAttribute(String name)
     {
         return attributes.get(name);
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletContext#getAttributeNames()
-     */
     public Enumeration<String> getAttributeNames()
     {
         return Collections.enumeration(attributes.keySet());
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletContext#setAttribute(java.lang.String, java.lang.Object)
-     */
-    public void setAttribute(String name, Object value)
-    {
-        if (value != null)
-        {
+    public void setAttribute(String name, Object value) {
+        if (value != null) {
             attributes.put(name, value);
-        }
-        else
-        {
+        } else {
             attributes.remove(name);
         }
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletContext#removeAttribute(java.lang.String)
-     */
     public void removeAttribute(String name)
     {
         attributes.remove(name);
@@ -309,9 +223,6 @@ class FakeServletContextObject24 // Note: does not implement interface as we are
         this.servletContextName = servletContextName;
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletContext#getServletContextName()
-     */
     public String getServletContextName()
     {
         return servletContextName;

@@ -3,10 +3,8 @@ package org.directwebremoting.util;
 /**
  * @author Mike Wilson
  */
-public class FakeHttpServletRequestFactory
-{
-    public static FakeHttpServletRequest create()
-    {
+public class FakeHttpServletRequestFactory {
+    public static FakeHttpServletRequest create() {
         return MethodMatchingProxyFactory.createProxy(FakeHttpServletRequest.class, fakeHttpServletRequestClass);
     }
 

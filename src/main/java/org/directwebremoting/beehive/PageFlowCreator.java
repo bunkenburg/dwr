@@ -72,9 +72,6 @@ public class PageFlowCreator extends AbstractCreator implements Creator
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.Creator#getInstance()
-     */
     public Object getInstance() throws InstantiationException
     {
         if (getter == null)

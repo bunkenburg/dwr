@@ -16,82 +16,43 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * Used by ExecutionContext to forward results back via javascript.
- * <p>We could like to implement {@link HttpServletResponse}, but there is a bug
- * in WebLogic where it casts to a {@link HttpServletResponseWrapper} so we
- * need to extend that.
  * @author Joe Walker [joe at getahead dot ltd dot uk]
  */
-public final class SwallowingHttpServletResponse implements HttpServletResponse
-{
+public final class SwallowingHttpServletResponse implements HttpServletResponse {
+
     /**
      * Create a new HttpServletResponse that allows you to catch the body
      * @param response The original HttpServletResponse
      * @param sout The place we copy responses to
      * @param characterEncoding The output encoding
      */
-    public SwallowingHttpServletResponse(HttpServletResponse response, Writer sout, String characterEncoding)
-    {
+    public SwallowingHttpServletResponse(HttpServletResponse response, Writer sout, String characterEncoding) {
         pout = new PrintWriter(sout);
         outputStream = new WriterOutputStream(sout, characterEncoding);
 
         this.characterEncoding = characterEncoding;
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.http.HttpServletResponseWrapper#addCookie(javax.servlet.http.Cookie)
-     */
-    public void addCookie(Cookie cookie)
-    {
-    }
+    public void addCookie(Cookie cookie) {}
 
-    /* (non-Javadoc)
-     * @see javax.servlet.http.HttpServletResponseWrapper#addDateHeader(java.lang.String, long)
-     */
-    public void addDateHeader(String name, long value)
-    {
-    }
+    public void addDateHeader(String name, long value) {}
 
-    /* (non-Javadoc)
-     * @see javax.servlet.http.HttpServletResponseWrapper#addHeader(java.lang.String, java.lang.String)
-     */
-    public void addHeader(String name, String value)
-    {
-    }
+    public void addHeader(String name, String value) {}
 
-    /* (non-Javadoc)
-     * @see javax.servlet.http.HttpServletResponseWrapper#addIntHeader(java.lang.String, int)
-     */
-    public void addIntHeader(String name, int value)
-    {
-    }
+    public void addIntHeader(String name, int value) {}
 
-    /* (non-Javadoc)
-     * @see javax.servlet.http.HttpServletResponseWrapper#containsHeader(java.lang.String)
-     */
     public boolean containsHeader(String name)
     {
         return false;
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletResponseWrapper#flushBuffer()
-     */
-    public void flushBuffer() throws IOException
-    {
-        pout.flush();
-    }
+    public void flushBuffer() throws IOException {pout.flush();}
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletResponseWrapper#getBufferSize()
-     */
     public int getBufferSize()
     {
         return bufferSize;
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletResponseWrapper#getCharacterEncoding()
-     */
     public String getCharacterEncoding()
     {
         return characterEncoding;
@@ -116,17 +77,11 @@ public final class SwallowingHttpServletResponse implements HttpServletResponse
         return errorMessage;
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletResponseWrapper#getLocale()
-     */
     public Locale getLocale()
     {
         return locale;
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletResponseWrapper#getOutputStream()
-     */
     public ServletOutputStream getOutputStream()
     {
         return outputStream;
@@ -150,43 +105,22 @@ public final class SwallowingHttpServletResponse implements HttpServletResponse
         return status;
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletResponseWrapper#getWriter()
-     */
     public PrintWriter getWriter()
     {
         return pout;
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletResponseWrapper#isCommitted()
-     */
     public boolean isCommitted()
     {
         return false;
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletResponseWrapper#reset()
-     */
-    public void reset()
-    {
-    }
+    public void reset() {}
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletResponseWrapper#resetBuffer()
-     */
-    public void resetBuffer()
-    {
-    }
+    public void resetBuffer() {}
 
-    /* (non-Javadoc)
-     * @see javax.servlet.http.HttpServletResponseWrapper#sendError(int)
-     */
-    public void sendError(int newStatus)
-    {
-        if (committed)
-        {
+    public void sendError(int newStatus) {
+        if (committed) {
             throw new IllegalStateException("Cannot set error status - response is already committed");
         }
 
@@ -196,13 +130,8 @@ public final class SwallowingHttpServletResponse implements HttpServletResponse
         committed = true;
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.http.HttpServletResponseWrapper#sendError(int, java.lang.String)
-     */
-    public void sendError(int newStatus, String newErrorMessage)
-    {
-        if (committed)
-        {
+    public void sendError(int newStatus, String newErrorMessage) {
+        if (committed) {
             throw new IllegalStateException("Cannot set error status - response is already committed");
         }
 
@@ -213,13 +142,8 @@ public final class SwallowingHttpServletResponse implements HttpServletResponse
         committed = true;
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.http.HttpServletResponseWrapper#sendRedirect(java.lang.String)
-     */
-    public void sendRedirect(String location)
-    {
-        if (committed)
-        {
+    public void sendRedirect(String location) {
+        if (committed) {
             throw new IllegalStateException("Cannot send redirect - response is already committed");
         }
 
@@ -229,9 +153,6 @@ public final class SwallowingHttpServletResponse implements HttpServletResponse
         committed = true;
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletResponseWrapper#setBufferSize(int)
-     */
     public void setBufferSize(int bufferSize)
     {
         this.bufferSize = bufferSize;
@@ -246,57 +167,35 @@ public final class SwallowingHttpServletResponse implements HttpServletResponse
         this.characterEncoding = characterEncoding;
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletResponseWrapper#setContentLength(int)
-     */
-    public void setContentLength(int i)
-    {
-        // The content length of the original document is not likely to be the
-        // same as the content length of the new document.
-    }
+    /** Does nothing.
+     * The content length of the original document is not likely to be the
+     * same as the content length of the new document.
+     * */
+    public void setContentLength(int i) {}
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletResponseWrapper#setContentType(java.lang.String)
-     */
+    /** Does nothing.
+     * The content length of the original document is not likely to be the
+     * same as the content length of the new document.
+     * */
+    @Override public void setContentLengthLong(long l) {}
+
     public void setContentType(String contentType)
     {
         this.contentType = contentType;
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.http.HttpServletResponseWrapper#setDateHeader(java.lang.String, long)
-     */
-    public void setDateHeader(String name, long value)
-    {
-    }
+    public void setDateHeader(String name, long value) {}
 
-    /* (non-Javadoc)
-     * @see javax.servlet.http.HttpServletResponseWrapper#setHeader(java.lang.String, java.lang.String)
-     */
-    public void setHeader(String name, String value)
-    {
-    }
+    public void setHeader(String name, String value) {}
 
-    /* (non-Javadoc)
-     * @see javax.servlet.http.HttpServletResponseWrapper#setIntHeader(java.lang.String, int)
-     */
-    public void setIntHeader(String name, int value)
-    {
-    }
+    public void setIntHeader(String name, int value) {}
 
-    /* (non-Javadoc)
-     * @see javax.servlet.ServletResponseWrapper#setLocale(java.util.Locale)
-     */
     public void setLocale(Locale locale)
     {
         this.locale = locale;
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.http.HttpServletResponseWrapper#setStatus(int)
-     */
-    public void setStatus(int status)
-    {
+    public void setStatus(int status) {
         this.status = status;
         log.warn("Ignoring call to setStatus(" + status + ')');
     }
@@ -305,25 +204,17 @@ public final class SwallowingHttpServletResponse implements HttpServletResponse
      * @see javax.servlet.http.HttpServletResponse#setStatus(int, java.lang.String)
      * @deprecated
      */
-    @Deprecated
-    public void setStatus(int newStatus, String newErrorMessage)
-    {
+    @Deprecated public void setStatus(int newStatus, String newErrorMessage) {
         status = newStatus;
         errorMessage = newErrorMessage;
         log.warn("Ignoring call to setStatus(" + newStatus + ", " + newErrorMessage + ')');
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.http.HttpServletResponse#encodeURL(java.lang.String)
-     */
     public String encodeURL(String paramString)
     {
         return null;
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.http.HttpServletResponse#encodeRedirectURL(java.lang.String)
-     */
     public String encodeRedirectURL(String paramString)
     {
         return null;
@@ -336,25 +227,16 @@ public final class SwallowingHttpServletResponse implements HttpServletResponse
         return null;
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.http.HttpServletResponse#getHeader(java.lang.String)
-     */
     public String getHeader(String paramString)
     {
         return null;
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.http.HttpServletResponse#getHeaders(java.lang.String)
-     */
     public Collection<String> getHeaders(String paramString)
     {
         return null;
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.http.HttpServletResponse#getHeaderNames()
-     */
     public Collection<String> getHeaderNames()
     {
         return null;

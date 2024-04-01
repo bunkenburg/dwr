@@ -25,17 +25,11 @@ import org.directwebremoting.extend.ProtocolConstants;
  */
 public class ArrayConverter implements Converter
 {
-    /* (non-Javadoc)
-     * @see org.directwebremoting.convert.BaseV20Converter#setConverterManager(org.directwebremoting.ConverterManager)
-     */
     public void setConverterManager(ConverterManager converterManager)
     {
         this.converterManager = converterManager;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.Converter#convertInbound(java.lang.Class, org.directwebremoting.InboundVariable, org.directwebremoting.InboundContext)
-     */
     public Object convertInbound(Class<?> paramType, InboundVariable data) throws ConversionException
     {
         if (data.isNull())
@@ -116,9 +110,6 @@ public class ArrayConverter implements Converter
         return array;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.Converter#convertOutbound(java.lang.Object, org.directwebremoting.OutboundContext)
-     */
     public OutboundVariable convertOutbound(Object data, OutboundContext outctx) throws ConversionException
     {
         if (!data.getClass().isArray())
