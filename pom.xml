@@ -5,7 +5,7 @@
     <groupId>cat.inspiracio</groupId>
     <artifactId>dwr</artifactId>
     <packaging>jar</packaging>
-    <version>3.1.0</version>
+    <version>4.0.0</version>
     <name>Direct Web Remoting</name>
     <url>http://directwebremoting.org/dwr/index.html</url>
 
@@ -13,7 +13,7 @@
         DWR is easy Ajax for Java. It makes it simple to call Java code directly from Javascript.
         It gets rid of almost all the boilerplate code between the web browser and your Java code.
 
-        This version 3.1.0 works with Servlet 3.1.0.
+        This version 4.0.0 works with Servlet 4.0.0.
     </description>
 
     <developers>
@@ -76,7 +76,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>3.3.2</version>
             </plugin>
 
             <!-- phase validate ================================================================ -->
@@ -84,7 +84,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
-                <version>2.14.2</version>
+                <version>2.16.2</version>
                 <executions>
                     <execution>
                         <phase>validate</phase>
@@ -100,7 +100,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.4.1</version>
                 <executions>
 
                     <execution>
@@ -109,7 +109,7 @@
                         <goals><goal>enforce</goal></goals>
                         <configuration>
                             <rules>
-                                <requireMavenVersion><version>3.5.4</version></requireMavenVersion>
+                                <requireMavenVersion><version>3.6.3</version></requireMavenVersion>
                                 <requireJavaVersion><version>1.11</version></requireJavaVersion>
                             </rules>
                         </configuration>
@@ -122,7 +122,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
+                <version>3.13.0</version>
                 <configuration>
                     <debug>true</debug>
                     <debuglevel>lines,vars,source</debuglevel>
@@ -147,7 +147,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>3.3.1</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -173,7 +173,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>3.3.1</version>
             </plugin>
 
             <!-- jar -->
@@ -187,7 +187,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>3.2.1</version>
+                <version>3.2.2</version>
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
@@ -201,28 +201,28 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-install-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.1.1</version>
             </plugin>
 
             <!-- deploy -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.1.1</version>
             </plugin>
 
             <!-- site -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>4.0.0-M4</version>
+                <version>4.0.0-M13</version>
             </plugin>
 
             <!-- surefire -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M8</version>
+                <version>3.2.5</version>
             </plugin>
 
         </plugins>
@@ -263,7 +263,7 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
+            <version>4.0.0</version>
             <scope>provided</scope>
         </dependency>
 
