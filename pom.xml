@@ -5,7 +5,7 @@
     <groupId>cat.inspiracio</groupId>
     <artifactId>dwr</artifactId>
     <packaging>jar</packaging>
-    <version>4.0.1</version>
+    <version>4.0.2</version>
     <name>Direct Web Remoting</name>
     <url>http://directwebremoting.org/dwr/index.html</url>
 
@@ -13,7 +13,7 @@
         DWR is easy Ajax for Java. It makes it simple to call Java code directly from Javascript.
         It gets rid of almost all the boilerplate code between the web browser and your Java code.
 
-        This version 4.0.1 works with Servlet 4.0.1.
+        This version 4.0.2 works with Jakarta Servlet 4.0.2.
     </description>
 
     <developers>
@@ -259,22 +259,21 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+        <!-- https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api -->
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>4.0.2</version>
             <scope>provided</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
+        <!-- https://mvnrepository.com/artifact/jakarta.servlet.jsp/jakarta.servlet.jsp-api -->
         <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>javax.servlet.jsp-api</artifactId>
-            <version>2.3.3</version>
+            <groupId>jakarta.servlet.jsp</groupId>
+            <artifactId>jakarta.servlet.jsp-api</artifactId>
+            <version>2.3.4</version>
             <scope>provided</scope>
         </dependency>
-
 
         <!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
         <dependency>
