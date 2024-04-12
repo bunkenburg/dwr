@@ -5,7 +5,7 @@
     <groupId>cat.inspiracio</groupId>
     <artifactId>dwr</artifactId>
     <packaging>jar</packaging>
-    <version>4.0.3</version>
+    <version>4.0.4</version>
     <name>Direct Web Remoting</name>
     <url>http://directwebremoting.org/dwr/index.html</url>
 
@@ -13,7 +13,7 @@
         DWR is easy Ajax for Java. It makes it simple to call Java code directly from Javascript.
         It gets rid of almost all the boilerplate code between the web browser and your Java code.
 
-        This version 4.0.3 works with Jakarta Servlet 4.0.3.
+        This version 4.0.4 works with Jakarta Servlet 4.0.4.
     </description>
 
     <developers>
@@ -187,7 +187,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>3.2.2</version>
+                <version>3.2.3</version>
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
@@ -263,7 +263,7 @@
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
-            <version>4.0.3</version>
+            <version>4.0.4</version>
             <scope>provided</scope>
         </dependency>
 

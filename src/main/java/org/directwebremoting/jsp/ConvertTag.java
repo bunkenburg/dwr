@@ -22,16 +22,10 @@ import org.directwebremoting.extend.ScriptBufferUtil;
  *
  * @author Lance Semmens [uklance at gmail dot com]
  */
-public class ConvertTag extends TagSupport
-{
-    /* (non-Javadoc)
-     * @see javax.servlet.jsp.tagext.TagSupport#doEndTag()
-     */
-    @Override
-    public int doEndTag() throws JspException
-    {
-        try
-        {
+public class ConvertTag extends TagSupport {
+
+    @Override public int doEndTag() throws JspException {
+        try {
             Container container = ServerContextFactory.get().getContainer();
             ConverterManager converterManager = container.getBean(ConverterManager.class);
 
@@ -40,16 +34,12 @@ public class ConvertTag extends TagSupport
             WebContextFactory.WebContextBuilder contextBuilder = container.getBean(WebContextFactory.WebContextBuilder.class);
             contextBuilder.engageThread(container, request, response);
 
-            try
-            {
-                if (json)
-                {
+            try {
+                if (json) {
                     ScriptBuffer buffy = new ScriptBuffer();
                     buffy.appendData(value);
                     pageContext.getOut().write(ScriptBufferUtil.createOutput(buffy, converterManager, true));
-                }
-                else
-                {
+                } else {
                     ScriptBuffer buffy = new ScriptBuffer();
                     buffy.appendScript("return ").appendData(value).appendScript(";");
 
@@ -60,16 +50,12 @@ public class ConvertTag extends TagSupport
                         " })();"
                     );
                 }
-            }
-            finally
-            {
+            } finally {
                 // clean up the thread local
                 contextBuilder.disengageThread();
             }
             return super.doEndTag();
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             throw new JspException(ex);
         }
     }
