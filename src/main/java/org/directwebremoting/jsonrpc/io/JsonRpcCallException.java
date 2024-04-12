@@ -1,6 +1,6 @@
 package org.directwebremoting.jsonrpc.io;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.directwebremoting.jsonrpc.JsonRpcConstants;
 

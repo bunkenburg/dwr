@@ -2,9 +2,9 @@ package org.directwebremoting.extend;
 
 import java.io.IOException;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * We need to keep container specific logic out of BasePollHandler, and other
@@ -17,7 +17,7 @@ public interface ContainerAbstraction
     /**
      * We ask ContainerAbstractions to identify if the environment given is
      * 'theirs'. Are they fit for this environment?
-     * @param servletConfig Access to {@link javax.servlet.ServletContext} etc.
+     * @param servletConfig Access to {@link jakarta.servlet.ServletContext} etc.
      * @return true if this implementation should be used
      */
     boolean isNativeEnvironment(ServletConfig servletConfig);

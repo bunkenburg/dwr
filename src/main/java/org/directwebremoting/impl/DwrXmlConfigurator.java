@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -40,8 +40,8 @@ import org.xml.sax.SAXException;
  * A configurator that gets its configuration by reading a dwr.xml file.
  * @author Joe Walker [joe at getahead dot ltd dot uk]
  */
-public class DwrXmlConfigurator implements Configurator
-{
+public class DwrXmlConfigurator implements Configurator {
+
     /**
      * Setter for the resource name that we can use to read a file from the
      * servlet context
@@ -51,24 +51,19 @@ public class DwrXmlConfigurator implements Configurator
      * @throws ParserConfigurationException On XML setup failure
      * @throws SAXException On XML parse failure
      */
-    public void setServletResourceName(ServletContext servletContext, String servletResourceName) throws IOException, ParserConfigurationException, SAXException
-    {
+    public void setServletResourceName(ServletContext servletContext, String servletResourceName) throws IOException, ParserConfigurationException, SAXException {
         this.servletResourceName = servletResourceName;
 
         InputStream in = null;
-        try
-        {
+        try {
             in = servletContext.getResourceAsStream(servletResourceName);
-            if (in == null)
-            {
+            if (in == null) {
                 throw new IOException("Missing config file: '" + servletResourceName + "'");
             }
 
             Loggers.STARTUP.debug("Configuring from servlet resource: " + servletResourceName);
             setInputStream(in);
-        }
-        finally
-        {
+        } finally {
             LocalUtil.close(in);
         }
     }
@@ -80,13 +75,11 @@ public class DwrXmlConfigurator implements Configurator
      * @throws ParserConfigurationException On XML setup failure
      * @throws SAXException On XML parse failure
      */
-    public void setClassResourceName(String classResourceName) throws IOException, ParserConfigurationException, SAXException
-    {
+    public void setClassResourceName(String classResourceName) throws IOException, ParserConfigurationException, SAXException {
         this.classResourceName = classResourceName;
 
         InputStream in = LocalUtil.getInternalResourceAsStream(classResourceName);
-        if (in == null)
-        {
+        if (in == null) {
             throw new IOException("Missing config file: '" + classResourceName + "'");
         }
 
@@ -101,8 +94,7 @@ public class DwrXmlConfigurator implements Configurator
      * @throws ParserConfigurationException On XML setup failure
      * @throws SAXException On XML parse failure
      */
-    public void setInputStream(InputStream in) throws ParserConfigurationException, SAXException, IOException
-    {
+    public void setInputStream(InputStream in) throws ParserConfigurationException, SAXException, IOException {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         dbf.setValidating(true);
 
@@ -122,11 +114,7 @@ public class DwrXmlConfigurator implements Configurator
         this.document = document;
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.Configurator#configure(org.directwebremoting.Container)
-     */
-    public void configure(Container container)
-    {
+    public void configure(Container container) {
         accessControl = container.getBean(AccessControl.class);
         ajaxFilterManager = container.getBean(AjaxFilterManager.class);
         converterManager = container.getBean(ConverterManager.class);

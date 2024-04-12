@@ -1,6 +1,6 @@
 package org.directwebremoting.ui.browser;
 
-import javax.servlet.http.Cookie;
+import jakarta.servlet.http.Cookie;
 
 import org.directwebremoting.ScriptSessions;
 import org.directwebremoting.util.JavascriptUtil;

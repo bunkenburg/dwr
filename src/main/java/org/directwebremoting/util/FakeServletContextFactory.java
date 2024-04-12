@@ -1,6 +1,6 @@
 package org.directwebremoting.util;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 
 /**
  * @author Mike Wilson

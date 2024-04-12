@@ -6,7 +6,7 @@ import java.util.EventListener;
  * Implementations of this interface are notified of changes to the list of
  * active sessions in a web application.
  * @see ScriptSessionEvent
- * @see javax.servlet.http.HttpSessionListener
+ * @see jakarta.servlet.http.HttpSessionListener
  * @author Joe Walker [joe at getahead dot ltd dot uk]
  */
 public interface ScriptSessionListener extends EventListener

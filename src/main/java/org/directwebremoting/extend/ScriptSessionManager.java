@@ -2,7 +2,7 @@ package org.directwebremoting.extend;
 
 import java.util.Collection;
 
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;
 
 import org.directwebremoting.ScriptSession;
 import org.directwebremoting.event.ScriptSessionListener;

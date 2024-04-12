@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.directwebremoting.WebContextFactory;
 import org.directwebremoting.extend.DownloadManager;

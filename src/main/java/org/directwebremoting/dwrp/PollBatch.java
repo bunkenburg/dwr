@@ -1,6 +1,6 @@
 package org.directwebremoting.dwrp;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.directwebremoting.extend.ProtocolConstants;
 import org.directwebremoting.extend.ServerException;

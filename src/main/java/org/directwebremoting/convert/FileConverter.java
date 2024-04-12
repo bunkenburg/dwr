@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.directwebremoting.Container;
 import org.directwebremoting.ConversionException;
@@ -34,105 +34,69 @@ import org.directwebremoting.util.UserAgent;
  * @author Joe Walker [joe at getahead dot org]
  * @author Niklas Johansson [niklas dot json at gmail dot com]
  */
-public class FileConverter extends AbstractConverter
-{
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.Converter#convertInbound(java.lang.Class, org.directwebremoting.extend.InboundVariable, org.directwebremoting.extend.InboundContext)
-     */
-    public Object convertInbound(Class<?> paramType, InboundVariable data) throws ConversionException
-    {
-        if (data.isNull())
-        {
+public class FileConverter extends AbstractConverter {
+
+    public Object convertInbound(Class<?> paramType, InboundVariable data) throws ConversionException {
+        if (data.isNull()) {
             return null;
         }
 
-        try
-        {
+        try {
             final FormField formField = data.getFormField();
-            if (paramType == FileTransfer.class)
-            {
-                InputStreamFactory inFactory = new InputStreamFactory()
-                {
-                    public InputStream getInputStream() throws IOException
-                    {
+            if (paramType == FileTransfer.class) {
+                InputStreamFactory inFactory = new InputStreamFactory() {
+                    public InputStream getInputStream() throws IOException {
                         return formField.getInputStream();
                     }
 
-                    public void close() throws IOException
-                    {
+                    public void close() throws IOException {
                         formField.getInputStream().close();
                     }
                 };
                 return new FileTransfer(formField.getName(), formField.getMimeType(), formField.getFileSize(), inFactory);
-            }
-            else if (paramType == InputStream.class)
-            {
+            } else if (paramType == InputStream.class) {
                 return formField.getInputStream();
-            }
-            else if (paramType == BufferedImage.class)
-            {
+            } else if (paramType == BufferedImage.class) {
                 return ImageIO.read(formField.getInputStream());
-            }
-            else if (paramType.isArray() && paramType.getComponentType() == Byte.TYPE)
-            {
+            } else if (paramType.isArray() && paramType.getComponentType() == Byte.TYPE) {
                 InputStream in = formField.getInputStream();
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
                 CopyUtils.copy(in, out);
                 return out.toByteArray();
             }
-        }
-        catch (IOException ex)
-        {
+        } catch (IOException ex) {
             throw new ConversionException(paramType, ex);
         }
 
         throw new ConversionException(paramType, "File conversion is not possible for a " + paramType);
     }
 
-    /* (non-Javadoc)
-     * @see org.directwebremoting.extend.Converter#convertOutbound(java.lang.Object, org.directwebremoting.extend.OutboundContext)
-     */
-    public OutboundVariable convertOutbound(final Object object, OutboundContext outboundContext) throws ConversionException
-    {
-        if (object == null)
-        {
+    public OutboundVariable convertOutbound(final Object object, OutboundContext outboundContext) throws ConversionException {
+        if (object == null) {
             return new NonNestedOutboundVariable("null");
         }
 
-        try
-        {
+        try {
             FileTransfer transfer;
 
-            if (object instanceof BufferedImage)
-            {
+            if (object instanceof BufferedImage) {
                 transfer = new FileTransfer((BufferedImage) object, "png");
-            }
-            else if (object instanceof InputStream)
-            {
+            } else if (object instanceof InputStream) {
                 final InputStream in = (InputStream) object;
-                transfer = new FileTransfer("download.dat", "binary/octet-stream", -1, new InputStreamFactory()
-                {
-                    public InputStream getInputStream() throws IOException
-                    {
+                transfer = new FileTransfer("download.dat", "binary/octet-stream", -1, new InputStreamFactory() {
+                    public InputStream getInputStream() throws IOException {
                         return in;
                     }
 
-                    public void close() throws IOException
-                    {
+                    public void close() throws IOException {
                         in.close();
                     }
                 });
-            }
-            else if (object instanceof FileTransfer)
-            {
+            } else if (object instanceof FileTransfer) {
                 transfer = (FileTransfer) object;
-            }
-            else if (object.getClass().isArray() && object.getClass().getComponentType() == Byte.TYPE)
-            {
+            } else if (object.getClass().isArray() && object.getClass().getComponentType() == Byte.TYPE) {
                 transfer = new FileTransfer("download.dat", "binary/octet-stream", (byte[]) object);
-            }
-            else
-            {
+            } else {
                 throw new ConversionException(object.getClass());
             }
 
@@ -140,20 +104,15 @@ public class FileConverter extends AbstractConverter
             boolean preferDataUrlSchema = ContainerUtil.getBooleanSetting(container, "preferDataUrlSchema", false);
 
             DownloadManager downloadManager;
-            if (preferDataUrlSchema && isDataUrlAvailable())
-            {
+            if (preferDataUrlSchema && isDataUrlAvailable()) {
                 downloadManager = new DataUrlDownloadManager();
-            }
-            else
-            {
+            } else {
                 downloadManager = container.getBean(DownloadManager.class);
             }
 
             String url = downloadManager.addFileTransfer(transfer);
             return new NonNestedOutboundVariable(url);
-        }
-        catch (IOException ex)
-        {
+        } catch (IOException ex) {
             throw new ConversionException(getClass(), ex);
         }
     }
@@ -162,8 +121,7 @@ public class FileConverter extends AbstractConverter
      * Is the data: URL allowed by the current browser.
      * @return true if data: is allowed
      */
-    protected boolean isDataUrlAvailable()
-    {
+    protected boolean isDataUrlAvailable() {
         HttpServletRequest request = WebContextFactory.get().getHttpServletRequest();
 
         return BrowserDetect.atLeast(request, UserAgent.IE, 8) ||

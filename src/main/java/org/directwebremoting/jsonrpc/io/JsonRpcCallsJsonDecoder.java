@@ -17,7 +17,7 @@ import org.directwebremoting.json.parse.JsonParseException;
 import org.directwebremoting.json.parse.impl.StatefulJsonDecoder;
 import org.directwebremoting.util.JavascriptUtil;
 
-import static javax.servlet.http.HttpServletResponse.*;
+import static jakarta.servlet.http.HttpServletResponse.*;
 
 import static org.directwebremoting.jsonrpc.JsonRpcConstants.*;
 

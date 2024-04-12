@@ -3,7 +3,7 @@ package org.directwebremoting.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;
 
 import org.directwebremoting.ScriptSession;
 import org.directwebremoting.event.ScriptSessionListener;
@@ -25,7 +25,7 @@ import org.directwebremoting.extend.ScriptSessionManager;
 public class TransientScriptSessionManager implements ScriptSessionManager
 {
     /* (non-Javadoc)
-     * @see org.directwebremoting.ScriptSessionManager#getOrCreateScriptSession(java.lang.String, java.lang.String, javax.servlet.http.HttpSession)
+     * @see org.directwebremoting.ScriptSessionManager#getOrCreateScriptSession(java.lang.String, java.lang.String, jakarta.servlet.http.HttpSession)
      */
     public RealScriptSession getOrCreateScriptSession(String id, String page, HttpSession httpSession)
     {

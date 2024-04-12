@@ -26,7 +26,7 @@ public class JsonRpcCallHandlerTest
     }
 
     /**
-     * Test method for {@link org.directwebremoting.jsonrpc.JsonRpcCallHandler#handle(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)}.
+     * Test method for {@link org.directwebremoting.jsonrpc.JsonRpcCallHandler#handle(jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)}.
      */
     @Test
     public void testHandle() throws Exception

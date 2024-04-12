@@ -39,7 +39,7 @@ public class FileJavaScriptHandler extends JavaScriptHandler
     }
 
     /* (non-Javadoc)
-     * @see org.directwebremoting.servlet.CachingHandler#generate(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @see org.directwebremoting.servlet.CachingHandler#generate(jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     @Override
     public String generateCachableContent(String contextPath, String servletPath, String pathInfo) throws IOException
@@ -54,7 +54,7 @@ public class FileJavaScriptHandler extends JavaScriptHandler
     }
 
     /* (non-Javadoc)
-     * @see org.directwebremoting.servlet.TemplateHandler#generateTemplate(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @see org.directwebremoting.servlet.TemplateHandler#generateTemplate(jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     @Override
     protected String generateTemplate(String contextPath, String servletPath, String pathInfo) throws IOException

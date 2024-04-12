@@ -2,7 +2,7 @@ package com.example.dwr.simple;
 
 import java.io.IOException;
 
-import javax.servlet.ServletException;
+import jakarta.servlet.ServletException;
 
 import org.directwebremoting.WebContext;
 import org.directwebremoting.WebContextFactory;

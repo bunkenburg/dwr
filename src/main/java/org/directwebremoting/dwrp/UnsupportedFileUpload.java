@@ -2,7 +2,7 @@ package org.directwebremoting.dwrp;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -18,7 +18,7 @@ import org.directwebremoting.extend.ServerException;
 public class UnsupportedFileUpload implements FileUpload
 {
     /* (non-Javadoc)
-     * @see org.directwebremoting.dwrp.FileUpload#parseRequest(javax.servlet.http.HttpServletRequest, java.io.File)
+     * @see org.directwebremoting.dwrp.FileUpload#parseRequest(jakarta.servlet.http.HttpServletRequest, java.io.File)
      */
     public Map<String, FormField> parseRequest(HttpServletRequest req) throws ServerException
     {

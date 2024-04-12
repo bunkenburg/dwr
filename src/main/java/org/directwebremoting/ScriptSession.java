@@ -9,7 +9,7 @@ import org.directwebremoting.event.ScriptSessionBindingListener;
  * Javascript variable.
  * The operations on a Page are similar to (and derived from) the options on a
  * Session, with some added simplification.
- * @see javax.servlet.http.HttpSession
+ * @see jakarta.servlet.http.HttpSession
  * @author Joe Walker [joe at getahead dot ltd dot uk]
  */
 public interface ScriptSession
@@ -65,7 +65,7 @@ public interface ScriptSession
 
     /**
      * Checks to see if this ScriptSession has been invalidated.
-     * <p>There is no similar method on {@link javax.servlet.http.HttpSession}
+     * <p>There is no similar method on {@link jakarta.servlet.http.HttpSession}
      * because it is assumed that you do not store HttpSessions from one request
      * to another, so all sessions that you have access to will always be either
      * valid, or you have just invalidated it yourself so you wont need to ask.

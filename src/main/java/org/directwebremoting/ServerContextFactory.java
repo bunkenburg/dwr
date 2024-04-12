@@ -1,6 +1,6 @@
 package org.directwebremoting;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 
 import org.directwebremoting.extend.Builder;
 import org.directwebremoting.extend.Factory;
@@ -9,8 +9,7 @@ import org.directwebremoting.extend.Factory;
  * Accessor for the current ServerContext.
  * @author Joe Walker [joe at getahead dot ltd dot uk]
  */
-public class ServerContextFactory
-{
+public class ServerContextFactory {
     /**
      * Accessor for the current ServerContext.
      * @return The current ServerContext.
@@ -30,8 +29,7 @@ public class ServerContextFactory
      * @deprecated Use the plain ServerContextFactory.get() version
      * @see #get()
      */
-    @Deprecated
-    public static ServerContext get(ServletContext ctx)
+    @Deprecated public static ServerContext get(ServletContext ctx)
     {
         return factory.get();
     }
@@ -56,7 +54,5 @@ public class ServerContextFactory
     /**
      * Hack to get around Generics not being implemented by erasure
      */
-    public interface ServerContextBuilder extends Builder<ServerContext>
-    {
-    }
+    public interface ServerContextBuilder extends Builder<ServerContext> { }
 }

@@ -1,6 +1,6 @@
 package org.directwebremoting.datasync;
 
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;
 
 import org.directwebremoting.ScriptSession;
 

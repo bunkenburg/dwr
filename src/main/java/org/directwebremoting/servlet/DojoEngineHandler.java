@@ -9,7 +9,7 @@ import java.io.IOException;
 public class DojoEngineHandler extends BaseEngineHandler
 {
     /* (non-Javadoc)
-     * @see org.directwebremoting.servlet.FileJavaScriptHandler#generateTemplate(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @see org.directwebremoting.servlet.FileJavaScriptHandler#generateTemplate(jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     @Override
     protected String generateTemplate(String contextPath, String servletPath, String pathInfo) throws IOException

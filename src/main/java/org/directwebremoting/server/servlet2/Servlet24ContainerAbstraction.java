@@ -2,9 +2,9 @@ package org.directwebremoting.server.servlet2;
 
 import java.io.IOException;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.directwebremoting.extend.ContainerAbstraction;
 import org.directwebremoting.extend.RealScriptSession;
@@ -21,7 +21,7 @@ import org.directwebremoting.impl.ThreadWaitSleeper;
 public class Servlet24ContainerAbstraction implements ContainerAbstraction
 {
     /* (non-Javadoc)
-     * @see org.directwebremoting.dwrp.ContainerAbstraction#isNativeEnvironment(javax.servlet.ServletConfig)
+     * @see org.directwebremoting.dwrp.ContainerAbstraction#isNativeEnvironment(jakarta.servlet.ServletConfig)
      */
     public boolean isNativeEnvironment(ServletConfig servletConfig)
     {
@@ -37,7 +37,7 @@ public class Servlet24ContainerAbstraction implements ContainerAbstraction
     }
 
     /* (non-Javadoc)
-     * @see org.directwebremoting.extend.ContainerAbstraction#isResponseCompleted(javax.servlet.http.HttpServletRequest)
+     * @see org.directwebremoting.extend.ContainerAbstraction#isResponseCompleted(jakarta.servlet.http.HttpServletRequest)
      */
     public boolean handleResumedRequest(HttpServletRequest request)
     {

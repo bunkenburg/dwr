@@ -11,7 +11,7 @@ import org.directwebremoting.servlet.AmdModule;
 public class AmdUtilHandler extends BaseUtilHandler
 {
     /* (non-Javadoc)
-     * @see org.directwebremoting.servlet.FileJavaScriptHandler#generateTemplate(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @see org.directwebremoting.servlet.FileJavaScriptHandler#generateTemplate(jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     @Override
     protected String generateTemplate(String contextPath, String servletPath, String pathInfo) throws IOException

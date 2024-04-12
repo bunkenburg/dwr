@@ -1,6 +1,6 @@
 package org.directwebremoting.util;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * @author Mike Wilson

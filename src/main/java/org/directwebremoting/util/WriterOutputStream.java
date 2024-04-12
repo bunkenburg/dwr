@@ -3,8 +3,8 @@ package org.directwebremoting.util;
 import java.io.IOException;
 import java.io.Writer;
 
-import javax.servlet.ServletOutputStream;
-import javax.servlet.WriteListener;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.WriteListener;
 
 /**
  * This is not the evil hack you are looking for.

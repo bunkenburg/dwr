@@ -2,8 +2,8 @@ package org.directwebremoting;
 
 import java.util.Collection;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
 
 /**
  * ServerContext is something of a misnomer - it refers to a running DwrServlet
@@ -19,8 +19,7 @@ import javax.servlet.ServletContext;
  * {@link ServerContext} is accessible from {@link ServerContextFactory#get()}.
  * @author Joe Walker [joe at getahead dot ltd dot uk]
  */
-public interface ServerContext
-{
+public interface ServerContext {
     /**
      * Get a list of all ScriptSessions on a given page.
      * Note that the list of known sessions is continually changing so it is
@@ -31,8 +30,7 @@ public interface ServerContext
      * @return A collection of all the ScriptSessions.
      * @deprecated Use {@link Browser#withPage(String, Runnable)} instead
      */
-    @Deprecated
-    Collection<ScriptSession> getScriptSessionsByPage(String url);
+    @Deprecated Collection<ScriptSession> getScriptSessionsByPage(String url);
 
     /**
      * You can request access to a specific {@link ScriptSession} if you know
@@ -46,8 +44,7 @@ public interface ServerContext
      * @return The ScriptSession for the given ID, or null if it does not exist
      * @deprecated Use {@link Browser#withSession(String, Runnable)} instead
      */
-    @Deprecated
-    ScriptSession getScriptSessionById(String sessionId);
+    @Deprecated ScriptSession getScriptSessionById(String sessionId);
 
     /**
      * Get a list of all the ScriptSessions known to this server at the given
@@ -59,8 +56,7 @@ public interface ServerContext
      * @return A collection of all the ScriptSessions.
      * @deprecated Use {@link Browser#withAllSessions(Runnable)} instead
      */
-    @Deprecated
-    Collection<ScriptSession> getAllScriptSessions();
+    @Deprecated Collection<ScriptSession> getAllScriptSessions();
 
     /**
      * Accessor for the servlet config.

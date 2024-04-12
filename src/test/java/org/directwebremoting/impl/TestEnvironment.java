@@ -2,8 +2,8 @@ package org.directwebremoting.impl;
 
 import java.io.IOException;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.directwebremoting.Container;

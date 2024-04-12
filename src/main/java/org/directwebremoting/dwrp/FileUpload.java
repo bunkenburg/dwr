@@ -3,7 +3,7 @@ package org.directwebremoting.dwrp;
 import java.io.IOException;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.directwebremoting.extend.FormField;
 import org.directwebremoting.extend.ServerException;

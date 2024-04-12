@@ -28,9 +28,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.Servlet;
-import javax.servlet.ServletContext;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.Servlet;
+import jakarta.servlet.ServletContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -64,7 +64,7 @@ class FakeServletContextObject24 {
         // Use JVM temp dir as ServletContext temp dir.
         String tempDir = System.getProperty("java.io.tmpdir");
         if (tempDir != null) {
-            attributes.put("javax.servlet.context.tempdir", new File(tempDir));
+            attributes.put("jakarta.servlet.context.tempdir", new File(tempDir));
         }
     }
 

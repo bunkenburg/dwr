@@ -2,7 +2,7 @@ package org.directwebremoting.impl;
 
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
-import javax.servlet.ServletContextListener;
+import jakarta.servlet.ServletContextListener;
 
 import org.directwebremoting.extend.UninitializingBean;
 

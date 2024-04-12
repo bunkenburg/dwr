@@ -2,8 +2,8 @@ package org.directwebremoting.servlet;
 
 import java.util.Date;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.directwebremoting.extend.Handler;
 import org.directwebremoting.util.LocalUtil;
@@ -14,7 +14,7 @@ import org.directwebremoting.util.LocalUtil;
 public class PublicPeriodCacheableResponse implements ResponseHandler
 {
     /* (non-Javadoc)
-     * @see org.directwebremoting.servlet.ResponseHandler#handle(org.directwebremoting.extend.Handler, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @see org.directwebremoting.servlet.ResponseHandler#handle(org.directwebremoting.extend.Handler, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     public void handle(Handler handler, HttpServletRequest request, HttpServletResponse response)
     {

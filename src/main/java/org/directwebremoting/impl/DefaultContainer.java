@@ -7,9 +7,9 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
+import jakarta.servlet.Servlet;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
 
 import org.directwebremoting.Container;
 import org.directwebremoting.extend.ContainerConfigurationException;
@@ -127,7 +127,7 @@ public class DefaultContainer extends AbstractContainer implements Container {
     /**
      * Called to indicate that we finished adding parameters.
      * The thread safety of a large part of DWR depends on this function only
-     * being called from {@link Servlet#init(javax.servlet.ServletConfig)},
+     * being called from {@link Servlet#init(jakarta.servlet.ServletConfig)},
      * where all the setup is done, and where we depend on the undocumented
      * feature of all servlet containers that they complete the init process
      * of a Servlet before they begin servicing requests.
