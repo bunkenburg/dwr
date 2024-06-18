@@ -49,7 +49,7 @@ public class ServerContextFactory {
     /**
      * The factory helper class
      */
-    private static Factory<ServerContext> factory = Factory.create(ServerContextBuilder.class);
+    private static final Factory<ServerContext> factory = Factory.create(ServerContextBuilder.class);
 
     /**
      * Hack to get around Generics not being implemented by erasure

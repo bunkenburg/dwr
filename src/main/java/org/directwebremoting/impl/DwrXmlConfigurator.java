@@ -123,23 +123,16 @@ public class DwrXmlConfigurator implements Configurator {
         Element root = document.getDocumentElement();
 
         NodeList rootChildren = root.getChildNodes();
-        for (int i = 0; i < rootChildren.getLength(); i++)
-        {
+        for (int i = 0; i < rootChildren.getLength(); i++) {
             Node node = rootChildren.item(i);
-            if (node.getNodeType() == Node.ELEMENT_NODE)
-            {
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
                 Element child = (Element) node;
 
-                if (child.getNodeName().equals(ELEMENT_INIT))
-                {
+                if (child.getNodeName().equals(ELEMENT_INIT)) {
                     loadInits(child);
-                }
-                else if (child.getNodeName().equals(ELEMENT_ALLOW))
-                {
+                } else if (child.getNodeName().equals(ELEMENT_ALLOW)) {
                     loadAllows(child);
-                }
-                else if (child.getNodeName().equals(ELEMENT_SIGNATURES))
-                {
+                } else if (child.getNodeName().equals(ELEMENT_SIGNATURES)) {
                     loadSignature(child);
                 }
             }
@@ -150,23 +143,17 @@ public class DwrXmlConfigurator implements Configurator {
      * Internal method to load the init element
      * @param child The element to read
      */
-    private void loadInits(Element child)
-    {
+    private void loadInits(Element child) {
         NodeList inits = child.getChildNodes();
-        for (int j = 0; j < inits.getLength(); j++)
-        {
-            if (inits.item(j).getNodeType() == Node.ELEMENT_NODE)
-            {
+        for (int j = 0; j < inits.getLength(); j++) {
+            if (inits.item(j).getNodeType() == Node.ELEMENT_NODE) {
                 Element initer = (Element) inits.item(j);
 
-                if (initer.getNodeName().equals(ATTRIBUTE_CREATOR))
-                {
+                if (initer.getNodeName().equals(ATTRIBUTE_CREATOR)) {
                     String id = initer.getAttribute(ATTRIBUTE_ID);
                     String className = initer.getAttribute(ATTRIBUTE_CLASS);
                     creatorManager.addCreatorType(id, className);
-                }
-                else if (initer.getNodeName().equals(ATTRIBUTE_CONVERTER))
-                {
+                } else if (initer.getNodeName().equals(ATTRIBUTE_CONVERTER)) {
                     String id = initer.getAttribute(ATTRIBUTE_ID);
                     String className = initer.getAttribute(ATTRIBUTE_CLASS);
                     converterManager.addConverterType(id, className);
@@ -179,25 +166,17 @@ public class DwrXmlConfigurator implements Configurator {
      * Internal method to load the create/convert elements
      * @param child The element to read
      */
-    private void loadAllows(Element child)
-    {
+    private void loadAllows(Element child) {
         NodeList allows = child.getChildNodes();
-        for (int j = 0; j < allows.getLength(); j++)
-        {
-            if (allows.item(j).getNodeType() == Node.ELEMENT_NODE)
-            {
+        for (int j = 0; j < allows.getLength(); j++) {
+            if (allows.item(j).getNodeType() == Node.ELEMENT_NODE) {
                 Element allower = (Element) allows.item(j);
 
-                if (allower.getNodeName().equals(ELEMENT_CREATE))
-                {
+                if (allower.getNodeName().equals(ELEMENT_CREATE)) {
                     loadCreate(allower);
-                }
-                else if (allower.getNodeName().equals(ELEMENT_CONVERT))
-                {
+                } else if (allower.getNodeName().equals(ELEMENT_CONVERT)) {
                     loadConvert(allower);
-                }
-                else if (allower.getNodeName().equals(ELEMENT_FILTER))
-                {
+                } else if (allower.getNodeName().equals(ELEMENT_FILTER)) {
                     loadFilter(allower);
                 }
             }
@@ -208,22 +187,16 @@ public class DwrXmlConfigurator implements Configurator {
      * Internal method to load the convert element
      * @param allower The element to read
      */
-    private void loadConvert(Element allower)
-    {
+    private void loadConvert(Element allower) {
         String match = allower.getAttribute(ATTRIBUTE_MATCH);
         String type = allower.getAttribute(ATTRIBUTE_CONVERTER);
 
-        try
-        {
+        try {
             Map<String, String> params = createSettingMap(allower);
             converterManager.addConverter(match, type, params);
-        }
-        catch (NoClassDefFoundError ex)
-        {
+        } catch (NoClassDefFoundError ex) {
             Loggers.STARTUP.info("Convertor '" + type + "' not loaded due to NoClassDefFoundError. (match='" + match + "'). Cause: " + ex.getMessage());
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             Loggers.STARTUP.error("Failed to add convertor: match=" + match + ", type=" + type, ex);
         }
     }
@@ -232,13 +205,11 @@ public class DwrXmlConfigurator implements Configurator {
      * Internal method to load the create element
      * @param allower The element to read
      */
-    private void loadCreate(Element allower)
-    {
+    private void loadCreate(Element allower) {
         String type = allower.getAttribute(ATTRIBUTE_CREATOR);
         String javascript = allower.getAttribute(ATTRIBUTE_JAVASCRIPT);
 
-        try
-        {
+        try {
             Map<String, String> params = createSettingMap(allower);
             creatorManager.addCreator(type, params);
 
@@ -246,13 +217,9 @@ public class DwrXmlConfigurator implements Configurator {
             processAuth(javascript, allower);
             processParameters(javascript, allower);
             processAjaxFilters(javascript, allower);
-        }
-        catch (NoClassDefFoundError ex)
-        {
+        } catch (NoClassDefFoundError ex) {
             Loggers.STARTUP.info("Creator '" + type + "' not loaded due to NoClassDefFoundError. (javascript='" + javascript + "'). Cause: " + ex.getMessage());
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             Loggers.STARTUP.error("Failed to add creator: type=" + type + ", javascript=" + javascript, ex);
         }
     }
@@ -261,29 +228,21 @@ public class DwrXmlConfigurator implements Configurator {
      * Internal method to load the convert element
      * @param allower The element to read
      */
-    private void loadFilter(Element allower)
-    {
+    private void loadFilter(Element allower) {
         String type = allower.getAttribute(ATTRIBUTE_CLASS);
 
-        try
-        {
+        try {
             Class<?> impl = LocalUtil.classForName(type);
             AjaxFilter object = (AjaxFilter) impl.getDeclaredConstructor().newInstance();
 
             LocalUtil.setParams(object, createSettingMap(allower), ignore);
 
             ajaxFilterManager.addAjaxFilter(object);
-        }
-        catch (ClassCastException ex)
-        {
+        } catch (ClassCastException ex) {
             Loggers.STARTUP.error(type + " does not implement " + AjaxFilter.class.getName(), ex);
-        }
-        catch (NoClassDefFoundError ex)
-        {
+        } catch (NoClassDefFoundError ex) {
             Loggers.STARTUP.info("Missing class for filter (class='" + type + "'). Cause: " + ex.getMessage());
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             Loggers.STARTUP.error("Failed to add filter: class=" + type, ex);
         }
     }
@@ -294,14 +253,12 @@ public class DwrXmlConfigurator implements Configurator {
      * @param parent The parent element
      * @return A map of parameters
      */
-    private static Map<String, String> createSettingMap(Element parent)
-    {
+    private static Map<String, String> createSettingMap(Element parent) {
         Map<String, String> params = new HashMap<String, String>();
 
         // Go through the attributes in the allower element, adding to the param map
         NamedNodeMap attrs = parent.getAttributes();
-        for (int i = 0; i < attrs.getLength(); i++)
-        {
+        for (int i = 0; i < attrs.getLength(); i++) {
             Node node = attrs.item(i);
             String name = node.getNodeName();
             String value = node.getNodeValue();
@@ -310,8 +267,7 @@ public class DwrXmlConfigurator implements Configurator {
 
         // Go through the param elements in the allower element, adding to the param map
         NodeList locNodes = parent.getElementsByTagName(ELEMENT_PARAM);
-        for (int i = 0; i < locNodes.getLength(); i++)
-        {
+        for (int i = 0; i < locNodes.getLength(); i++) {
             // Since this comes from getElementsByTagName we can assume that
             // all the nodes are elements.
             Element element = (Element) locNodes.item(i);
@@ -319,22 +275,18 @@ public class DwrXmlConfigurator implements Configurator {
             // But getElementsByTagName(ELEMENT_PARAM) includes param nodes that
             // are nested down inside filters, so we need to check that the
             // parent node is 'parent'. $&*?! DOM!
-            if (element.getParentNode() != parent)
-            {
+            if (element.getParentNode() != parent) {
                 continue;
             }
 
             String name = element.getAttribute(ATTRIBUTE_NAME);
-            if (name != null)
-            {
+            if (name != null) {
                 String value = element.getAttribute(ATTRIBUTE_VALUE);
-                if (value == null || value.length() == 0)
-                {
+                if (value == null || value.length() == 0) {
                     StringBuffer buffer = new StringBuffer();
                     NodeList textNodes = element.getChildNodes();
 
-                    for (int j = 0; j < textNodes.getLength(); j++)
-                    {
+                    for (int j = 0; j < textNodes.getLength(); j++) {
                         buffer.append(textNodes.item(j).getNodeValue());
                     }
 
@@ -354,25 +306,21 @@ public class DwrXmlConfigurator implements Configurator {
      * @param javascript The name of the creator
      * @param parent The container of the include and exclude elements.
      */
-    private void processPermissions(String javascript, Element parent)
-    {
+    private void processPermissions(String javascript, Element parent) {
         NodeList incNodes = parent.getElementsByTagName(ELEMENT_INCLUDE);
-        for (int i = 0; i < incNodes.getLength(); i++)
-        {
+        for (int i = 0; i < incNodes.getLength(); i++) {
             Element include = (Element) incNodes.item(i);
             String method = include.getAttribute(ATTRIBUTE_METHOD);
             accessControl.addIncludeRule(javascript, method);
 
-            if (include.hasAttribute(ATTRIBUTE_ROLE))
-            {
+            if (include.hasAttribute(ATTRIBUTE_ROLE)) {
                 String role = include.getAttribute(ATTRIBUTE_ROLE);
                 accessControl.addRoleRestriction(javascript, method, role);
             }
         }
 
         NodeList excNodes = parent.getElementsByTagName(ELEMENT_EXCLUDE);
-        for (int i = 0; i < excNodes.getLength(); i++)
-        {
+        for (int i = 0; i < excNodes.getLength(); i++) {
             Element include = (Element) excNodes.item(i);
             String method = include.getAttribute(ATTRIBUTE_METHOD);
             accessControl.addExcludeRule(javascript, method);
@@ -384,11 +332,9 @@ public class DwrXmlConfigurator implements Configurator {
      * @param javascript The name of the creator
      * @param parent The container of the include and exclude elements.
      */
-    private void processAuth(String javascript, Element parent)
-    {
+    private void processAuth(String javascript, Element parent) {
         NodeList nodes = parent.getElementsByTagName(ELEMENT_AUTH);
-        for (int i = 0; i < nodes.getLength(); i++)
-        {
+        for (int i = 0; i < nodes.getLength(); i++) {
             Element include = (Element) nodes.item(i);
 
             String method = include.getAttribute(ATTRIBUTE_METHOD);
@@ -403,17 +349,14 @@ public class DwrXmlConfigurator implements Configurator {
      * @param javascript The name of the creator
      * @param parent The container of the include and exclude elements.
      */
-    private void processAjaxFilters(String javascript, Element parent)
-    {
+    private void processAjaxFilters(String javascript, Element parent) {
         NodeList nodes = parent.getElementsByTagName(ELEMENT_FILTER);
-        for (int i = 0; i < nodes.getLength(); i++)
-        {
+        for (int i = 0; i < nodes.getLength(); i++) {
             Element include = (Element) nodes.item(i);
 
             String type = include.getAttribute(ATTRIBUTE_CLASS);
             AjaxFilter filter = LocalUtil.classNewInstance(javascript, type, AjaxFilter.class);
-            if (filter != null)
-            {
+            if (filter != null) {
                 LocalUtil.setParams(filter, createSettingMap(include), ignore);
                 ajaxFilterManager.addAjaxFilter(filter, javascript);
             }
@@ -424,20 +367,17 @@ public class DwrXmlConfigurator implements Configurator {
      * Parse and extra type info from method signatures
      * @param element The element to read
      */
-    private void loadSignature(Element element)
-    {
+    private void loadSignature(Element element) {
         StringBuffer sigtext = new StringBuffer();
 
         // This coagulates text nodes, not sure if we need to do this?
         element.normalize();
 
         NodeList nodes = element.getChildNodes();
-        for (int i = 0; i < nodes.getLength(); i++)
-        {
+        for (int i = 0; i < nodes.getLength(); i++) {
             Node node = nodes.item(i);
             short type = node.getNodeType();
-            if (type != Node.TEXT_NODE && type != Node.CDATA_SECTION_NODE)
-            {
+            if (type != Node.TEXT_NODE && type != Node.CDATA_SECTION_NODE) {
                 Loggers.STARTUP.warn("Ignoring illegal node type: " + type);
                 continue;
             }
@@ -456,11 +396,9 @@ public class DwrXmlConfigurator implements Configurator {
      * @param parent The container of the include and exclude elements.
      * @throws ClassNotFoundException If the type attribute can't be converted into a Class
      */
-    private void processParameters(String javascript, Element parent) throws ClassNotFoundException
-    {
+    private void processParameters(String javascript, Element parent) throws ClassNotFoundException {
         NodeList nodes = parent.getElementsByTagName(ELEMENT_PARAMETER);
-        for (int i = 0; i < nodes.getLength(); i++)
-        {
+        for (int i = 0; i < nodes.getLength(); i++) {
             Element include = (Element) nodes.item(i);
 
             String methodName = include.getAttribute(ATTRIBUTE_METHOD);
@@ -470,23 +408,17 @@ public class DwrXmlConfigurator implements Configurator {
             Class<?> dest = creator.getType();
 
             Method method = null;
-            for (Method test : dest.getMethods())
-            {
-                if (test.getName().equals(methodName))
-                {
-                    if (method == null)
-                    {
+            for (Method test : dest.getMethods()) {
+                if (test.getName().equals(methodName)) {
+                    if (method == null) {
                         method = test;
-                    }
-                    else
-                    {
+                    } else {
                         Loggers.STARTUP.warn("Setting extra type info to overloaded methods may fail with <parameter .../>");
                     }
                 }
             }
 
-            if (method == null)
-            {
+            if (method == null) {
                 Loggers.STARTUP.error("Unable to find method called: " + methodName + " on type: " + dest.getName() + " from creator: " + javascript);
                 continue;
             }
@@ -498,8 +430,7 @@ public class DwrXmlConfigurator implements Configurator {
             StringTokenizer st = new StringTokenizer(types, ",");
 
             int j = 0;
-            while (st.hasMoreTokens())
-            {
+            while (st.hasMoreTokens()) {
                 String type = st.nextToken();
                 Class<?> clazz = LocalUtil.classForName(type.trim());
                 ParameterProperty parentProperty = new ParameterProperty(new MethodDeclaration(method), paramNo);
@@ -512,18 +443,10 @@ public class DwrXmlConfigurator implements Configurator {
         }
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString()
-    {
-        if (servletResourceName != null)
-        {
+    @Override public String toString() {
+        if (servletResourceName != null) {
             return "DwrXmlConfigurator[ServletResource:" + servletResourceName + "]";
-        }
-        else
-        {
+        } else {
             return "DwrXmlConfigurator[ClassResource:" + classResourceName + "]";
         }
     }
@@ -536,7 +459,7 @@ public class DwrXmlConfigurator implements Configurator {
     /**
      * The properties that we don't warn about if they don't exist.
      */
-    private static final List<String> ignore = Arrays.asList("class");
+    private static final List<String> ignore = List.of("class");
 
     /**
      * What AjaxFilters apply to which Ajax calls?
