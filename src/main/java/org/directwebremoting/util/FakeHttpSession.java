@@ -5,6 +5,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
+import cat.inspiracio.servlet.http.InitialHttpSession;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpSession;
 
@@ -16,8 +17,7 @@ import org.apache.commons.logging.LogFactory;
  * that doesn't do anything other than not be null.
  * @author Joe Walker [joe at getahead dot ltd dot uk]
  */
-public class FakeHttpSession implements HttpSession
-{
+public class FakeHttpSession extends InitialHttpSession {
     /**
      * Setup the creation time
      */
@@ -30,158 +30,56 @@ public class FakeHttpSession implements HttpSession
      * Setup the creation time
      * @param id The new session id
      */
-    public FakeHttpSession(String id)
-    {
+    public FakeHttpSession(String id) {
         this.id = id;
         creationTime = System.currentTimeMillis();
     }
 
-    /* (non-Javadoc)
-     * @see jakarta.servlet.http.HttpSession#getCreationTime()
-     */
-    public long getCreationTime()
+    @Override public long getCreationTime()
     {
         return creationTime;
     }
 
-    /* (non-Javadoc)
-     * @see jakarta.servlet.http.HttpSession#getId()
-     */
-    public String getId()
-    {
-        if (id == null)
-        {
+    @Override public String getId() {
+        if (id == null) {
             log.warn("Inventing data in FakeHttpSession.getId() to remain plausible.");
             id = "fake";
         }
-
         return id;
     }
 
-    /* (non-Javadoc)
-     * @see jakarta.servlet.http.HttpSession#getLastAccessedTime()
-     */
-    public long getLastAccessedTime()
+    @Override public long getLastAccessedTime()
     {
         return creationTime;
     }
 
-    /* (non-Javadoc)
-     * @see jakarta.servlet.http.HttpSession#getServletContext()
-     */
-    public ServletContext getServletContext()
-    {
-        return null;
-    }
-
-    /* (non-Javadoc)
-     * @see jakarta.servlet.http.HttpSession#setMaxInactiveInterval(int)
-     */
-    public void setMaxInactiveInterval(int maxInactiveInterval)
-    {
+    @Override public void setMaxInactiveInterval(int maxInactiveInterval) {
         this.maxInactiveInterval = maxInactiveInterval;
     }
 
-    /* (non-Javadoc)
-     * @see jakarta.servlet.http.HttpSession#getMaxInactiveInterval()
-     */
-    public int getMaxInactiveInterval()
+    @Override public int getMaxInactiveInterval()
     {
         return maxInactiveInterval;
     }
 
-    /**
-     * @see jakarta.servlet.http.HttpSession#getSessionContext()
-     * @deprecated
-     */
-    @SuppressWarnings({"UnnecessaryFullyQualifiedName"})
-    @Deprecated
-    public jakarta.servlet.http.HttpSessionContext getSessionContext()
-    {
-        return null;
-    }
-
-    /* (non-Javadoc)
-     * @see jakarta.servlet.http.HttpSession#getAttribute(java.lang.String)
-     */
-    public Object getAttribute(String name)
+    @Override public Object getAttribute(String name)
     {
         return attributes.get(name);
     }
 
-    /* (non-Javadoc)
-     * @see jakarta.servlet.http.HttpSession#getValue(java.lang.String)
-     */
-    @Deprecated
-    public Object getValue(String name)
-    {
-        return attributes.get(name);
-    }
-
-    /* (non-Javadoc)
-     * @see jakarta.servlet.http.HttpSession#getAttributeNames()
-     */
-    public Enumeration<String> getAttributeNames()
+    @Override public Enumeration<String> getAttributeNames()
     {
         return Collections.enumeration(attributes.keySet());
     }
 
-    /* (non-Javadoc)
-     * @see jakarta.servlet.http.HttpSession#getValueNames()
-     */
-    @Deprecated
-    public String[] getValueNames()
-    {
-        return attributes.keySet().toArray(new String[attributes.keySet().size()]);
-    }
-
-    /* (non-Javadoc)
-     * @see jakarta.servlet.http.HttpSession#setAttribute(java.lang.String, java.lang.Object)
-     */
-    public void setAttribute(String name, Object value)
+    @Override public void setAttribute(String name, Object value)
     {
         attributes.put(name, value);
     }
 
-    /* (non-Javadoc)
-     * @see jakarta.servlet.http.HttpSession#putValue(java.lang.String, java.lang.Object)
-     */
-    @Deprecated
-    public void putValue(String name, Object value)
-    {
-        attributes.put(name, value);
-    }
-
-    /* (non-Javadoc)
-     * @see jakarta.servlet.http.HttpSession#removeAttribute(java.lang.String)
-     */
-    public void removeAttribute(String name)
+    @Override public void removeAttribute(String name)
     {
         attributes.remove(name);
-    }
-
-    /* (non-Javadoc)
-     * @see jakarta.servlet.http.HttpSession#removeValue(java.lang.String)
-     */
-    @Deprecated
-    public void removeValue(String name)
-    {
-        attributes.remove(name);
-    }
-
-    /* (non-Javadoc)
-     * @see jakarta.servlet.http.HttpSession#invalidate()
-     */
-    public void invalidate()
-    {
-    }
-
-    /* (non-Javadoc)
-     * @see jakarta.servlet.http.HttpSession#isNew()
-     */
-    public boolean isNew()
-    {
-        return true;
     }
 
     /**
@@ -192,12 +90,12 @@ public class FakeHttpSession implements HttpSession
     /**
      * The list of attributes
      */
-    private Map<String, Object> attributes = new HashMap<String, Object>();
+    private final Map<String, Object> attributes = new HashMap<String, Object>();
 
     /**
      * When were we created
      */
-    private long creationTime;
+    private final long creationTime;
 
     /**
      * How long before we timeout?

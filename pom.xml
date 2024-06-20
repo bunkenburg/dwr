@@ -5,7 +5,7 @@
     <groupId>cat.inspiracio</groupId>
     <artifactId>dwr</artifactId>
     <packaging>jar</packaging>
-    <version>5.0.0</version>
+    <version>6.0.0-SNAPSHOT</version>
     <name>Direct Web Remoting</name>
     <url>http://directwebremoting.org/dwr/index.html</url>
 
@@ -13,7 +13,7 @@
         DWR is easy Ajax for Java. It makes it simple to call Java code directly from Javascript.
         It gets rid of almost all the boilerplate code between the web browser and your Java code.
 
-        This version 5.0.0 is for Servlet 5.0.0.
+        Version 6.0.0 is for Servlet 6.0.0.
     </description>
 
     <developers>
@@ -76,7 +76,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
-                <version>3.3.2</version>
+                <version>3.4.0</version>
             </plugin>
 
             <!-- phase validate ================================================================ -->
@@ -180,7 +180,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.4.1</version>
+                <version>3.4.2</version>
             </plugin>
 
             <!-- signing -->
@@ -259,11 +259,18 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/cat.inspiracio/dummy-servlet -->
+        <dependency>
+            <groupId>cat.inspiracio</groupId>
+            <artifactId>dummy-servlet</artifactId>
+            <version>6.0.0-SNAPSHOT</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api -->
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
-            <version>5.0.0</version>
+            <version>6.0.0</version>
             <scope>provided</scope>
         </dependency>
 
@@ -271,7 +278,7 @@
         <dependency>
             <groupId>jakarta.servlet.jsp</groupId>
             <artifactId>jakarta.servlet.jsp-api</artifactId>
-            <version>3.0.0</version>
+            <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
 

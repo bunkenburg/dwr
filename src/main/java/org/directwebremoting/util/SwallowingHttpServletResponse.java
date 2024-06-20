@@ -6,6 +6,7 @@ import java.io.Writer;
 import java.util.Collection;
 import java.util.Locale;
 
+import cat.inspiracio.servlet.http.InitialHttpServletResponse;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,7 +19,7 @@ import org.apache.commons.logging.LogFactory;
  * Used by ExecutionContext to forward results back via javascript.
  * @author Joe Walker [joe at getahead dot ltd dot uk]
  */
-public final class SwallowingHttpServletResponse implements HttpServletResponse {
+public final class SwallowingHttpServletResponse extends InitialHttpServletResponse {
 
     /**
      * Create a new HttpServletResponse that allows you to catch the body
@@ -33,27 +34,24 @@ public final class SwallowingHttpServletResponse implements HttpServletResponse 
         this.characterEncoding = characterEncoding;
     }
 
-    public void addCookie(Cookie cookie) {}
+    @Override public void addCookie(Cookie cookie) {}
 
-    public void addDateHeader(String name, long value) {}
+    @Override public void addDateHeader(String name, long value) {}
 
-    public void addHeader(String name, String value) {}
+    @Override public void addHeader(String name, String value) {}
 
-    public void addIntHeader(String name, int value) {}
+    @Override public void addIntHeader(String name, int value) {}
 
-    public boolean containsHeader(String name)
-    {
-        return false;
-    }
+    @Override public boolean containsHeader(String name) {return false;}
 
-    public void flushBuffer() throws IOException {pout.flush();}
+    @Override public void flushBuffer() throws IOException {pout.flush();}
 
-    public int getBufferSize()
+    @Override public int getBufferSize()
     {
         return bufferSize;
     }
 
-    public String getCharacterEncoding()
+    @Override public String getCharacterEncoding()
     {
         return characterEncoding;
     }
@@ -62,7 +60,7 @@ public final class SwallowingHttpServletResponse implements HttpServletResponse 
      * @return The MIME type of the content
      * @see jakarta.servlet.ServletResponse#setContentType(String)
      */
-    public String getContentType()
+    @Override public String getContentType()
     {
         return contentType;
     }
@@ -77,12 +75,12 @@ public final class SwallowingHttpServletResponse implements HttpServletResponse 
         return errorMessage;
     }
 
-    public Locale getLocale()
+    @Override public Locale getLocale()
     {
         return locale;
     }
 
-    public ServletOutputStream getOutputStream()
+    @Override public ServletOutputStream getOutputStream()
     {
         return outputStream;
     }
@@ -100,60 +98,51 @@ public final class SwallowingHttpServletResponse implements HttpServletResponse 
      * What HTTP status code should be returned?
      * @return The current http status code
      */
-    public int getStatus()
+    @Override public int getStatus()
     {
         return status;
     }
 
-    public PrintWriter getWriter()
+    @Override public PrintWriter getWriter()
     {
         return pout;
     }
 
-    public boolean isCommitted()
-    {
-        return false;
-    }
+    @Override public boolean isCommitted() {return false;}
 
-    public void reset() {}
+    @Override public void reset() {}
 
-    public void resetBuffer() {}
+    @Override public void resetBuffer() {}
 
-    public void sendError(int newStatus) {
+    @Override public void sendError(int newStatus) {
         if (committed) {
             throw new IllegalStateException("Cannot set error status - response is already committed");
         }
-
         log.warn("Ignoring call to sendError(" + newStatus + ')');
-
         status = newStatus;
         committed = true;
     }
 
-    public void sendError(int newStatus, String newErrorMessage) {
+    @Override public void sendError(int newStatus, String newErrorMessage) {
         if (committed) {
             throw new IllegalStateException("Cannot set error status - response is already committed");
         }
-
         log.warn("Ignoring call to sendError(" + newStatus + ", " + newErrorMessage + ')');
-
         status = newStatus;
         errorMessage = newErrorMessage;
         committed = true;
     }
 
-    public void sendRedirect(String location) {
+    @Override public void sendRedirect(String location) {
         if (committed) {
             throw new IllegalStateException("Cannot send redirect - response is already committed");
         }
-
         log.warn("Ignoring call to sendRedirect(" + location + ')');
-
         redirectedUrl = location;
         committed = true;
     }
 
-    public void setBufferSize(int bufferSize)
+    @Override public void setBufferSize(int bufferSize)
     {
         this.bufferSize = bufferSize;
     }
@@ -162,7 +151,7 @@ public final class SwallowingHttpServletResponse implements HttpServletResponse 
      * @param characterEncoding The new encoding to use for response strings
      * @see jakarta.servlet.ServletResponseWrapper#getCharacterEncoding()
      */
-    public void setCharacterEncoding(String characterEncoding)
+    @Override public void setCharacterEncoding(String characterEncoding)
     {
         this.characterEncoding = characterEncoding;
     }
@@ -171,7 +160,7 @@ public final class SwallowingHttpServletResponse implements HttpServletResponse 
      * The content length of the original document is not likely to be the
      * same as the content length of the new document.
      * */
-    public void setContentLength(int i) {}
+    @Override public void setContentLength(int i) {}
 
     /** Does nothing.
      * The content length of the original document is not likely to be the
@@ -179,65 +168,45 @@ public final class SwallowingHttpServletResponse implements HttpServletResponse 
      * */
     @Override public void setContentLengthLong(long l) {}
 
-    public void setContentType(String contentType)
+    @Override public void setContentType(String contentType)
     {
         this.contentType = contentType;
     }
 
-    public void setDateHeader(String name, long value) {}
+    @Override public void setDateHeader(String name, long value) {}
 
-    public void setHeader(String name, String value) {}
+    @Override public void setHeader(String name, String value) {}
 
-    public void setIntHeader(String name, int value) {}
+    @Override public void setIntHeader(String name, int value) {}
 
-    public void setLocale(Locale locale)
+    @Override public void setLocale(Locale locale)
     {
         this.locale = locale;
     }
 
-    public void setStatus(int status) {
+    @Override public void setStatus(int status) {
         this.status = status;
         log.warn("Ignoring call to setStatus(" + status + ')');
     }
 
-    /**
-     * @see jakarta.servlet.http.HttpServletResponse#setStatus(int, java.lang.String)
-     * @deprecated
-     */
-    @Deprecated public void setStatus(int newStatus, String newErrorMessage) {
-        status = newStatus;
-        errorMessage = newErrorMessage;
-        log.warn("Ignoring call to setStatus(" + newStatus + ", " + newErrorMessage + ')');
-    }
+    @Override public String encodeURL(String paramString) {return null;}
 
-    public String encodeURL(String paramString)
+    @Override public String encodeRedirectURL(String paramString)
     {
         return null;
     }
 
-    public String encodeRedirectURL(String paramString)
+    @Override public String getHeader(String paramString)
     {
         return null;
     }
 
-    @Deprecated public String encodeUrl(String paramString) {return null;}
-
-    @Deprecated public String encodeRedirectUrl(String paramString)
+    @Override public Collection<String> getHeaders(String paramString)
     {
         return null;
     }
 
-    public String getHeader(String paramString)
-    {
-        return null;
-    }
-
-    public Collection<String> getHeaders(String paramString)
-    {
-        return null;
-    }
-
-    public Collection<String> getHeaderNames()
+    @Override public Collection<String> getHeaderNames()
     {
         return null;
     }
